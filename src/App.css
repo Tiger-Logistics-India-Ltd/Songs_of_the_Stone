@@ -659,6 +659,20 @@ a {
     text-align: center;
   }
 
+  .about-text {
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-tagline,
+  .about-title,
+  .about-description {
+    text-align: center;
+    width: 100%;
+  }
+
   .about-description {
     max-width: 100%;
   }
@@ -762,6 +776,22 @@ a {
     width: 100%;
     max-width: 100%;
     object-fit: cover;
+  }
+
+  /* Mobile-specific image handling for 1920x1080 images */
+  .hero {
+    height: 60vh; /* Reduce hero container height */
+  }
+
+  .hero-img {
+    object-fit: cover;
+    object-position: center 40%; /* Show more of the important part */
+  }
+
+  .about-img {
+    height: 250px; /* Reduce about image height */
+    object-fit: cover;
+    object-position: center center;
   }
 
   /* Fix form elements */
