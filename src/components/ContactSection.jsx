@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import emailjs from '@emailjs/browser';
 import { EMAILJS_CONFIG } from '../config/emailjs';
@@ -27,6 +27,7 @@ const ContactSection = () => {
   
   const [formStatus, setFormStatus] = useState('idle'); // idle, submitting, success, error
   const [formErrors, setFormErrors] = useState({});
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
 
   /**
    * Intersection Observer for scroll animations
@@ -35,6 +36,31 @@ const ContactSection = () => {
     threshold: 0.1,
     triggerOnce: true
   });
+
+  /**
+   * Smooth scroll to contact section
+   */
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+      contactSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
+  /**
+   * Auto-focus on first input when section comes into view
+   */
+  useEffect(() => {
+    if (inView) {
+      const firstInput = document.querySelector('#contact input[name="name"]');
+      if (firstInput) {
+        setTimeout(() => firstInput.focus(), 500);
+      }
+    }
+  }, [inView]);
 
   /**
    * Handle form input changes
@@ -126,8 +152,14 @@ const ContactSection = () => {
       setFormStatus('success');
       setFormData({ name: '', email: '', phone: '', workplace: '', message: '' });
       
-      // Reset success message after 3 seconds
-      setTimeout(() => setFormStatus('idle'), 3000);
+      // Show elegant success popup
+      setShowSuccessPopup(true);
+      
+      // Hide popup after 4 seconds
+      setTimeout(() => {
+        setShowSuccessPopup(false);
+        setFormStatus('idle');
+      }, 4000);
       
     } catch (error) {
       console.error('EmailJS Error:', error);
@@ -148,9 +180,81 @@ const ContactSection = () => {
     }
   };
 
+  /**
+   * Animation variants for success popup
+   */
+  const popupVariants = {
+    hidden: { 
+      opacity: 0, 
+      scale: 0.8, 
+      y: -50,
+      transition: { duration: 0.3 }
+    },
+    visible: { 
+      opacity: 1, 
+      scale: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.5, 
+        ease: "easeOut",
+        type: "spring",
+        stiffness: 300,
+        damping: 30
+      }
+    }
+  };
+
+  /**
+   * Success Popup Component
+   */
+  const SuccessPopup = () => (
+    <motion.div
+      className="success-popup-overlay"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <motion.div
+        className="success-popup"
+        variants={popupVariants}
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+      >
+        <div className="popup-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path 
+              d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" 
+              stroke="currentColor" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+        <h3 className="popup-title">Message Sent Successfully!</h3>
+        <p className="popup-message">
+          Thank you for reaching out to us. We have received your message and will connect with you shortly to discuss your cultural journey.
+        </p>
+        <div className="popup-decoration">
+          <span>✦</span>
+          <span>✧</span>
+          <span>✦</span>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+
   return (
-    <section id="contact" className="contact" ref={ref}>
-      <div className="container">
+    <>
+      {/* Success Popup */}
+      <AnimatePresence>
+        {showSuccessPopup && <SuccessPopup />}
+      </AnimatePresence>
+
+      <section id="contact" className="contact" ref={ref}>
+        <div className="container">
         <motion.div 
           className="contact-content"
           initial="hidden"
@@ -299,6 +403,7 @@ const ContactSection = () => {
         </motion.div>
       </div>
     </section>
+    </>
   );
 };
 

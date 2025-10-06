@@ -1,10 +1,10 @@
 // EmailJS Configuration
-// Replace these with your actual EmailJS credentials
+// Uses environment variables for better security
 
 export const EMAILJS_CONFIG = {
-  SERVICE_ID: 'service_kc85ggl', // Replace with your EmailJS Service ID
-  TEMPLATE_ID: 'template_15jye58', // Replace with your EmailJS Template ID
-  PUBLIC_KEY: 'hU7gdDpwzNyOeHzah' // Replace with your EmailJS Public Key
+  SERVICE_ID: import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_kc85ggl',
+  TEMPLATE_ID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_15jye58',
+  PUBLIC_KEY: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'hU7gdDpwzNyOeHzah'
 };
 
 // Example of how to get these values:

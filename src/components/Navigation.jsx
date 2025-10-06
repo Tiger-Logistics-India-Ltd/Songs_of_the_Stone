@@ -60,6 +60,35 @@ const Navigation = () => {
     document.body.style.overflow = 'unset';
   };
 
+  /**
+   * Smooth scroll to section with enhanced experience
+   */
+  const scrollToSection = (sectionId, event) => {
+    event.preventDefault();
+    closeMobileMenu();
+    
+    const section = document.getElementById(sectionId);
+    if (section) {
+      // Add a slight delay for better UX
+      setTimeout(() => {
+        section.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+        
+        // Special handling for contact section - focus first input
+        if (sectionId === 'contact') {
+          setTimeout(() => {
+            const firstInput = section.querySelector('input[name="name"]');
+            if (firstInput) {
+              firstInput.focus();
+            }
+          }, 800);
+        }
+      }, 100);
+    }
+  };
+
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
@@ -79,14 +108,14 @@ const Navigation = () => {
           <a href="#events" className="nav-link" onClick={closeMobileMenu}>
             Events
           </a>
-          <a href="#contact" className="nav-link" onClick={closeMobileMenu}>
+          <a href="#contact" className="nav-link" onClick={(e) => scrollToSection('contact', e)}>
             Contact
           </a>
         </div>
         
         {/* Call-to-Action Button */}
         <div className="nav-cta">
-          <a href="#contact" className="cta-button" onClick={closeMobileMenu}>
+          <a href="#contact" className="cta-button" onClick={(e) => scrollToSection('contact', e)}>
             Explore
           </a>
         </div>
