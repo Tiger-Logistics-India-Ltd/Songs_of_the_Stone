@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import emailjs from '@emailjs/browser';
+import { EMAILJS_CONFIG } from '../config/emailjs';
 
 /**
  * Contact Section Component
@@ -18,6 +20,8 @@ const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
+    workplace: '',
     message: ''
   });
   
@@ -69,6 +73,16 @@ const ContactSection = () => {
       errors.email = 'Please enter a valid email address';
     }
     
+    if (!formData.phone.trim()) {
+      errors.phone = 'Phone number is required';
+    } else if (!/^\+?[\d\s\-\(\)]{10,}$/.test(formData.phone.replace(/\s/g, ''))) {
+      errors.phone = 'Please enter a valid phone number';
+    }
+    
+    if (!formData.workplace.trim()) {
+      errors.workplace = 'Please tell us where you work';
+    }
+    
     if (!formData.message.trim()) {
       errors.message = 'Please share your cultural interests';
     }
@@ -78,7 +92,7 @@ const ContactSection = () => {
 
   /**
    * Handle form submission
-   * Validates data and simulates API call
+   * Validates data and sends email using EmailJS
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -93,16 +107,30 @@ const ContactSection = () => {
     setFormStatus('submitting');
     
     try {
-      // Simulate API call - replace with actual submission logic
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // EmailJS configuration
+      const { SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY } = EMAILJS_CONFIG;
+      
+      // Template parameters for EmailJS
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        phone: formData.phone,
+        workplace: formData.workplace,
+        message: formData.message,
+        to_name: 'Songs of the Stone Team'
+      };
+      
+      // Send email using EmailJS
+      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
       
       setFormStatus('success');
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', workplace: '', message: '' });
       
       // Reset success message after 3 seconds
       setTimeout(() => setFormStatus('idle'), 3000);
       
     } catch (error) {
+      console.error('EmailJS Error:', error);
       setFormStatus('error');
       setTimeout(() => setFormStatus('idle'), 3000);
     }
@@ -173,6 +201,35 @@ const ContactSection = () => {
                         disabled={formStatus === 'submitting'}
                       />
                       {formErrors.email && <span className="error-message">{formErrors.email}</span>}
+                    </div>
+                  </div>
+                  
+                  {/* Form Row - Phone and Workplace */}
+                  <div className="form-row">
+                    <div className="form-field">
+                      <input 
+                        type="tel" 
+                        name="phone"
+                        placeholder="Your Phone Number" 
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        className={formErrors.phone ? 'error' : ''}
+                        disabled={formStatus === 'submitting'}
+                      />
+                      {formErrors.phone && <span className="error-message">{formErrors.phone}</span>}
+                    </div>
+                    
+                    <div className="form-field">
+                      <input 
+                        type="text" 
+                        name="workplace"
+                        placeholder="Where do you work?" 
+                        value={formData.workplace}
+                        onChange={handleInputChange}
+                        className={formErrors.workplace ? 'error' : ''}
+                        disabled={formStatus === 'submitting'}
+                      />
+                      {formErrors.workplace && <span className="error-message">{formErrors.workplace}</span>}
                     </div>
                   </div>
                   
