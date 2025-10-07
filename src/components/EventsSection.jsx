@@ -132,7 +132,7 @@ const EventsSection = () => {
               }}
             >
               <img 
-                src="/qutub.jpeg" 
+                src="/Images/Event_mehtab_ali_1920x1080 px.png" 
                 alt="Qutub Minar - Venue for The Mehtab Ali Niazi Experience" 
                 className="event-img"
                 loading="lazy"
@@ -209,28 +209,12 @@ const EventsSection = () => {
 
               {/* Desktop: Right side - Image */}
               <div className="learn-more-image-wrapper">
-                <picture>
-                  {/* Mobile image (600x400) */}
-                  <source 
-                    media="(max-width: 767px)" 
-                    srcSet="/mobile.png" 
-                    type="image/png" 
-                  />
-                  
-                  {/* Desktop image */}
-                  <source 
-                    srcSet="/desktop.png" 
-                    type="image/png" 
-                  />
-                  
-                  {/* Fallback */}
-                  <img 
-                    src="/desktop.png" 
-                    alt="Ustad Mehtaab Ali Niazi - Classical Music Performance" 
-                    className="learn-more-section-img"
-                    loading="lazy"
-                  />
-                </picture>
+                <img 
+                  src="/Images/Mobile/Mehtab_ali_600x400 px.png" 
+                  alt="Ustad Mehtaab Ali Niazi - Classical Music Performance" 
+                  className="learn-more-section-img"
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>

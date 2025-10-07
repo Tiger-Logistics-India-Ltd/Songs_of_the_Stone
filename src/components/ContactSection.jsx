@@ -279,7 +279,7 @@ const ContactSection = () => {
                       <input 
                         type="text" 
                         name="name"
-                        placeholder="Your Name" 
+                        placeholder="Name" 
                         value={formData.name}
                         onChange={handleInputChange}
                         className={formErrors.name ? 'error' : ''}
@@ -292,7 +292,7 @@ const ContactSection = () => {
                       <input 
                         type="email" 
                         name="email"
-                        placeholder="Your Email" 
+                        placeholder="Email" 
                         value={formData.email}
                         onChange={handleInputChange}
                         className={formErrors.email ? 'error' : ''}
@@ -307,7 +307,7 @@ const ContactSection = () => {
                     <input 
                       type="tel" 
                       name="phone"
-                      placeholder="Your Phone Number" 
+                      placeholder="Phone" 
                       value={formData.phone}
                       onChange={handleInputChange}
                       className={formErrors.phone ? 'error' : ''}
@@ -320,7 +320,7 @@ const ContactSection = () => {
                   <div className="form-field">
                     <textarea 
                       name="message"
-                      placeholder=" What draws you to this world, what you love about culture, and what you do in your own life or work?..."
+                      placeholder="What draws you to this world, what you love about culture, and what you do in your own life or work?"
                       rows="4"
                       value={formData.message}
                       onChange={handleInputChange}
@@ -362,7 +362,7 @@ const ContactSection = () => {
             <div className="contact-image-section">
               <div className="contact-image-wrapper">
                 <img 
-                  src="/music.jpeg" 
+                  src="/Contact_us.jpeg" 
                   alt="Musical Heritage and Cultural Expression" 
                   className="contact-img"
                   loading="lazy"

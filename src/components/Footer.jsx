@@ -19,13 +19,20 @@ const Footer = () => {
     <footer className="footer">
       <div className="container">
         <div className="footer-content">
+          {/* Footer Logo */}
+          <div className="footer-logo">
+            <img 
+              src="/footer_logo.svg" 
+              alt="Inkpot India & Songs of the Stone" 
+              className="footer-logo-img"
+            />
+          </div>
+          
           {/* Main Footer Text */}
           <div className="footer-text">
             <p className="copyright">
               Song of the Stone © {currentYear}. All rights reserved.
             </p>
-            
-            
           </div>
           
           {/* Future: Social Media Links Section */}

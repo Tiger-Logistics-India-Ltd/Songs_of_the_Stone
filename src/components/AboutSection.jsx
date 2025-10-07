@@ -61,7 +61,7 @@ const AboutSection = () => {
             <div className="about-text">
               <div className="about-tagline">Our Mission</div>
               
-              <h2 className="about-title">About Inkpot India</h2>
+              <h2 className="about-title">About</h2>
               
               <div className="about-description">
                 <p>
@@ -83,22 +83,22 @@ const AboutSection = () => {
             {/* Image Section - Inkpot */}
             <div className="about-image">
               <picture>
-                {/* Mobile banner image */}
+                {/* Mobile about inkpot image - 600x400px */}
                 <source 
                   media="(max-width: 767px)" 
-                  srcSet="/mobile_inkpot.png" 
-                  type="image/png" 
+                  srcSet="/Images/Mobile/about_inkpot_600x400 px.svg" 
+                  type="image/svg+xml" 
                 />
                 
-                {/* Desktop image */}
+                {/* Desktop about inkpot image - 800x600px */}
                 <source 
-                  srcSet="/desktop_inkpot.png" 
-                  type="image/png" 
+                  srcSet="/Images/desktop/About_inkpot_800x600 px.svg" 
+                  type="image/svg+xml" 
                 />
                 
                 {/* Fallback */}
                 <img 
-                  src="/desktop_inkpot.png" 
+                  src="/Images/desktop/About_inkpot_800x600 px.svg" 
                   alt="Inkpot India - Cultural Heritage and Artistry" 
                   className="about-img"
                   loading="lazy"
@@ -124,22 +124,22 @@ const AboutSection = () => {
             {/* Image Section - Songs of the Stone */}
             <div className="about-image">
               <picture>
-                {/* Mobile banner image */}
+                {/* Mobile Songs of the Stone image - 600x400px */}
                 <source 
                   media="(max-width: 767px)" 
-                  srcSet="/mobile.png" 
-                  type="image/png" 
+                  srcSet="/Images/Mobile/Songs_of_the_stone_600x400 px.svg" 
+                  type="image/svg+xml" 
                 />
                 
-                {/* Desktop image */}
+                {/* Desktop Songs of the Stone image - 800x600px */}
                 <source 
-                  srcSet="/desktop.png" 
-                  type="image/png" 
+                  srcSet="/Images/desktop/Songs_of_the_stone_800x600 px.svg" 
+                  type="image/svg+xml" 
                 />
                 
                 {/* Fallback */}
                 <img 
-                  src="/desktop.png" 
+                  src="/Images/desktop/Songs_of_the_stone_800x600 px.svg" 
                   alt="Songs of the Stone - Heritage Monuments and Music" 
                   className="about-img"
                   loading="lazy"
