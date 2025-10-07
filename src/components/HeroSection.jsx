@@ -11,6 +11,8 @@ import { motion } from 'framer-motion';
  * - Overlay for better text readability
  */
 const HeroSection = () => {
+
+
   /**
    * Animation variants for different text elements
    * These create staggered entrance effects for better visual impact
@@ -38,9 +40,9 @@ const HeroSection = () => {
           src="/hero.png" 
           alt="Song of the Stone Heritage" 
           className="hero-img"
-          loading="priority" // Load hero image with high priority
+          loading="priority"
         />
-        <div className="hero-overlay" aria-hidden="true"></div>
+        <div className="hero-overlay"></div>
       </div>
       
       {/* Main Hero Content Container */}

@@ -32,7 +32,6 @@ const Navigation = () => {
    */
   const scrollToSection = (sectionId, event) => {
     event.preventDefault();
-    closeMobileMenu();
     
     const section = document.getElementById(sectionId);
     if (section) {
@@ -82,7 +81,7 @@ const Navigation = () => {
         
         {/* Call-to-Action Button */}
         <div className="nav-cta">
-          <a href="#contact" className="cta-button" onClick={(e) => scrollToSection('contact', e)}>
+          <a href="#events" className="cta-button" onClick={(e) => scrollToSection('events', e)}>
             Explore
           </a>
         </div>

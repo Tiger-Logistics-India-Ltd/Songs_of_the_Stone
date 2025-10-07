@@ -30,6 +30,11 @@
   
   /* Transitions */
   --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  /* Advanced Animation Variables */
+  --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-power: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-bounce: cubic-bezier(0.68, -0.6, 0.32, 1.6);
 }
 
 body {
@@ -39,6 +44,124 @@ body {
   overflow-x: hidden;
   font-weight: 400;
   background: var(--primary-cream);
+}
+
+/* 🎭 SPECTACULAR ANIMATIONS & EFFECTS */
+
+/* Floating ornament animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(1deg); }
+  50% { transform: translateY(-5px) rotate(-1deg); }
+  75% { transform: translateY(-15px) rotate(0.5deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(211, 163, 81, 0.3);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(211, 163, 81, 0.6);
+    transform: scale(1.05);
+  }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes expand-line {
+  0% { width: 0; opacity: 0; }
+  50% { opacity: 1; }
+  100% { width: 200px; opacity: 0.8; }
+}
+
+/* Section Dividers with Magic Effects */
+.section-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.floating-ornament {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(45deg, var(--primary-mustard), var(--primary-red));
+  border-radius: 50%;
+  position: relative;
+  animation: float 6s ease-in-out infinite, pulse-glow 4s ease-in-out infinite;
+}
+
+.floating-ornament::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: var(--primary-cream);
+  border-radius: 50%;
+}
+
+.floating-ornament::after {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  border: 2px solid rgba(211, 163, 81, 0.3);
+  border-radius: 50%;
+  animation: pulse-glow 3s ease-in-out infinite reverse;
+}
+
+/* Expanding line animation */
+.expanding-line {
+  height: 2px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--primary-mustard) 25%, 
+    var(--primary-red) 50%, 
+    var(--primary-mustard) 75%, 
+    transparent 100%
+  );
+  position: relative;
+  animation: expand-line 2s ease-out forwards;
+}
+
+.expanding-line::before,
+.expanding-line::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  background: var(--primary-mustard);
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.expanding-line::before { left: -4px; }
+.expanding-line::after { right: -4px; }
+
+/* Parallax Section Styling */
+.parallax-section {
+  position: relative;
+  min-height: 100vh;
+}
+
+.parallax-overlay {
+  background: rgba(226, 203, 163, 0.95);
+  backdrop-filter: blur(2px);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
 }
 
 /* Prevent horizontal overflow on all elements */
@@ -147,7 +270,7 @@ a {
   transform: translateY(-2px);
 }
 
-/* Hero Section */
+/* 🎬 SPECTACULAR HERO SECTION */
 .hero {
   height: 100vh;
   position: relative;
@@ -157,6 +280,39 @@ a {
   text-align: center;
   color: var(--primary-white);
   overflow: hidden;
+  perspective: 1000px;
+}
+
+/* Floating Particles Background */
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(211, 163, 81, 0.8);
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(211, 163, 81, 0.5);
+}
+
+.particle::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 8px;
+  height: 8px;
+  background: rgba(144, 26, 28, 0.3);
+  border-radius: 50%;
+  animation: pulse-glow 3s ease-in-out infinite;
 }
 
 .hero-background {
@@ -172,25 +328,31 @@ a {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  will-change: transform, filter;
 }
 
-.hero-overlay {
+.cinematic-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(72, 45, 24, 0.6), rgba(61, 63, 33, 0.5));
+  background: 
+    linear-gradient(135deg, rgba(72, 45, 24, 0.7), rgba(61, 63, 33, 0.6)),
+    radial-gradient(circle at 30% 70%, rgba(211, 163, 81, 0.2) 0%, transparent 50%);
+  backdrop-filter: blur(1px);
 }
 
-.hero-content {
+/* 🎭 SPECTACULAR HERO CONTENT */
+.spectacular-entrance {
   position: relative;
   z-index: 2;
   max-width: 1000px;
   padding: 0 4rem;
+  transform-style: preserve-3d;
 }
 
-.hero-tagline {
+.floating-text {
   font-family: var(--font-accent);
   font-size: clamp(1rem, 2vw, 1.3rem);
   font-weight: 400;
@@ -198,27 +360,134 @@ a {
   margin-bottom: 2rem;
   opacity: 0.9;
   color: var(--primary-cream);
+  position: relative;
+  animation: float 6s ease-in-out infinite;
 }
 
-.hero-title {
+.floating-text::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-mustard), var(--primary-red));
+  animation: expand-line 3s ease-out 2s forwards;
+}
+
+/* Morphing Title Container */
+.hero-title-container {
+  perspective: 1000px;
+  margin-bottom: 2rem;
+}
+
+.morphing-title {
   font-family: var(--font-heading);
   font-size: clamp(3rem, 8vw, 8rem);
   font-weight: 600;
-  margin-bottom: 2rem;
   letter-spacing: -2px;
   line-height: 0.9;
   color: var(--primary-white);
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-.hero-subtitle {
+.morphing-title span {
+  display: inline-block;
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.morphing-title span::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, var(--primary-mustard), var(--primary-red));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0;
+  transform: rotateY(90deg);
+  transition: all 0.6s ease;
+}
+
+.morphing-title span:hover::before {
+  opacity: 1;
+  transform: rotateY(0deg);
+}
+
+/* Shimmer Text Effect */
+.shimmer-text {
   font-family: var(--font-subheading);
   font-size: clamp(1rem, 2vw, 1.4rem);
   font-weight: 300;
   letter-spacing: 2px;
   opacity: 0.9;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 0 auto 4rem;
   color: var(--primary-cream);
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.4), 
+    transparent
+  );
+  animation: shimmer 3s ease-in-out 4s infinite;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.scroll-arrow {
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(180deg, 
+    var(--primary-mustard) 0%, 
+    transparent 100%
+  );
+  position: relative;
+  animation: float 2s ease-in-out infinite;
+}
+
+.scroll-arrow::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 8px solid var(--primary-mustard);
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-10px); }
 }
 
 /* About Section */
@@ -316,11 +585,29 @@ a {
   background: var(--primary-white);
 }
 
+/* Desktop Events Grid - Strategic 3-section layout */
 .events-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-areas: 
+    "text image"
+    "buttons image";
   gap: 6rem;
-  align-items: center;
+  align-items: start;
+}
+
+.event-details {
+  grid-area: text;
+}
+
+.event-image {
+  grid-area: image;
+  align-self: center;
+}
+
+.event-cta-section {
+  grid-area: buttons;
+  margin-top: 2rem;
 }
 
 .event-image {
@@ -470,6 +757,141 @@ a {
   background: var(--primary-mustard);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(144, 26, 28, 0.3);
+}
+
+/* 🎭 SPECTACULAR BUTTON ANIMATIONS */
+.spectacular-btn {
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  will-change: transform, box-shadow;
+}
+
+.spectacular-btn .btn-text {
+  position: relative;
+  z-index: 2;
+  display: block;
+}
+
+.spectacular-btn .btn-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.4), 
+    transparent
+  );
+  transition: left 0.8s ease;
+  z-index: 1;
+}
+
+.spectacular-btn:hover .btn-glow {
+  left: 100%;
+}
+
+.magical-btn {
+  position: relative;
+  background: linear-gradient(45deg, var(--primary-mustard), var(--primary-terracotta));
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.magical-btn::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--primary-red), var(--primary-mustard), var(--primary-red));
+  background-size: 300% 300%;
+  border-radius: 32px;
+  z-index: -1;
+  animation: gradient-border 2s linear infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes gradient-border {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* Floating Badge Animation */
+.floating-badge {
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(144, 26, 28, 0.3);
+}
+
+/* Morphing Category */
+.morphing-category {
+  position: relative;
+  transition: all 0.4s var(--ease-elegant);
+}
+
+.morphing-category::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-mustard);
+  transition: width 0.6s var(--ease-elegant);
+}
+
+.morphing-category:hover::after {
+  width: 100%;
+}
+
+/* Floating Title */
+.floating-title {
+  text-shadow: 2px 2px 20px rgba(72, 45, 24, 0.3);
+  transition: all 0.6s var(--ease-elegant);
+}
+
+/* Shimmer Subtitle */
+.shimmer-subtitle {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-subtitle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(211, 163, 81, 0.3), 
+    transparent
+  );
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* Pulsing Location */
+.pulsing-location {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Spectacular Image Effects */
+.spectacular-image {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.spectacular-image .event-img {
+  will-change: transform, filter;
+  transition: all 0.8s var(--ease-elegant);
 }
 
 /* Contact Section */
@@ -1195,22 +1617,27 @@ html {
 
   /* Mobile Events Reordering: Text → Image → Buttons */
   .events-grid {
-    display: flex;
+    display: flex !important; /* Override desktop grid */
     flex-direction: column;
+    grid-template-areas: none; /* Remove grid areas */
     gap: 3rem;
     text-align: center;
   }
 
   .event-details {
     order: 1; /* Text content first */
+    grid-area: unset; /* Remove grid area */
   }
 
   .event-image {
     order: 2; /* Image second */
+    grid-area: unset; /* Remove grid area */
+    align-self: unset;
   }
 
   .event-cta-section {
-    order: 3; /* Buttons last */
+    order: 3; /* Buttons AFTER image on mobile - this is the key! */
+    grid-area: unset; /* Remove grid area */
     margin-top: 1rem;
     display: flex;
     justify-content: center;

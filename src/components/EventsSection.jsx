@@ -97,29 +97,12 @@ const EventsSection = () => {
           className="events-content"
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          variants={contentVariants}
+          variants={{
+            hidden: { opacity: 0, y: 50 },
+            visible: { opacity: 1, y: 0, transition: { duration: 1, delay: 0.2 } }
+          }}
         >
           <div className="events-grid">
-            {/* Event Image Section */}
-            <motion.div 
-              className="event-image"
-              variants={imageVariants}
-            >
-              <img 
-                src="/qutub.jpeg" 
-                alt="Qutub Minar - Venue for The Mehtab Ali Niazi Experience" 
-                className="event-img"
-                loading="lazy"
-              />
-              
-              {/* Date Badge - positioned over the image */}
-              <div className="event-date-badge">
-                <span className="date-day">13</span>
-                <span className="date-month">DEC</span>
-                <span className="date-year">2025</span>
-              </div>
-            </motion.div>
-            
             {/* Event Details Section */}
             <div className="event-details">
               <div className="event-category">Musical Experience</div>
@@ -140,7 +123,30 @@ const EventsSection = () => {
               </p>
             </div>
 
-            {/* Call to Action - Separate section for mobile reordering */}
+            {/* Event Image Section */}
+            <motion.div 
+              className="event-image"
+              variants={{
+                hidden: { opacity: 0, scale: 0.8 },
+                visible: { opacity: 1, scale: 1, transition: { duration: 1.2, delay: 0.4 } }
+              }}
+            >
+              <img 
+                src="/qutub.jpeg" 
+                alt="Qutub Minar - Venue for The Mehtab Ali Niazi Experience" 
+                className="event-img"
+                loading="lazy"
+              />
+              
+              {/* Date Badge - positioned over the image */}
+              <div className="event-date-badge">
+                <span className="date-day">13</span>
+                <span className="date-month">DEC</span>
+                <span className="date-year">2025</span>
+              </div>
+            </motion.div>
+            
+            {/* Call to Action Buttons - Separate section for flexible positioning */}
             <div className="event-cta-section">
               <div className="event-cta">
                 <button 

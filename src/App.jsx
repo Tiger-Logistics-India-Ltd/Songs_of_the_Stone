@@ -31,40 +31,11 @@ import Footer from './components/Footer';
 function App() {
   return (
     <div className="App">
-      {/* 
-        Navigation component - appears on all pages 
-        Handles mobile menu state and scroll behavior
-      */}
       <Navigation />
-      
-      {/* 
-        Hero section - first impression and main messaging 
-        Full viewport height with background image and animated text
-      */}
       <HeroSection />
-      
-      {/* 
-        About section - explains the mission and values 
-        Text + image layout with scroll animations
-      */}
       <AboutSection />
-      
-      {/* 
-        Events section - showcases upcoming cultural events 
-        Featured event with booking functionality
-      */}
       <EventsSection />
-      
-      {/* 
-        Contact section - allows visitors to get in touch 
-        Contact form with validation and inspirational imagery
-      */}
       <ContactSection />
-      
-      {/* 
-        Footer - contains copyright and additional links 
-        Simple design, expandable for future social media
-      */}
       <Footer />
     </div>
   );
