@@ -6,25 +6,27 @@ import { useInView } from 'react-intersection-observer';
  * About Section Component
  * 
  * Features:
- * - Grid layout with text and image
+ * - Two-section layout for Inkpot India and Songs of the Stone
  * - Scroll-triggered animations using Intersection Observer
- * - Mobile-responsive design with stacked layout
+ * - Mobile-responsive design with responsive images
  * - Rich typography and visual hierarchy
  */
 const AboutSection = () => {
   /**
-   * Intersection Observer hook to trigger animations when section comes into view
-   * - threshold: 0.1 means animate when 10% of element is visible
-   * - triggerOnce: true means animation only happens once (performance optimization)
+   * Intersection Observer hooks for each section
    */
-  const { ref, inView } = useInView({
+  const { ref: inkpotRef, inView: inkpotInView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true
+  });
+
+  const { ref: songsRef, inView: songsInView } = useInView({
     threshold: 0.1,
     triggerOnce: true
   });
 
   /**
-   * Animation variants for the about content
-   * Creates a smooth fade-in and slide-up effect
+   * Animation variants for the content sections
    */
   const contentVariants = {
     hidden: { 
@@ -43,41 +45,65 @@ const AboutSection = () => {
   };
 
   return (
-    <section id="about" className="about" ref={ref}>
+    <section id="about" className="about">
       <div className="container">
+        
+        {/* Inkpot India Section */}
         <motion.div 
-          className="about-content"
+          className="about-section"
+          ref={inkpotRef}
           initial="hidden"
-          animate={inView ? "visible" : "hidden"}
+          animate={inkpotInView ? "visible" : "hidden"}
           variants={contentVariants}
         >
           <div className="about-grid">
-            {/* Text Content Section */}
+            {/* Text Content */}
             <div className="about-text">
-              <div className="about-tagline">Heritage Reimagined</div>
+              <div className="about-tagline">Our Mission</div>
               
-              <h2 className="about-title">
-                Culture blooms where tradition meets innovation
-              </h2>
+              <h2 className="about-title">About Inkpot India</h2>
               
-              <p className="about-description">
-                We curate immersive experiences that honor the past while speaking to contemporary hearts. 
-                Every stone tells a story, every shadow holds wisdom, and every moment becomes a bridge 
-                between ancient heritage and modern expression.
-              </p>
-              
-              
+              <div className="about-description">
+                <p>
+                  India stands at an inflection point in its relationship with its own cultural wealth. 
+                  For too long, external narratives dictated what was valued, what was preserved, and what slipped into silence.
+                </p>
+                <p>
+                  Inkpot exists to change that — to bring our music, literature, architecture, and performance back into the light, 
+                  not as relics of the past, but as living forces of beauty and imagination. Our task is not only to preserve, 
+                  but to reframe — to make our traditions aspirational and relevant in the contemporary global imagination.
+                </p>
+                <p>
+                  Through intimate, thoughtfully crafted experiences, we weave together space, sound, and story. 
+                  Each event is an invitation to pause, listen, and rediscover the pulse of Indian artistry in a new light.
+                </p>
+              </div>
             </div>
             
-            {/* Image Section */}
+            {/* Image Section - Inkpot */}
             <div className="about-image">
-              <img 
-                src="/image.png" 
-                alt="Heritage and Culture" 
-                className="about-img"
-                loading="lazy" // Lazy load for performance
-              />
-              
+              <picture>
+                {/* Mobile banner image */}
+                <source 
+                  media="(max-width: 767px)" 
+                  srcSet="/mobile_inkpot.png" 
+                  type="image/png" 
+                />
+                
+                {/* Desktop image */}
+                <source 
+                  srcSet="/desktop_inkpot.png" 
+                  type="image/png" 
+                />
+                
+                {/* Fallback */}
+                <img 
+                  src="/desktop_inkpot.png" 
+                  alt="Inkpot India - Cultural Heritage and Artistry" 
+                  className="about-img"
+                  loading="lazy"
+                />
+              </picture>
               {/* Decorative overlay for enhanced visual appeal */}
               <div className="about-image-overlay" aria-hidden="true">
                 <div className="overlay-accent"></div>
@@ -85,6 +111,71 @@ const AboutSection = () => {
             </div>
           </div>
         </motion.div>
+
+        {/* Songs of the Stone Section */}
+        <motion.div 
+          className="about-section songs-section"
+          ref={songsRef}
+          initial="hidden"
+          animate={songsInView ? "visible" : "hidden"}
+          variants={contentVariants}
+        >
+          <div className="about-grid about-grid-reverse">
+            {/* Image Section - Songs of the Stone */}
+            <div className="about-image">
+              <picture>
+                {/* Mobile banner image */}
+                <source 
+                  media="(max-width: 767px)" 
+                  srcSet="/mobile.png" 
+                  type="image/png" 
+                />
+                
+                {/* Desktop image */}
+                <source 
+                  srcSet="/desktop.png" 
+                  type="image/png" 
+                />
+                
+                {/* Fallback */}
+                <img 
+                  src="/desktop.png" 
+                  alt="Songs of the Stone - Heritage Monuments and Music" 
+                  className="about-img"
+                  loading="lazy"
+                />
+              </picture>
+              {/* Decorative overlay */}
+              <div className="about-image-overlay" aria-hidden="true">
+                <div className="overlay-accent"></div>
+              </div>
+            </div>
+
+            {/* Text Content */}
+            <div className="about-text">
+              <div className="about-tagline">Our Flagship Series</div>
+              
+              <h2 className="about-title">Songs of the Stone</h2>
+              
+              <div className="about-description">
+                <p>
+                  Songs of the Stone is Inkpot's flagship series of after-hours cultural evenings at Delhi's heritage monuments. 
+                  Here, space becomes stage, arches become resonance, and stone becomes story.
+                </p>
+                <p>
+                  Our debut edition unfolds at the Qutub Minar, transforming the monument into a living arena of music and memory. 
+                  Presented in association with the Delhi Government and the Archaeological Survey of India, the evening celebrates 
+                  the dialogue between heritage and contemporary expression.
+                </p>
+                <p>
+                  Each Songs of the Stone evening is intimate by design — an invitation to share in something rare and real: 
+                  a moment of connection between music, history, and each other.
+                </p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );

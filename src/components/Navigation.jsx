@@ -12,16 +12,12 @@ import { useWindowSize, useScrollPosition } from '../hooks/useResponsive';
  * - Responsive behavior using custom hooks
  */
 const Navigation = () => {
-  // Get responsive information using custom hook
-  const { isMobile } = useWindowSize();
+  // Get scroll position using custom hook
   const { scrollY } = useScrollPosition();
   
   // State to track if the user has scrolled past a certain point
   const [scrolled, setScrolled] = useState(false);
   
-  // State to manage mobile menu visibility
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   /**
    * Effect to handle scroll position changes using custom hook
    * Updates scrolled state when scroll position changes
@@ -30,35 +26,6 @@ const Navigation = () => {
     // Change navbar appearance when scrolled more than 50px
     setScrolled(scrollY > 50);
   }, [scrollY]);
-
-  /**
-   * Close mobile menu when screen size changes to desktop
-   */
-  useEffect(() => {
-    if (!isMobile && mobileMenuOpen) {
-      setMobileMenuOpen(false);
-      document.body.style.overflow = 'unset';
-    }
-  }, [isMobile, mobileMenuOpen]);
-
-  /**
-   * Toggle mobile menu visibility
-   * Also prevents body scroll when menu is open
-   */
-  const toggleMobileMenu = () => {
-    setMobileMenuOpen(!mobileMenuOpen);
-    // Prevent body scroll when mobile menu is open
-    document.body.style.overflow = !mobileMenuOpen ? 'hidden' : 'unset';
-  };
-
-  /**
-   * Close mobile menu when a navigation link is clicked
-   * Restores body scroll
-   */
-  const closeMobileMenu = () => {
-    setMobileMenuOpen(false);
-    document.body.style.overflow = 'unset';
-  };
 
   /**
    * Smooth scroll to section with enhanced experience
@@ -98,14 +65,14 @@ const Navigation = () => {
         </div>
         
         {/* Desktop Navigation Menu */}
-        <div className={`nav-menu ${mobileMenuOpen ? 'nav-menu-mobile-open' : ''}`}>
-          <a href="#home" className="nav-link" onClick={closeMobileMenu}>
+        <div className="nav-menu">
+          <a href="#home" className="nav-link">
             Home
           </a>
-          <a href="#about" className="nav-link" onClick={closeMobileMenu}>
+          <a href="#about" className="nav-link">
             About
           </a>
-          <a href="#events" className="nav-link" onClick={closeMobileMenu}>
+          <a href="#events" className="nav-link">
             Events
           </a>
           <a href="#contact" className="nav-link" onClick={(e) => scrollToSection('contact', e)}>
@@ -120,16 +87,7 @@ const Navigation = () => {
           </a>
         </div>
 
-        {/* Mobile Menu Hamburger Button */}
-        <button 
-          className={`mobile-menu-btn ${mobileMenuOpen ? 'mobile-menu-btn-open' : ''}`}
-          onClick={toggleMobileMenu}
-          aria-label="Toggle mobile menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+
       </div>
     </nav>
   );

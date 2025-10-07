@@ -282,6 +282,34 @@ a {
   filter: sepia(0.1) saturate(1.1);
 }
 
+/* Two-section About Layout */
+.about-section {
+  margin-bottom: 8rem;
+}
+
+.about-section:last-child {
+  margin-bottom: 0;
+}
+
+.songs-section {
+  padding-top: 4rem;
+  border-top: 1px solid rgba(139, 69, 19, 0.1);
+}
+
+/* Reverse grid for alternating layout */
+.about-grid-reverse {
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Multiple paragraphs styling */
+.about-description p {
+  margin-bottom: 1.5rem;
+}
+
+.about-description p:last-child {
+  margin-bottom: 0;
+}
+
 /* Events Section */
 .events {
   padding: var(--section-padding);
@@ -412,8 +440,15 @@ a {
   max-width: 500px;
 }
 
-.event-cta {
+.event-cta-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
   margin-top: 2rem;
+}
+
+.event-cta {
+  margin-top: 0;
 }
 
 .event-btn {
@@ -576,7 +611,7 @@ a {
 
 .contact-form input,
 .contact-form textarea {
-  padding: 1.5rem;
+  padding: 1.2rem; /* Reduced by 20%: 1.5rem * 0.8 = 1.2rem */
   border: 1px solid var(--primary-olive);
   background: var(--primary-white);
   font-family: var(--font-body);
@@ -808,10 +843,19 @@ a {
     padding: 0 2rem;
   }
 
-  .about-grid {
+  .about-grid,
+  .about-grid-reverse {
     grid-template-columns: 1fr;
     gap: 4rem;
     text-align: center;
+  }
+
+  .about-section {
+    margin-bottom: 6rem;
+  }
+
+  .songs-section {
+    padding-top: 3rem;
   }
 
   .about-text {
@@ -838,13 +882,39 @@ a {
     text-align: center;
   }
 
-  /* Reorder events: text first, then image on mobile */
+  /* Learn More Section - Tablet Layout */
+  .learn-more-grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    text-align: center;
+  }
+
+  .learn-more-section-title {
+    font-size: 2.2rem;
+  }
+
+  .learn-more-text-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .learn-more-description {
+    max-width: 600px;
+  }
+
+  /* Reorder events: text first, then image, then buttons on tablet */
   .event-details {
     order: 1;
   }
 
   .event-image {
     order: 2;
+  }
+
+  .event-cta-section {
+    order: 3;
   }
 
   .event-description {
@@ -923,9 +993,85 @@ a {
     max-width: 100%;
   }
 
+  /* Mobile: Songs of the Stone - Image below text */
+  .about-grid-reverse {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .about-grid-reverse .about-image {
+    order: 2; /* Image goes after text on mobile */
+  }
+
+  .about-grid-reverse .about-text {
+    order: 1; /* Text comes first on mobile */
+  }
+
+  /* Mobile: True full-width banner images */
+  .about-image {
+    /* Full-bleed without transform hack to avoid subtle horizontal offset */
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw); /* pull to left edge */
+    margin-right: calc(50% - 50vw); /* pull to right edge */
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    overflow: clip;
+    border-radius: 0;
+    line-height: 0; /* remove inline-gap */
+  }
+
+  .about-img {
+    width: 100%;
+    height: clamp(160px, 32vh, 240px); /* responsive banner height */
+    object-fit: cover;
+    object-position: center center;
+    border-radius: 0;
+    display: block;
+    aspect-ratio: 21 / 9; /* cinematic wide look without forcing fixed px height */
+  }
+
+  /* Remove image overlay on mobile for cleaner banner look */
+  .about-image-overlay {
+    display: none;
+  }
+
+  /* Ensure container doesn't constrain the banner */
+  .about-section .container {
+    overflow: visible;
+  }
+  
+  /* Override any section padding that might interfere */
+  .about-section {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  
+  /* Ensure the about container allows overflow for banner effect */
+  .about {
+    overflow-x: hidden;
+  }
+  
+  .about .container {
+    overflow: visible;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Center the text block precisely (prevents micro drift) */
+  .about-text {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 680px; /* readable width */
+  }
+
+  /* Ensure grid children don’t introduce unexpected horizontal shift */
+  .about-grid, .about-grid-reverse {
+    justify-items: center;
+  }
+
   /* Ensure images don't overflow */
   .hero-img,
-  .about-img,
   .event-img,
   .contact-img {
     width: 100%;
@@ -943,11 +1089,7 @@ a {
     object-position: center 40%; /* Show more of the important part */
   }
 
-  .about-img {
-    height: 250px; /* Reduce about image height */
-    object-fit: cover;
-    object-position: center center;
-  }
+  /* removed duplicate .about-img override to avoid empty ruleset */
 
   /* Fix form elements */
   .contact-form,
@@ -1043,92 +1185,72 @@ html {
   opacity: 0.7;
 }
 
-/* Mobile Navigation Improvements */
-.mobile-menu-btn {
-  display: none;
-  flex-direction: column;
-  justify-content: space-around;
-  width: 30px;
-  height: 30px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  z-index: 1001;
-}
 
-.mobile-menu-btn span {
-  display: block;
-  height: 3px;
-  width: 100%;
-  background-color: var(--primary-brown);
-  border-radius: 3px;
-  opacity: 1;
-  left: 0;
-  transform: rotate(0deg);
-  transition: 0.25s ease-in-out;
-}
-
-.mobile-menu-btn-open span:nth-child(1) {
-  top: 18px;
-  transform: rotate(135deg);
-}
-
-.mobile-menu-btn-open span:nth-child(2) {
-  opacity: 0;
-  left: -60px;
-}
-
-.mobile-menu-btn-open span:nth-child(3) {
-  top: 18px;
-  transform: rotate(-135deg);
-}
 
 /* Mobile Menu Styles */
 @media (max-width: 768px) {
-  .mobile-menu-btn {
-    display: flex;
-  }
-
   .nav-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    height: 100vh;
-    width: 300px;
-    background: var(--primary-cream);
+    display: none;
+  }
+
+  /* Mobile Events Reordering: Text → Image → Buttons */
+  .events-grid {
+    display: flex;
     flex-direction: column;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .event-details {
+    order: 1; /* Text content first */
+  }
+
+  .event-image {
+    order: 2; /* Image second */
+  }
+
+  .event-cta-section {
+    order: 3; /* Buttons last */
+    margin-top: 1rem;
+    display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    transition: right 0.3s ease-in-out;
-    z-index: 1000;
-    box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
   }
 
-  .nav-menu-mobile-open {
-    right: 0;
+  /* Equal sized buttons on mobile - centered */
+  .event-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    text-align: center;
   }
 
-  .nav-link {
-    font-size: 1.2rem;
-    padding: 1rem;
+  .event-btn,
+  .event-btn-secondary {
+    width: 100%;
+    margin: 0;
+    padding: 1rem 2rem;
   }
 
-  .nav-cta {
-    order: -1;
+  /* Mobile contact form - reduced height by 20% */
+  .contact-form input,
+  .contact-form textarea {
+    padding: 1.5rem; /* 1.875rem * 0.8 = 1.5rem (20% reduction from mobile size) */
+    font-size: 1.1rem; /* Slightly larger font for better mobile UX */
   }
 
-  .cta-button {
-    padding: 1rem 2rem !important;
-    font-size: 1rem !important;
+  .contact-form textarea {
+    min-height: 120px; /* Reduced by 20%: 150px * 0.8 = 120px */
   }
 }
 
-/* Enhanced Form Styles for Mobile */
+/* Enhanced Form Styles - Reduced gap between fields */
 .contact-form .form-field {
   position: relative;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem; /* Reduced from 1.5rem to 1rem for tighter spacing */
 }
 
 .contact-form input.error,
@@ -1264,6 +1386,97 @@ html {
   margin-right: 0.5rem;
 }
 
+/* Learn More Full Section Styles */
+.learn-more-full-section {
+  padding: var(--section-padding);
+  background: var(--primary-white);
+  border-top: 1px solid rgba(139, 106, 77, 0.1);
+}
+
+.learn-more-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.learn-more-text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.learn-more-section-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--primary-brown);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.learn-more-description {
+  font-family: var(--font-body);
+  line-height: 1.7;
+  color: var(--primary-brown);
+  font-size: 1.1rem;
+}
+
+.learn-more-description p {
+  margin: 0;
+}
+
+.event-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem;
+  background: rgba(233, 223, 206, 0.3);
+  border-radius: 12px;
+  border-left: 4px solid var(--primary-brown);
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detail-label {
+  font-family: var(--font-accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--primary-brown);
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.detail-value {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--primary-brown);
+}
+
+.learn-more-image-wrapper {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(139, 106, 77, 0.15);
+}
+
+.learn-more-section-img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  object-position: center center;
+  transition: transform 0.3s ease;
+}
+
+.learn-more-section-img:hover {
+  transform: scale(1.02);
+}
+
 .overlay-author {
   display: block;
   margin-top: 1rem;
@@ -1307,10 +1520,76 @@ html {
     flex-direction: column;
   }
 
+  /* Equal sized buttons on mobile */
+  .event-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
   .event-btn-secondary {
     margin-left: 0;
-    margin-top: 1rem;
+    margin-top: 0;
     width: 100%;
+    padding: 0.8rem 2rem; /* Match primary button padding */
+  }
+
+  /* Mobile Learn More Full Section Styles */
+  .learn-more-full-section {
+    padding: 3rem 0;
+  }
+
+  .learn-more-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .learn-more-section-title {
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  .learn-more-description {
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .event-details-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.5rem;
+    text-align: left;
+  }
+
+  /* Mobile order: Image first, then text */
+  .learn-more-grid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .learn-more-image-wrapper {
+    order: 1;
+    /* Mobile banner treatment */
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 1.5rem 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .learn-more-section-img {
+    border-radius: 0;
+    height: 200px; /* Mobile banner height */
+  }
+
+  .learn-more-text-content {
+    order: 2;
+    gap: 1.5rem;
+    padding: 0 1rem;
   }
 
   .contact-form .form-row {
@@ -1411,8 +1690,5 @@ html {
     justify-content: center;
   }
 
-  .mobile-menu-btn {
-    min-height: 44px;
-    min-width: 44px;
-  }
+
 }

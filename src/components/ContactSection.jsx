@@ -21,7 +21,6 @@ const ContactSection = () => {
     name: '',
     email: '',
     phone: '',
-    workplace: '',
     message: ''
   });
   
@@ -105,10 +104,6 @@ const ContactSection = () => {
       errors.phone = 'Please enter a valid phone number';
     }
     
-    if (!formData.workplace.trim()) {
-      errors.workplace = 'Please tell us where you work';
-    }
-    
     if (!formData.message.trim()) {
       errors.message = 'Please share your cultural interests';
     }
@@ -141,7 +136,6 @@ const ContactSection = () => {
         from_name: formData.name,
         from_email: formData.email,
         phone: formData.phone,
-        workplace: formData.workplace,
         message: formData.message,
         to_name: 'Songs of the Stone Team'
       };
@@ -150,7 +144,7 @@ const ContactSection = () => {
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
       
       setFormStatus('success');
-      setFormData({ name: '', email: '', phone: '', workplace: '', message: '' });
+      setFormData({ name: '', email: '', phone: '', message: '' });
       
       // Show elegant success popup
       setShowSuccessPopup(true);
@@ -267,12 +261,12 @@ const ContactSection = () => {
               <div className="contact-header">
                 <div className="contact-tagline">Connect With Heritage</div>
                 
-                <h2 className="contact-title">Begin Your Cultural Journey</h2>
+                <h2 className="contact-title">Join The Community</h2>
                 
                 <p className="contact-description">
-                  Step into a world where every experience is curated with passion. 
-                  Let us craft moments that resonate with your soul and connect you 
-                  with the timeless beauty of our cultural heritage.
+                  We’re so glad you’ve found us. Inkpot isn’t just an initiative – it’s a space for those seeking meaning, connection, and beauty – in art, in stories, in each other.
+                  We’d love to get to know you. Share a few lines, and we’ll be in touch about upcoming events and ways to engage.
+
                 </p>
               </div>
               
@@ -308,41 +302,26 @@ const ContactSection = () => {
                     </div>
                   </div>
                   
-                  {/* Form Row - Phone and Workplace */}
-                  <div className="form-row">
-                    <div className="form-field">
-                      <input 
-                        type="tel" 
-                        name="phone"
-                        placeholder="Your Phone Number" 
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        className={formErrors.phone ? 'error' : ''}
-                        disabled={formStatus === 'submitting'}
-                      />
-                      {formErrors.phone && <span className="error-message">{formErrors.phone}</span>}
-                    </div>
-                    
-                    <div className="form-field">
-                      <input 
-                        type="text" 
-                        name="workplace"
-                        placeholder="Where do you work?" 
-                        value={formData.workplace}
-                        onChange={handleInputChange}
-                        className={formErrors.workplace ? 'error' : ''}
-                        disabled={formStatus === 'submitting'}
-                      />
-                      {formErrors.workplace && <span className="error-message">{formErrors.workplace}</span>}
-                    </div>
+                  {/* Phone Field */}
+                  <div className="form-field">
+                    <input 
+                      type="tel" 
+                      name="phone"
+                      placeholder="Your Phone Number" 
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className={formErrors.phone ? 'error' : ''}
+                      disabled={formStatus === 'submitting'}
+                    />
+                    {formErrors.phone && <span className="error-message">{formErrors.phone}</span>}
                   </div>
                   
                   {/* Message Field */}
                   <div className="form-field">
                     <textarea 
                       name="message"
-                      placeholder="Share your cultural interests and how we can help you connect with heritage..."
-                      rows="5"
+                      placeholder=" What draws you to this world, what you love about culture, and what you do in your own life or work?..."
+                      rows="4"
                       value={formData.message}
                       onChange={handleInputChange}
                       className={formErrors.message ? 'error' : ''}
