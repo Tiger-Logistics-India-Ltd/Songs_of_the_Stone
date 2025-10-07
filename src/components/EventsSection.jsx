@@ -1,4 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -21,8 +21,6 @@ const EventsSection = () => {
    * State for managing "Learn More" section visibility
    */
   const [showLearnMore, setShowLearnMore] = useState(false);
-  const expandRef = useRef(null);
-  const [expandHeight, setExpandHeight] = useState(0);
 
   /**
    * Intersection Observer for scroll-triggered animations
@@ -32,13 +30,7 @@ const EventsSection = () => {
     triggerOnce: true
   });
 
-  useLayoutEffect(() => {
-    if (showLearnMore && expandRef.current) {
-      setExpandHeight(expandRef.current.scrollHeight);
-    } else {
-      setExpandHeight(0);
-    }
-  }, [showLearnMore]);
+  // Removed dynamic height measurement to prevent layout thrash on mobile
 
   /**
    * Handle event registration button click
@@ -181,19 +173,18 @@ const EventsSection = () => {
       </div>
 
       {/* Learn More Section - Separate full-width section */}
-      <AnimatePresence initial={false} mode="wait">
+      <AnimatePresence initial={false}>
         {showLearnMore && (
           <motion.section
             key="learn-more"
             className="learn-more-full-section"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: expandHeight }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.55, ease: 'easeInOut' }}
+            initial={{ opacity: 0, y: 24, height: 0 }}
+            animate={{ opacity: 1, y: 0, height: 'auto' }}
+            exit={{ opacity: 0, y: 24, height: 0 }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
           >
-            <div ref={expandRef} className="learn-more-inner-measure">
-              <div className="container">
-                <div className="learn-more-grid">
+            <div className="container">
+              <div className="learn-more-grid">
                   {/* Desktop: Left side - Text Content */}
                   <div className="learn-more-text-content">
                     <h3 className="learn-more-section-title">About the Artist</h3>
@@ -229,7 +220,6 @@ const EventsSection = () => {
                       loading="lazy"
                     />
                   </div>
-                </div>
               </div>
             </div>
           </motion.section>

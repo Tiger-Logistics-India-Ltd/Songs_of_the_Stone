@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useWindowSize, useScrollPosition } from '../hooks/useResponsive';
+import { useScrollPosition } from '../hooks/useResponsive';
 
 /**
  * Navigation Component
@@ -15,7 +15,6 @@ const Navigation = () => {
   // Get scroll position using custom hook
   const { scrollY } = useScrollPosition();
   const scrollingRef = useRef(false);
-  const scrollTimeoutRef = useRef(null);
   
   // State to track if the user has scrolled past a certain point
   const [scrolled, setScrolled] = useState(false);
@@ -49,9 +48,8 @@ const Navigation = () => {
     if (!section) return;
     scrollingRef.current = true;
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    // Clear flag after scroll settles
-    clearTimeout(scrollTimeoutRef.current);
-    scrollTimeoutRef.current = setTimeout(() => { scrollingRef.current = false; }, 900);
+  // Release lock after animation window
+  setTimeout(() => { scrollingRef.current = false; }, 800);
     if (sectionId === 'contact') {
       setTimeout(() => {
         const firstInput = section.querySelector('input[name="name"]');
