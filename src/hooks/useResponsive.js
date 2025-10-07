@@ -73,7 +73,7 @@ export const useScrollPosition = () => {
   const [scrollDirection, setScrollDirection] = useState('down');
 
   useEffect(() => {
-    let previousScrollY = scrollY;
+    let previousScrollY = 0;
     let ticking = false;
 
     /**
@@ -107,10 +107,13 @@ export const useScrollPosition = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    // Set initial scroll position
+    setScrollY(window.scrollY);
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [scrollY]);
+  }, []); // Remove scrollY dependency to prevent infinite re-renders
 
   return { scrollY, scrollDirection };
 };

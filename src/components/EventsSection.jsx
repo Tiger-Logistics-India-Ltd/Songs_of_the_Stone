@@ -173,10 +173,11 @@ const EventsSection = () => {
       {/* Learn More Section - Separate full-width section */}
       {showLearnMore && (
         <motion.section 
+          key="learn-more"
           className="learn-more-full-section"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
           <div className="container">

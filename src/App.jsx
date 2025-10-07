@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './App.css';
 
 // Import modular components
@@ -29,6 +29,26 @@ import Footer from './components/Footer';
  * - Footer: Site footer with copyright
  */
 function App() {
+  // Force re-render of sections after DOM changes to prevent rendering issues
+  useEffect(() => {
+    const handleResize = () => {
+      // Trigger a reflow to fix any layout issues
+      document.body.style.display = 'none';
+      document.body.offsetHeight; // Trigger reflow
+      document.body.style.display = '';
+    };
+
+    // Add a small delay to ensure DOM is ready
+    const timer = setTimeout(() => {
+      window.addEventListener('resize', handleResize);
+    }, 100);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className="App">
       <Navigation />

@@ -49,6 +49,10 @@ body {
   overflow-x: hidden;
   font-weight: 400;
   background: var(--primary-cream);
+  /* Improve scrolling performance and prevent glitches */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  -webkit-overflow-scrolling: touch;
 }
 
 /* 🎭 SPECTACULAR ANIMATIONS & EFFECTS */
@@ -383,75 +387,86 @@ a {
 }
 
 @media (max-width: 768px) {
-  /* Mobile Hero: full banner with overlay text (left-aligned) */
+  /* Mobile Hero: Perfect 900x1200 display with no extra space */
   .hero-split {
-    /* Enforce exact 3:4 aspect ratio (900x1200) so no extra area shows */
     position: relative;
-    width: 100%;
-    aspect-ratio: 3 / 4; /* modern browsers */
-    height: auto; /* allow intrinsic ratio to drive height */
+    width: 100vw;
+    height: auto; /* Let image content determine height */
     padding: 0;
+    margin: 0;
     overflow: hidden;
-    background: #000; /* behind any transparency */
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .hero-inner {
-    display: block;
+    position: relative;
+    width: 100%;
+    height: auto; /* Match content */
     padding: 0;
-    position: absolute; /* cover aspect-ratio box */
-    inset: 0;
-    height: 100%;
+    margin: 0;
+    display: block; /* Override desktop grid */
   }
   .hero-image-col {
-    position: absolute;
-    inset: 0;
+    position: relative;
     width: 100%;
-    height: 100%;
-    order: 1;
+    height: auto; /* Let image determine height */
+    display: block; /* Ensure no grid behavior */
   }
   .hero-img-split {
-    width: 100%;
-    height: 100%;
-    object-fit: contain !important; /* show full image without cropping */
+    width: 100vw; /* Full viewport width */
+    height: auto; /* Natural aspect ratio */
+    max-width: 100vw;
+    object-fit: contain; /* Show full image */
     object-position: center center;
     display: block;
     background: #000;
   }
   .hero-image-overlay {
-    background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.55) 100%);
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.6) 100%);
     mix-blend-mode: normal;
+    z-index: 1;
+    pointer-events: none;
   }
   .hero-text-col {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
-    padding: 0 1.05rem; /* uniform side padding */
+    padding: 0 1.2rem 2.5rem; /* Bottom padding to position text */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center; /* center vertically */
-    gap: 0.65rem;
+    justify-content: flex-end; /* Push text to bottom */
+    gap: 0.5rem;
     pointer-events: none;
     text-align: left;
-    background: none; /* remove gradient from container */
     z-index: 2;
   }
   .hero-main-text-left {
     text-align: left !important;
-    max-width: 88%;
+    max-width: 95%;
     pointer-events: auto;
     margin: 0;
+    color: var(--primary-white);
+    font-size: clamp(1.4rem, 5.5vw, 2.2rem);
+    line-height: 1.2;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.7);
   }
-
-  /* Fallback for browsers without aspect-ratio support */
-  @supports not (aspect-ratio: 1 / 1) {
-    .hero-split { height: 0; padding-top: 133.333%; }
-    .hero-inner { position: absolute; inset: 0; }
+  .hero-main-text-left em { 
+    font-style: italic; 
+    color: var(--primary-white);
   }
-  .hero-main-text-left em { font-style: italic; }
-  /* refine line-length for small devices */
+  /* Smaller screens get proportionally smaller text */
   @media (max-width: 480px) {
-    .hero-main-text-left { font-size: clamp(1.3rem, 6vw, 2rem); }
+    .hero-main-text-left { 
+      font-size: clamp(1.2rem, 5vw, 1.8rem);
+      max-width: 98%;
+    }
+    .hero-text-col {
+      padding: 0 1rem 2rem; /* Keep text within bounds on small screens */
+    }
   }
   /* unify placeholder styles + center alignment */
   /* Center placeholders uniformly and ensure full-width fields */
@@ -1815,7 +1830,7 @@ span.italic-text {
     display: none;
   }
 
-  /* Event image mobile optimization - full portrait mode */
+  /* Event image mobile optimization - full edge-to-edge */
   .event-image {
     width: 100vw;
     margin-left: calc(50% - 50vw);
@@ -1823,24 +1838,22 @@ span.italic-text {
     margin-top: 1rem;
     margin-bottom: 1rem;
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0; /* remove side padding to eliminate gaps */
+    padding: 0;
     box-sizing: border-box;
     overflow: hidden;
   }
 
   .event-img {
-    width: 100%;
+    width: 100vw; /* Full viewport width - no side gaps */
     height: auto;
-    max-width: 100%;
     max-height: 40vh; /* reduce length - shorter on mobile */
-    object-fit: contain; /* show full image with no crop */
+    object-fit: cover; /* Fill width completely, crop height if needed */
     object-position: center center;
     border-radius: 0;
-    background: transparent; /* no letterbox backdrop */
+    background: transparent;
     display: block;
+    margin: 0;
+    padding: 0;
   }
 
   /* Mobile-specific placeholder font size */
