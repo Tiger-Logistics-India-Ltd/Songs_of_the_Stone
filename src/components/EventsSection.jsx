@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef, useLayoutEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 /**
@@ -21,6 +21,8 @@ const EventsSection = () => {
    * State for managing "Learn More" section visibility
    */
   const [showLearnMore, setShowLearnMore] = useState(false);
+  const expandRef = useRef(null);
+  const [expandHeight, setExpandHeight] = useState(0);
 
   /**
    * Intersection Observer for scroll-triggered animations
@@ -29,6 +31,14 @@ const EventsSection = () => {
     threshold: 0.1,
     triggerOnce: true
   });
+
+  useLayoutEffect(() => {
+    if (showLearnMore && expandRef.current) {
+      setExpandHeight(expandRef.current.scrollHeight);
+    } else {
+      setExpandHeight(0);
+    }
+  }, [showLearnMore]);
 
   /**
    * Handle event registration button click
@@ -171,56 +181,60 @@ const EventsSection = () => {
       </div>
 
       {/* Learn More Section - Separate full-width section */}
-      {showLearnMore && (
-        <motion.section 
-          key="learn-more"
-          className="learn-more-full-section"
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <div className="container">
-            <div className="learn-more-grid">
-              {/* Desktop: Left side - Text Content */}
-              <div className="learn-more-text-content">
-                <h3 className="learn-more-section-title">About the Artist</h3>
-                
-                <div className="learn-more-description">
-                  <p>
-                    The premiere features Ustad Mehtaab Ali Niazi of the Rampur-Sahaswan Gharana — one of India's most nuanced classical lineages. Trained under Ustad Ghulam Mustafa Niazi, Mehtaab bridges raga and rhythm with modern soundscapes, perfectly balancing the old and the new.
-                  </p>
-                </div>
+      <AnimatePresence initial={false} mode="wait">
+        {showLearnMore && (
+          <motion.section
+            key="learn-more"
+            className="learn-more-full-section"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: expandHeight }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.55, ease: 'easeInOut' }}
+          >
+            <div ref={expandRef} className="learn-more-inner-measure">
+              <div className="container">
+                <div className="learn-more-grid">
+                  {/* Desktop: Left side - Text Content */}
+                  <div className="learn-more-text-content">
+                    <h3 className="learn-more-section-title">About the Artist</h3>
+                    
+                    <div className="learn-more-description">
+                      <p>
+                        The premiere features Ustad Mehtaab Ali Niazi of the Rampur-Sahaswan Gharana — one of India's most nuanced classical lineages. Trained under Ustad Ghulam Mustafa Niazi, Mehtaab bridges raga and rhythm with modern soundscapes, perfectly balancing the old and the new.
+                      </p>
+                    </div>
 
-                <div className="event-details-grid">
-                  <div className="detail-item">
-                    <span className="detail-label">Date:</span>
-                    <span className="detail-value">13th December 2025</span>
+                    <div className="event-details-grid">
+                      <div className="detail-item">
+                        <span className="detail-label">Date:</span>
+                        <span className="detail-value">13th December 2025</span>
+                      </div>
+                      <div className="detail-item">
+                        <span className="detail-label">Time:</span>
+                        <span className="detail-value">9pm-11pm</span>
+                      </div>
+                      <div className="detail-item">
+                        <span className="detail-label">Place:</span>
+                        <span className="detail-value">Qutub Minar, New Delhi</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="detail-item">
-                    <span className="detail-label">Time:</span>
-                    <span className="detail-value">9pm-11pm</span>
-                  </div>
-                  <div className="detail-item">
-                    <span className="detail-label">Place:</span>
-                    <span className="detail-value">Qutub Minar, New Delhi</span>
+
+                  {/* Desktop: Right side - Image */}
+                  <div className="learn-more-image-wrapper">
+                    <img 
+                      src="/Images/Mobile/Mehtab_ali_600x400 px.png" 
+                      alt="Ustad Mehtaab Ali Niazi - Classical Music Performance" 
+                      className="learn-more-section-img"
+                      loading="lazy"
+                    />
                   </div>
                 </div>
-              </div>
-
-              {/* Desktop: Right side - Image */}
-              <div className="learn-more-image-wrapper">
-                <img 
-                  src="/Images/Mobile/Mehtab_ali_600x400 px.png" 
-                  alt="Ustad Mehtaab Ali Niazi - Classical Music Performance" 
-                  className="learn-more-section-img"
-                  loading="lazy"
-                />
               </div>
             </div>
-          </div>
-        </motion.section>
-      )}
+          </motion.section>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

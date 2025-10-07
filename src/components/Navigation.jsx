@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useWindowSize, useScrollPosition } from '../hooks/useResponsive';
 
 /**
@@ -14,48 +14,51 @@ import { useWindowSize, useScrollPosition } from '../hooks/useResponsive';
 const Navigation = () => {
   // Get scroll position using custom hook
   const { scrollY } = useScrollPosition();
+  const scrollingRef = useRef(false);
+  const scrollTimeoutRef = useRef(null);
   
   // State to track if the user has scrolled past a certain point
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   
   /**
    * Effect to handle scroll position changes using custom hook
    * Updates scrolled state when scroll position changes
    */
   useEffect(() => {
-    // Change navbar appearance when scrolled more than 50px
     setScrolled(scrollY > 50);
   }, [scrollY]);
+
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
 
   /**
    * Smooth scroll to section with enhanced experience
    */
   const scrollToSection = (sectionId, event) => {
-    event.preventDefault();
-    
+    if (event) event.preventDefault();
+    if (scrollingRef.current) return; // debounce overlapping scrolls
     const section = document.getElementById(sectionId);
-    if (section) {
-      // Add a slight delay for better UX
+    if (!section) return;
+    scrollingRef.current = true;
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Clear flag after scroll settles
+    clearTimeout(scrollTimeoutRef.current);
+    scrollTimeoutRef.current = setTimeout(() => { scrollingRef.current = false; }, 900);
+    if (sectionId === 'contact') {
       setTimeout(() => {
-        section.scrollIntoView({ 
-          behavior: 'smooth',
-          block: 'start'
-        });
-        
-        // Special handling for contact section - focus first input
-        if (sectionId === 'contact') {
-          setTimeout(() => {
-            const firstInput = section.querySelector('input[name="name"]');
-            if (firstInput) {
-              firstInput.focus();
-            }
-          }, 800);
-        }
-      }, 100);
+        const firstInput = section.querySelector('input[name="name"]');
+        firstInput && firstInput.focus();
+      }, 950);
     }
   };
-
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   const toggleMobile = () => setMobileOpen(o => !o);
   const closeMobile = () => setMobileOpen(false);
