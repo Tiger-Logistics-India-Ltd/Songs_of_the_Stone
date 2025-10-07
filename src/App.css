@@ -385,36 +385,39 @@ a {
 @media (max-width: 768px) {
   /* Mobile Hero: full banner with overlay text (left-aligned) */
   .hero-split {
-    /* Match 3:4 image exactly: remove extra space causing bottom border */
-    height: calc(100vw * 1.3333); /* 900x1200 ratio */
-    max-height: var(--hero-mobile-max-h);
-    min-height: 0;
-    padding: 0;
+    /* Enforce exact 3:4 aspect ratio (900x1200) so no extra area shows */
     position: relative;
-    overflow: hidden; /* hide any residual overflow */
-    background: #000; /* ensure no brand brown shows if image shorter on edge cases */
+    width: 100%;
+    aspect-ratio: 3 / 4; /* modern browsers */
+    height: auto; /* allow intrinsic ratio to drive height */
+    padding: 0;
+    overflow: hidden;
+    background: #000; /* behind any transparency */
   }
   .hero-inner {
-    display: block; /* collapse grid */
+    display: block;
     padding: 0;
+    position: absolute; /* cover aspect-ratio box */
+    inset: 0;
     height: 100%;
-    position: relative;
   }
   .hero-image-col {
-    position: relative;
-    height: 100%;
+    position: absolute;
+    inset: 0;
     width: 100%;
+    height: 100%;
     order: 1;
   }
   .hero-img-split {
     width: 100%;
     height: 100%;
-    object-fit: contain !important; /* show full 3:4 image with no cropping */
+    object-fit: contain !important; /* show full image without cropping */
     object-position: center center;
-    background: transparent;
+    display: block;
+    background: #000;
   }
   .hero-image-overlay {
-    background: linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.15));
+    background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.55) 100%);
     mix-blend-mode: normal;
   }
   .hero-text-col {
@@ -422,20 +425,28 @@ a {
     inset: 0;
     width: 100%;
     height: 100%;
-    padding: 80px 1.1rem 40px; /* slightly reduced to stay inside new exact height */
+    padding: 0 1.05rem; /* uniform side padding */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: center;
-    gap: 0.6rem;
+    justify-content: center; /* center vertically */
+    gap: 0.65rem;
     pointer-events: none;
     text-align: left;
+    background: none; /* remove gradient from container */
+    z-index: 2;
   }
   .hero-main-text-left {
     text-align: left !important;
     max-width: 88%;
     pointer-events: auto;
     margin: 0;
+  }
+
+  /* Fallback for browsers without aspect-ratio support */
+  @supports not (aspect-ratio: 1 / 1) {
+    .hero-split { height: 0; padding-top: 133.333%; }
+    .hero-inner { position: absolute; inset: 0; }
   }
   .hero-main-text-left em { font-style: italic; }
   /* refine line-length for small devices */
@@ -1637,6 +1648,11 @@ span.italic-text {
 
   .about-description {
     max-width: 100%;
+    font-size: 0.825rem; /* 25% smaller than 1.1rem */
+  }
+
+  .event-description {
+    font-size: 0.825rem; /* 25% smaller than 1.1rem */
   }
 
   .events-grid {
@@ -1819,11 +1835,11 @@ span.italic-text {
     width: 100%;
     height: auto;
     max-width: 100%;
-    aspect-ratio: 9 / 16; /* force portrait framing while keeping full image */
-    object-fit: contain; /* show full image */
+    max-height: 40vh; /* reduce length - shorter on mobile */
+    object-fit: contain; /* show full image with no crop */
     object-position: center center;
     border-radius: 0;
-    background: #000; /* optional backdrop for letterboxed areas */
+    background: transparent; /* no letterbox backdrop */
     display: block;
   }
 
@@ -2527,14 +2543,11 @@ html {
 
 /* Desktop: revert hero to full-background with centered overlay text (keep mobile behavior) */
 @media (min-width: 769px) {
-  .hero-split { position: relative; text-align: center; color: var(--primary-white); background: #000; }
+  .hero-split { position: relative; text-align: center; color: var(--primary-white); background: #000; height: 100vh; min-height: 100vh; }
   .hero-inner { display: block; height: 100%; padding: 0; }
   .hero-image-col { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
   .hero-img-split { width: 100%; height: 100%; object-fit: cover; }
   .hero-image-overlay { background: linear-gradient(135deg, rgba(0,0,0,0.55), rgba(0,0,0,0.2)); mix-blend-mode: normal; }
-  .hero-text-col { position: relative; z-index: 2; width: 100%; max-width: 1100px; margin: 0 auto; height: 100%; display: flex; align-items: center; justify-content: center; padding: 0 4rem; }
-  .hero-main-text-left { text-align: center; color: var(--primary-white); font-size: clamp(2.2rem, 4vw, 3.5rem); line-height: 1.25; }
-  /* Left-align hero text on mobile per request */
-  .hero-main-text-left { text-align: left !important; }
-  .hero-text-col { justify-content: flex-start; }
+  .hero-text-col { position: relative; z-index: 2; width: 100%; max-width: 1100px; margin: 0 auto; height: 100%; display: flex; align-items: flex-end; justify-content: flex-start; padding: 0 4rem 4rem 4rem; }
+  .hero-main-text-left { text-align: left; color: var(--primary-white); font-size: clamp(2.2rem, 4vw, 3.5rem); line-height: 1.25; }
 }

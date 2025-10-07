@@ -9,5 +9,15 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      // Dynamic viewport height fix for mobile (sets --vh = 1% of visual viewport)
+      function setVh() {
+        const vh = window.visualViewport ? window.visualViewport.height * 0.01 : window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+      }
+      setVh();
+      window.addEventListener('resize', setVh);
+      window.addEventListener('orientationchange', setVh);
+    </script>
   </body>
 </html>
