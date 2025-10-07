@@ -55,6 +55,16 @@ const Navigation = () => {
     }
   };
 
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const toggleMobile = () => setMobileOpen(o => !o);
+  const closeMobile = () => setMobileOpen(false);
+
+  const handleNavClick = (id, e) => {
+    closeMobile();
+    scrollToSection(id, e);
+  };
+
   return (
     <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
       <div className="nav-container">
@@ -62,31 +72,41 @@ const Navigation = () => {
         <div className="nav-logo">
           <img src="/songofthestonelogo.svg" alt="Songs of the Stone" className="logo-img" />
         </div>
-        
+
         {/* Desktop Navigation Menu */}
         <div className="nav-menu">
-          <a href="#home" className="nav-link">
-            Home
-          </a>
-          <a href="#about" className="nav-link">
-            About
-          </a>
-          <a href="#events" className="nav-link">
-            Events
-          </a>
-          <a href="#contact" className="nav-link" onClick={(e) => scrollToSection('contact', e)}>
-            Contact
-          </a>
-        </div>
-        
-        {/* Call-to-Action Button */}
-        <div className="nav-cta">
-          <a href="#events" className="cta-button" onClick={(e) => scrollToSection('events', e)}>
-            Explore
-          </a>
+          <a href="#home" className="nav-link">Home</a>
+          <a href="#about" className="nav-link">About</a>
+            <a href="#events" className="nav-link">Events</a>
+          <a href="#contact" className="nav-link" onClick={(e) => scrollToSection('contact', e)}>Contact</a>
         </div>
 
+        {/* Desktop CTA */}
+        <div className="nav-cta desktop-only">
+          <a href="#events" className="cta-button" onClick={(e) => scrollToSection('events', e)}>Explore</a>
+        </div>
 
+        {/* Mobile Hamburger */}
+        <button
+          className={`hamburger ${mobileOpen ? 'is-active' : ''}`}
+          aria-label="Toggle navigation menu"
+          aria-expanded={mobileOpen}
+          onClick={toggleMobile}
+        >
+          <span className="hamburger-line" />
+          <span className="hamburger-line" />
+          <span className="hamburger-line" />
+        </button>
+      </div>
+
+      {/* Mobile Slide Panel */}
+      <div className={`mobile-menu-panel ${mobileOpen ? 'open' : ''}`}>
+        <div className="mobile-menu-inner">
+          <a href="#home" onClick={(e) => handleNavClick('home', e)}>Home</a>
+          <a href="#about" onClick={(e) => handleNavClick('about', e)}>About</a>
+          <a href="#events" onClick={(e) => handleNavClick('events', e)}>Events</a>
+          <a href="#contact" onClick={(e) => handleNavClick('contact', e)}>Contact</a>
+        </div>
       </div>
     </nav>
   );

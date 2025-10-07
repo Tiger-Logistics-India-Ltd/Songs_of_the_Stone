@@ -273,41 +273,40 @@ const ContactSection = () => {
               {/* Contact Form */}
               <div className="contact-form-wrapper">
                 <form className="contact-form" onSubmit={handleSubmit}>
-                  {/* Form Row - Name and Email */}
-                  <div className="form-row">
-                    <div className="form-field">
-                      <input 
-                        type="text" 
-                        name="name"
-                        placeholder="Name" 
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        className={formErrors.name ? 'error' : ''}
-                        disabled={formStatus === 'submitting'}
-                      />
-                      {formErrors.name && <span className="error-message">{formErrors.name}</span>}
-                    </div>
-                    
-                    <div className="form-field">
-                      <input 
-                        type="email" 
-                        name="email"
-                        placeholder="Email" 
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className={formErrors.email ? 'error' : ''}
-                        disabled={formStatus === 'submitting'}
-                      />
-                      {formErrors.email && <span className="error-message">{formErrors.email}</span>}
-                    </div>
-                  </div>
-                  
-                  {/* Phone Field */}
+                  {/* Name Field */}
                   <div className="form-field">
+                    <input 
+                      type="text" 
+                      name="name"
+                      placeholder="Name" 
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className={formErrors.name ? 'error' : ''}
+                      disabled={formStatus === 'submitting'}
+                    />
+                    {formErrors.name && <span className="error-message">{formErrors.name}</span>}
+                  </div>
+
+                  {/* Email Field (single full width) */}
+                  <div className="form-field full-width-input">
+                    <input 
+                      type="email" 
+                      name="email"
+                      placeholder="Email" 
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className={formErrors.email ? 'error' : ''}
+                      disabled={formStatus === 'submitting'}
+                    />
+                    {formErrors.email && <span className="error-message">{formErrors.email}</span>}
+                  </div>
+
+                  {/* Phone Field now full width and with clearer placeholder */}
+                  <div className="form-field full-width-input">
                     <input 
                       type="tel" 
                       name="phone"
-                      placeholder="Phone" 
+                      placeholder="Phone (optional)" 
                       value={formData.phone}
                       onChange={handleInputChange}
                       className={formErrors.phone ? 'error' : ''}
@@ -320,7 +319,7 @@ const ContactSection = () => {
                   <div className="form-field">
                     <textarea 
                       name="message"
-                      placeholder="What draws you to this world, what you love about culture, and what you do in your own life or work?"
+                      placeholder="Your message"
                       rows="4"
                       value={formData.message}
                       onChange={handleInputChange}

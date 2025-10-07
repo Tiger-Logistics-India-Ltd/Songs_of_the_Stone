@@ -45,10 +45,10 @@ const HeroSection = () => {
         {/* Image Column */}
         <div className="hero-image-col">
           <picture>
-            <source media="(max-width: 767px)" srcSet="/new_mobile_hero.svg" type="image/svg+xml" />
+            <source media="(max-width: 767px)" srcSet="/Images/Mobile/hero.svg" type="image/svg+xml" />
             <source media="(min-width: 768px)" srcSet="/Images/desktop/Hero_1920x1800px.svg" type="image/svg+xml" />
             <img
-              src="/new_mobile_hero.svg"
+              src="/Images/Mobile/hero.svg"
               alt="Song of the Stone – Architectural Heritage"
               className="hero-img-split"
               loading="priority"
