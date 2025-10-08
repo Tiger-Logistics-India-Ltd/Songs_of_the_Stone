@@ -2751,25 +2751,25 @@ html {
   /* Shrink interactive area but keep it reasonably tappable (>30px) */
   .contact-form input,
   .contact-form textarea {
-    padding: 0.30rem 0.45rem !important;
+    padding: 0.05rem 0.05rem !important;
     height: 30px !important; /* was 42px */
     font-size: 0.5rem !important; /* down from 0.75rem */
     line-height: 1.1 !important;
   }
   /* Textarea needs vertical room despite reduced single-line height */
   .contact-form textarea { min-height: 70px !important; }
-  /* Placeholder text scaled down roughly half */
+  /* Placeholder text - increased size for better readability */
   .contact-form input::placeholder,
   .contact-form textarea::placeholder {
-    font-size: 0.385rem !important; /* 1.1x of 0.35rem */
+    font-size: 0.55rem !important; /* increased from 0.385rem for better readability */
     letter-spacing: 0.05px !important;
   }
   .contact-form input::-webkit-input-placeholder,
-  .contact-form textarea::-webkit-input-placeholder { font-size: 0.385rem !important; }
+  .contact-form textarea::-webkit-input-placeholder { font-size: 0.55rem !important; }
   .contact-form input:-ms-input-placeholder,
-  .contact-form textarea:-ms-input-placeholder { font-size: 0.385rem !important; }
+  .contact-form textarea:-ms-input-placeholder { font-size: 0.55rem !important; }
   .contact-form input::-ms-input-placeholder,
-  .contact-form textarea::-ms-input-placeholder { font-size: 0.385rem !important; }
+  .contact-form textarea::-ms-input-placeholder { font-size: 0.55rem !important; }
 }
 
 /* Desktop only: prevent about section images from cropping; preserve intrinsic aspect ratio */
@@ -2820,13 +2820,13 @@ html {
   /* === FINAL DESKTOP CONTACT FORM CENTERING === */
   @media (min-width: 769px) {
     .contact-form input,
-    .contact-form textarea { text-align: center !important; }
+    .contact-form textarea { text-align: center !important; font-size: 1rem !important; }
     .contact-form input::placeholder,
-    .contact-form textarea::placeholder { text-align: center !important; }
+    .contact-form textarea::placeholder { text-align: center !important; font-size: 0.9rem !important; }
     .contact-form input::-webkit-input-placeholder,
-    .contact-form textarea::-webkit-input-placeholder { text-align: center !important; }
+    .contact-form textarea::-webkit-input-placeholder { text-align: center !important; font-size: 0.9rem !important; }
     .contact-form input:-ms-input-placeholder,
-    .contact-form textarea:-ms-input-placeholder { text-align: center !important; }
+    .contact-form textarea:-ms-input-placeholder { text-align: center !important; font-size: 0.9rem !important; }
     .contact-form input::-ms-input-placeholder,
-    .contact-form textarea::-ms-input-placeholder { text-align: center !important; }
+    .contact-form textarea::-ms-input-placeholder { text-align: center !important; font-size: 0.9rem !important; }
   }
