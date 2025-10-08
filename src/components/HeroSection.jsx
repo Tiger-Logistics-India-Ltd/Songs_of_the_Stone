@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 /**
@@ -21,8 +21,36 @@ const HeroSection = () => {
     })
   };
 
+  // Refs for dynamic scaling to prevent cropping on ultra-small widths
+  const line1Ref = useRef(null);
+  const line2Ref = useRef(null);
+  const heroScalerRef = useRef(null);
+
+  useEffect(() => {
+    function fitHeroLines() {
+      if (!line1Ref.current || !line2Ref.current || !heroScalerRef.current) return;
+      // Reset scale before measuring
+      heroScalerRef.current.style.transform = 'scale(1)';
+      heroScalerRef.current.style.transformOrigin = 'left bottom';
+      const lines = [line1Ref.current, line2Ref.current];
+      const ratios = lines.map(l => {
+        const cw = l.clientWidth || 1;
+        const sw = l.scrollWidth || 1;
+        return sw / cw;
+      });
+      const maxRatio = Math.max(...ratios);
+      if (maxRatio > 1.0001) {
+        heroScalerRef.current.style.transform = `scale(${1 / maxRatio})`;
+      }
+    }
+    fitHeroLines();
+    window.addEventListener('resize', fitHeroLines);
+    return () => window.removeEventListener('resize', fitHeroLines);
+  }, []);
+
   return (
     <section id="home" className="hero hero-split">
+
       <div className="hero-inner">
         {/* Text Column */}
         <motion.div
@@ -37,8 +65,10 @@ const HeroSection = () => {
             variants={textVariants}
             custom={0}
           >
-            Reimagining India's <em className="italic-text">Cultural Soul</em><br />
-            Art, Architecture, and Performance in <em className="italic-text">dialogue with time</em>
+              <div className="hero-text-scaler" ref={el => (heroScalerRef.current = el)}>
+                <span ref={el => (line1Ref.current = el)} className="hero-line hero-line-1">Reimagining India's <em className="italic-text">Cultural Soul</em></span>
+                <span ref={el => (line2Ref.current = el)} className="hero-line hero-line-2">Art, Architecture, and Performance in <em className="italic-text">dialogue with time</em></span>
+              </div>
           </motion.div>
         </motion.div>
 

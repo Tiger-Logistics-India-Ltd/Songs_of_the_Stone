@@ -376,11 +376,13 @@ a {
   display: flex;
   align-items: flex-end;
   justify-content: flex-start; /* Left align the text container */
+  text-align: left !important;
 }
 
 .hero-main-text-left {
   text-align: left !important;
-  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  /* Reduced overall scale (approx -15%) while keeping responsive fluidity */
+  font-size: clamp(1.6rem, 3vw, 3rem);
   line-height: 1.2;
   color: var(--primary-white);
   max-width: 800px;
@@ -389,6 +391,33 @@ a {
   cursor: text; /* Show text cursor */
   margin: 0; /* Remove any default margins */
   width: 100%; /* Ensure full width for left alignment */
+}
+
+/* Two-line enforced hero text structure */
+.hero-main-text-left .hero-line {
+  display: block;
+  white-space: nowrap; /* prevent wrapping inside each intended line */
+  width: 100%;
+}
+
+/* Responsive scaling to ensure both lines fit across smallest devices */
+@media (max-width: 768px) {
+  /* Further reduced mobile scale (~additional 15%) per request */
+  .hero-main-text-left { font-size: clamp(0.9rem, 4.2vw, 1.4rem); line-height: 1.12; text-align: left !important; letter-spacing: -0.25px; }
+  .hero-main-text-left .hero-line { white-space: nowrap; }
+}
+
+@media (max-width: 480px) {
+  .hero-main-text-left { font-size: clamp(0.85rem, 4vw, 1.3rem); }
+  /* If extremely narrow devices still overflow, gently scale down using viewport match */
+  @supports (font-size: clamp(1rem, 4.8vw, 1.6rem)) {
+    .hero-main-text-left { font-size: clamp(0.8rem, 3.9vw, 1.2rem); }
+  }
+}
+
+/* Ultra narrow safety (rare <340px widths) */
+@media (max-width: 340px) {
+  .hero-main-text-left { font-size: clamp(0.78rem, 3.8vw, 1.15rem); }
 }
 
 .hero-img-split {
@@ -930,7 +959,7 @@ span.italic-text {
 .about-img {
   width: 100%;
   height: 500px;
-  object-fit: cover;
+  object-fit: cover; /* default (mobile overrides later) */
   border-radius: 8px;
   transition: var(--transition);
 }
@@ -1998,6 +2027,135 @@ html {
   scroll-behavior: smooth;
 }
 
+/* === Mobile Ultra-Compact Vertical Rhythm (final tightening) === */
+@media (max-width: 768px) {
+  /* Reduce vertical padding further between major sections */
+  .about-section, .events, .contact { padding-top: 1.25rem !important; padding-bottom: 1.5rem !important; }
+  /* Full-bleed image blocks: shrink their vertical margins */
+  .about-image, .event-image, .contact-image, .learn-more-image-wrapper { margin-top: 1rem !important; margin-bottom: 1rem !important; }
+  /* Specific second about subsection (songs-section) margin reduction */
+  .songs-section { margin-top: 0.75rem !important; }
+  /* Collapse gap between consecutive sections */
+  section + section { margin-top: 0.75rem !important; }
+  /* If events follows about wrapper, ensure minimal gap */
+  .about + .events { margin-top: 0.75rem !important; }
+  /* Tighten heading top spacing when it immediately follows an image */
+  .about-image + .about-text .event-category,
+  .event-image + .event-details .event-category,
+  .contact-image + .contact-text-section .contact-title { margin-top: 0.25rem !important; }
+  /* Ensure no unintended extra space from first child margins */
+  .about-section > *:first-child,
+  .events > *:first-child,
+  .contact > *:first-child { margin-top: 0 !important; }
+  /* Slightly reduce bottom margin of about sections to avoid stack gaps */
+  .about-section { margin-bottom: 2rem !important; }
+  .about-section:last-child { margin-bottom: 2rem !important; }
+  /* Ensure hero remains visually separated a little */
+  .hero + .about { margin-top: 1.25rem !important; }
+}
+
+/* ============================= */
+/* Section Spacing Adjustments   */
+/* ============================= */
+/* Goal: Reduce vertical empty gap: mobile -> 50%, desktop -> 75% of current */
+/* We do NOT touch hero (full viewport) or internal component spacing. */
+
+/* Base (Desktop & large) reduce to 75% of original (original var(--section-padding) = 4rem 0 or overridden) */
+@media (min-width: 1025px) {
+  :root { --section-padding: 3rem 0; }
+  /* Target primary sections with own padding if they previously used var */
+  .about-section, .events, .contact { padding-top: 3rem; padding-bottom: 3rem; }
+  /* Fine tune large bottom margins between stacked about subsections */
+  .about-section { margin-bottom: 6rem; }
+  .about-section:last-child { margin-bottom: 0; }
+}
+
+/* Tablet (inherits 75% unless already custom) keep consistent */
+@media (max-width: 1024px) and (min-width: 769px) {
+  :root { --section-padding: 3rem 0; }
+  .about-section, .events, .contact { padding-top: 3rem; padding-bottom: 3rem; }
+  .about-section { margin-bottom: 5rem; }
+}
+
+/* Mobile: cut to 50% of desktop original (≈2rem vertical) */
+@media (max-width: 768px) {
+  :root { --section-padding: 2rem 0; }
+  .about-section, .events, .contact { padding-top: 2rem; padding-bottom: 2rem; }
+  .about-section { margin-bottom: 3rem; }
+  .about-section:last-child { margin-bottom: 0; }
+  /* Ensure learn-more expansion doesn't introduce huge whitespace */
+  .learn-more-full-section { padding-top: 1.75rem; padding-bottom: 1.75rem; }
+}
+
+/* === Mobile Contact Image: No Crop, No Margins, Edge-to-Edge (mirror event overrides) === */
+@media (max-width: 768px) {
+  .contact-image {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    aspect-ratio: auto !important;
+    height: auto !important;
+  }
+  .contact-img {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    height: auto !important;
+    object-fit: contain !important; /* show full 3:2 image */
+    object-position: center center !important;
+    aspect-ratio: auto !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    display: block;
+  }
+  #contact .container { padding-left: 0 !important; padding-right: 0 !important; }
+}
+
+/* === Mobile Event Image: No Crop, No Margins, Edge-to-Edge === */
+@media (max-width: 768px) {
+  /* Final authoritative overrides for event section image */
+  .event-image {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding: 0 !important;
+    aspect-ratio: auto !important; /* release forced ratio */
+    height: auto !important; /* allow natural 4:3 height */
+  }
+  .event-img {
+    width: 100vw !important; /* true full-bleed */
+    max-width: 100vw !important;
+    margin: 0 !important;
+    height: auto !important; /* keep intrinsic aspect ratio */
+    object-fit: contain !important; /* show entire SVG without crop */
+    object-position: center center !important;
+    aspect-ratio: auto !important; /* remove artificial constraints */
+    border-radius: 0 !important;
+    background: transparent !important;
+    display: block;
+  }
+  /* Prevent parent container from reintroducing side padding */
+  #events .container { padding-left: 0 !important; padding-right: 0 !important; }
+}
+
+  /* === Mobile Contact Form Field Width & Placeholder Centering (safe override) === */
+  @media (max-width: 768px) {
+    .contact-form .form-field { width: 100%; display: flex; justify-content: center; }
+    .contact-form input,
+    .contact-form textarea {
+      width: 50% !important; /* requested half length */
+      max-width: 50vw !important;
+    }
+    .contact-form textarea { min-height: 110px; }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { text-align: center !important; }
+    .contact-form input::-webkit-input-placeholder,
+    .contact-form textarea::-webkit-input-placeholder { text-align: center !important; }
+    .contact-form input:-ms-input-placeholder,
+    .contact-form textarea:-ms-input-placeholder { text-align: center !important; }
+    .contact-form input::-ms-input-placeholder,
+    .contact-form textarea::-ms-input-placeholder { text-align: center !important; }
+  }
+
 /* Subtle fade-in for newly swapped media (e.g., updated about image) */
 .fade-in-media {
   opacity: 0;
@@ -2572,4 +2730,103 @@ html {
     text-align: left; 
     font-size: clamp(1.8rem, 3vw, 2.5rem); 
   }
+  .hero-text-col { justify-content: flex-start !important; align-items: flex-end !important; text-align: left !important; }
+  .hero-text-col .hero-main-text-left, .hero-text-col .hero-line { text-align: left !important; }
 }
+
+/* Desktop (and tablet) placeholder centering for contact form */
+@media (min-width: 769px) {
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder { text-align: center; }
+  .contact-form input::-webkit-input-placeholder,
+  .contact-form textarea::-webkit-input-placeholder { text-align: center; }
+  .contact-form input:-ms-input-placeholder,
+  .contact-form textarea:-ms-input-placeholder { text-align: center; }
+  .contact-form input::-ms-input-placeholder,
+  .contact-form textarea::-ms-input-placeholder { text-align: center; }
+}
+
+/* Mobile: reduce placeholder/text field visual scale (approx half) */
+@media (max-width: 768px) {
+  /* Shrink interactive area but keep it reasonably tappable (>30px) */
+  .contact-form input,
+  .contact-form textarea {
+    padding: 0.30rem 0.45rem !important;
+    height: 30px !important; /* was 42px */
+    font-size: 0.5rem !important; /* down from 0.75rem */
+    line-height: 1.1 !important;
+  }
+  /* Textarea needs vertical room despite reduced single-line height */
+  .contact-form textarea { min-height: 70px !important; }
+  /* Placeholder text scaled down roughly half */
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    font-size: 0.385rem !important; /* 1.1x of 0.35rem */
+    letter-spacing: 0.05px !important;
+  }
+  .contact-form input::-webkit-input-placeholder,
+  .contact-form textarea::-webkit-input-placeholder { font-size: 0.385rem !important; }
+  .contact-form input:-ms-input-placeholder,
+  .contact-form textarea:-ms-input-placeholder { font-size: 0.385rem !important; }
+  .contact-form input::-ms-input-placeholder,
+  .contact-form textarea::-ms-input-placeholder { font-size: 0.385rem !important; }
+}
+
+/* Desktop only: prevent about section images from cropping; preserve intrinsic aspect ratio */
+@media (min-width: 1025px) {
+  .about-img {
+    height: auto !important;
+    max-height: 600px; /* cap for extremely tall assets */
+    object-fit: contain !important; /* show full image without crop */
+    background: transparent !important;
+  }
+}
+
+/* Mobile fine spacing reduction specifically after about sections and before events */
+@media (max-width: 768px) {
+  /* Remove extra top gap before Songs of the Stone (second about-section) */
+  .songs-section { margin-top: 1.25rem !important; }
+  /* Tighten gap after Songs of the Stone image before events */
+  .songs-section + .about-section + .events,
+  .songs-section + .events,
+  .about-section + .events { margin-top: 1.75rem !important; }
+  /* If events immediately follows the about container */
+  .about + .events { margin-top: 1.75rem !important; }
+}
+
+/* === FINAL MOBILE VERTICAL GAP OVERRIDES (Highest priority) === */
+@media (max-width: 768px) {
+  /* Ensure no unintended padding remains on primary sections */
+  section.about, section.events, section.contact { padding-top: 0.75rem !important; padding-bottom: 0.9rem !important; }
+  /* Collapse margins between any consecutive sections */
+  section + section { margin-top: 0.6rem !important; }
+  /* Full-bleed images tighter spacing */
+  .about-image, .event-image, .contact-image, .learn-more-image-wrapper { margin-top: 0.6rem !important; margin-bottom: 0.6rem !important; }
+  /* About subsections specific tightening */
+  .about-section { margin-bottom: 1.5rem !important; }
+  .about-section:last-child { margin-bottom: 1.5rem !important; }
+  /* Remove extra container side padding interference just in case */
+  .about .container, .events .container, .contact .container { padding-left: 0 !important; padding-right: 0 !important; }
+  /* Headings directly after images minimal top margin */
+  .about-image + .about-text .event-category,
+  .event-image + .event-details .event-category,
+  .contact-image + .contact-text-section .contact-title { margin-top: 0.15rem !important; }
+  /* Prevent double-spacing if first child has margin */
+  .about-section > *:first-child, .events > *:first-child, .contact > *:first-child { margin-top: 0 !important; }
+  /* Hero to about transition minimal */
+  .hero + .about { margin-top: 0.9rem !important; }
+}
+
+  /* === FINAL DESKTOP CONTACT FORM CENTERING === */
+  @media (min-width: 769px) {
+    .contact-form input,
+    .contact-form textarea { text-align: center !important; }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { text-align: center !important; }
+    .contact-form input::-webkit-input-placeholder,
+    .contact-form textarea::-webkit-input-placeholder { text-align: center !important; }
+    .contact-form input:-ms-input-placeholder,
+    .contact-form textarea:-ms-input-placeholder { text-align: center !important; }
+    .contact-form input::-ms-input-placeholder,
+    .contact-form textarea::-ms-input-placeholder { text-align: center !important; }
+  }

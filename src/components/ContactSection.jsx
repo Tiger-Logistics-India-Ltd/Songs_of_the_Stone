@@ -306,7 +306,7 @@ const ContactSection = () => {
                     <input 
                       type="tel" 
                       name="phone"
-                      placeholder="Phone (optional)" 
+                      placeholder="Phone Number" 
                       value={formData.phone}
                       onChange={handleInputChange}
                       className={formErrors.phone ? 'error' : ''}
@@ -319,7 +319,7 @@ const ContactSection = () => {
                   <div className="form-field">
                     <textarea 
                       name="message"
-                      placeholder="Your message"
+                      placeholder="What draws you to this world, what you love about culture, and what you do in your own life or work?"
                       rows="4"
                       value={formData.message}
                       onChange={handleInputChange}
@@ -338,7 +338,7 @@ const ContactSection = () => {
                     {formStatus === 'submitting' && 'Connecting...'}
                     {formStatus === 'success' && 'Message Sent!'}
                     {formStatus === 'error' && 'Try Again'}
-                    {formStatus === 'idle' && 'Connect With Us'}
+                    {formStatus === 'idle' && 'Submit'}
                   </button>
                   
                   {/* Status Messages */}
