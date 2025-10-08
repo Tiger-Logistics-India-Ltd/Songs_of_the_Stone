@@ -357,25 +357,30 @@ const ContactSection = () => {
               </div>
             </div>
 
-            {/* Contact Image Section */}
-            <div className="contact-image-section">
-              <div className="contact-image-wrapper">
+            {/* Contact Image Section - Clean slate approach matching About section exactly */}
+            <div className="contact-image">
+              <picture>
+                {/* Mobile contact image - edge to edge */}
+                <source 
+                  media="(max-width: 767px)" 
+                  srcSet="/contact_us.png" 
+                  type="image/png" 
+                />
+                
+                {/* Desktop contact image */}
+                <source 
+                  srcSet="/Images/desktop/contact_us_desktop.png" 
+                  type="image/png" 
+                />
+                
+                {/* Fallback */}
                 <img 
-                  src="/Contact_us.jpeg" 
+                  src="/Images/desktop/contact_us_desktop.png" 
                   alt="Musical Heritage and Cultural Expression" 
                   className="contact-img"
                   loading="lazy"
                 />
-                
-                <div className="contact-image-overlay">
-                  <div className="overlay-text">
-                    <span className="overlay-quote">
-                      "Music is the bridge between the earthly and the divine"
-                    </span>
-                    <span className="overlay-author">- Ancient Wisdom</span>
-                  </div>
-                </div>
-              </div>
+              </picture>
             </div>
           </div>
         </motion.div>

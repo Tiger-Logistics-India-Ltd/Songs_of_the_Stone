@@ -59,9 +59,7 @@ const AboutSection = () => {
           <div className="about-grid">
             {/* Text Content */}
             <div className="about-text">
-              <div className="about-tagline">Our Mission</div>
-              
-              <h2 className="about-title">About</h2>
+              <div className="event-category">About</div>
               
               <div className="about-description">
                 <p>
@@ -90,18 +88,20 @@ const AboutSection = () => {
                   type="image/svg+xml" 
                 />
                 
-                {/* Desktop about inkpot image - 800x600px */}
+                {/* Desktop about inkpot image - updated PNG (higher fidelity / branding) */}
                 <source 
-                  srcSet="/Images/desktop/About_inkpot_800x600 px.svg" 
-                  type="image/svg+xml" 
+                  media="(min-width: 768px)"
+                  srcSet="/Images/desktop/inkpot.png" 
+                  type="image/png" 
                 />
                 
-                {/* Fallback */}
+                {/* Fallback / default (will load PNG on desktop, SVG on mobile if supported) */}
                 <img 
-                  src="/Images/desktop/About_inkpot_800x600 px.svg" 
-                  alt="Inkpot India - Cultural Heritage and Artistry" 
-                  className="about-img"
+                  src="/Images/desktop/inkpot.png" 
+                  alt="Inkpot — Contemporary revival of Indian cultural heritage" 
+                  className="about-img fade-in-media"
                   loading="lazy"
+                  decoding="async"
                 />
               </picture>
               {/* Decorative overlay for enhanced visual appeal */}
@@ -131,15 +131,15 @@ const AboutSection = () => {
                   type="image/svg+xml" 
                 />
                 
-                {/* Desktop Songs of the Stone image - 800x600px */}
+                {/* Desktop Songs of the Stone image - now using Event Mehtab Ali */}
                 <source 
-                  srcSet="/Images/desktop/Songs_of_the_stone_800x600 px.svg" 
-                  type="image/svg+xml" 
+                  srcSet="/Images/Event_mehtab_ali_1920x1080 px.png" 
+                  type="image/png" 
                 />
                 
                 {/* Fallback */}
                 <img 
-                  src="/Images/desktop/Songs_of_the_stone_800x600 px.svg" 
+                  src="/Images/Event_mehtab_ali_1920x1080 px.png" 
                   alt="Songs of the Stone - Heritage Monuments and Music" 
                   className="about-img"
                   loading="lazy"
@@ -153,9 +153,7 @@ const AboutSection = () => {
 
             {/* Text Content */}
             <div className="about-text">
-              <div className="about-tagline">Our Flagship Series</div>
-              
-              <h2 className="about-title">Songs of the Stone</h2>
+              <div className="event-category">Songs of the Stone</div>
               
               <div className="about-description">
                 <p>

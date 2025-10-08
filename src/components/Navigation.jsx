@@ -71,7 +71,7 @@ const Navigation = () => {
       <div className="nav-container">
         {/* Logo Section */}
         <div className="nav-logo">
-          <img src="/songofthestonelogo.svg" alt="Songs of the Stone" className="logo-img" />
+          <img src="/footer_logo.svg" alt="Songs of the Stone" className="logo-img" />
         </div>
 
         {/* Desktop Navigation Menu */}

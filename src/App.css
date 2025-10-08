@@ -26,7 +26,7 @@
   --font-accent: 'Belleza', cursive;
   
   /* Spacing */
-  --section-padding: 8rem 0;
+  --section-padding: 4rem 0; /* simplified spacing */
   --container-padding: 0 4rem;
   
   /* Transitions */
@@ -53,6 +53,42 @@ body {
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
   -webkit-overflow-scrolling: touch;
+}
+
+/* Ensure all text is selectable and clickable globally */
+p, h1, h2, h3, h4, h5, h6, span, div, a, em, strong, i, b {
+  pointer-events: auto !important;
+  cursor: text;
+  user-select: text;
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+}
+
+/* Links should have pointer cursor */
+a, button {
+  cursor: pointer !important;
+}
+
+/* Ensure overlays don't block text selection */
+.hero-image-overlay,
+.about-image-overlay,
+.particles-container,
+.particle {
+  pointer-events: none !important;
+}
+
+/* Make sure all text content is always selectable */
+.hero-main-text,
+.hero-main-text-left,
+.about-description,
+.event-description,
+.event-title,
+.event-category,
+.contact-description {
+  pointer-events: auto !important;
+  cursor: text !important;
+  user-select: text !important;
 }
 
 /* 🎭 SPECTACULAR ANIMATIONS & EFFECTS */
@@ -238,7 +274,7 @@ a {
 }
 
 .logo-img {
-  height: 40px;
+  height: 60px; /* Increased by 1.5x from 40px */
   width: auto;
   object-fit: contain;
 }
@@ -303,67 +339,56 @@ a {
   .hamburger { display: block; }
 }
 
-/* 🎬 SPECTACULAR HERO SECTION */
-.hero {
-  height: 100vh;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: var(--primary-white);
-  overflow: hidden;
-  perspective: 1000px;
-  background: transparent; /* ensure no base brown shows */
-}
-
-/* Split Hero Layout (Text | Image) */
+/* Hero Section - Full Banner with Text Overlay */
 .hero-split {
+  position: relative;
+  width: 100vw;
   height: 100vh;
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  padding-top: 80px; /* space for fixed navbar */
-  text-align: left;
-  background: var(--primary-cream);
-  color: var(--primary-brown);
+  margin-top: 80px; /* Start after header */
+  overflow: hidden;
+  background: #000;
 }
 
 .hero-inner {
-  width: 100%;
-  max-width: 1400px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  align-items: center;
-  height: 100%;
   position: relative;
-  padding: 0 4rem;
-}
-
-.hero-text-col {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
+  width: 100%;
   height: 100%;
-  padding-right: 2rem;
-}
-
-.hero-main-text-left {
-  text-align: left;
-  font-size: clamp(1.8rem, 2.8vw, 3rem);
-  line-height: 1.2;
-  color: var(--primary-brown);
 }
 
 .hero-image-col {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100%;
+  z-index: 1;
+}
+
+.hero-text-col {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 4rem;
+  z-index: 3;
+  color: var(--primary-white);
+  pointer-events: none; /* Disable for overlay */
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  overflow: hidden;
+  align-items: flex-end;
+  justify-content: flex-start; /* Left align the text container */
+}
+
+.hero-main-text-left {
+  text-align: left !important;
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  line-height: 1.2;
+  color: var(--primary-white);
+  max-width: 800px;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.8);
+  pointer-events: auto; /* Enable clicking/selection on text */
+  cursor: text; /* Show text cursor */
+  margin: 0; /* Remove any default margins */
+  width: 100%; /* Ensure full width for left alignment */
 }
 
 .hero-img-split {
@@ -377,13 +402,47 @@ a {
 .hero-image-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, rgba(226,203,163,0.2), rgba(226,203,163,0));
+  background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0.7) 100%);
   pointer-events: none;
+  z-index: 2;
 }
 
-@media (max-width: 1024px) {
-  .hero-inner { padding: 0 2rem; }
-  .hero-main-text-left { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+/* Tablet adjustments - revert to old layout */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .hero-split {
+    width: 100%;
+    margin-top: 0;
+    padding-top: 80px;
+    height: 100vh;
+    background: var(--primary-cream);
+    position: relative;
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0 2rem;
+    position: relative;
+  }
+  .hero-image-col {
+    position: relative;
+    height: auto;
+  }
+  .hero-text-col {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    padding: 2rem;
+    color: var(--primary-brown);
+  }
+  .hero-main-text-left {
+    color: var(--primary-brown);
+    text-shadow: none;
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+  }
+  .hero-image-overlay {
+    background: linear-gradient(90deg, rgba(226,203,163,0.2), rgba(226,203,163,0));
+  }
 }
 
 @media (max-width: 768px) {
@@ -821,15 +880,7 @@ span.italic-text {
   align-items: center;
 }
 
-.about-tagline {
-  font-family: var(--font-accent);
-  font-size: 0.9rem;
-  font-weight: 400;
-  letter-spacing: 3px;
-  color: var(--primary-olive);
-  margin-bottom: 2rem;
-  text-transform: uppercase;
-}
+
 
 .about-title {
   font-family: var(--font-heading);
@@ -971,39 +1022,7 @@ span.italic-text {
   filter: sepia(0.2) saturate(1.2) brightness(1);
 }
 
-.event-date-badge {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: var(--primary-red);
-  color: var(--primary-white);
-  padding: 1rem;
-  border-radius: 8px;
-  text-align: center;
-  font-family: var(--font-subheading);
-  font-weight: 600;
-  box-shadow: 0 4px 20px rgba(144, 26, 28, 0.3);
-}
 
-.date-day {
-  display: block;
-  font-size: 1.5rem;
-  line-height: 1;
-  margin-bottom: 0.2rem;
-}
-
-.date-month {
-  display: block;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-  margin-bottom: 0.2rem;
-}
-
-.date-year {
-  display: block;
-  font-size: 0.7rem;
-  opacity: 0.9;
-}
 
 .event-details {
   padding: 2rem 0;
@@ -1309,54 +1328,24 @@ span.italic-text {
   max-width: 100%;
 }
 
-.contact-image-section {
+.contact-image {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.contact-image-wrapper {
-  position: relative;
-  width: 100%;
-  max-width: 500px;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(72, 45, 24, 0.2);
-}
-
 .contact-img {
   width: 100%;
-  height: 600px;
+  height: 500px;
   object-fit: cover;
+  border-radius: 8px;
   transition: var(--transition);
-  filter: sepia(0.1) saturate(1.1) brightness(0.95);
 }
 
-.contact-image-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(transparent, rgba(72, 45, 24, 0.8));
-  padding: 3rem 2rem 2rem;
-  color: var(--primary-white);
-}
-
-.overlay-text {
-  text-align: center;
-}
-
-.overlay-quote {
-  font-family: var(--font-accent);
-  font-size: 1.1rem;
-  font-style: italic;
-  line-height: 1.6;
-  display: block;
-}
-
-.contact-image-wrapper:hover .contact-img {
-  transform: scale(1.05);
-  filter: sepia(0.2) saturate(1.2) brightness(1);
+.contact-img:hover {
+  transform: scale(1.02);
+  filter: sepia(0.1) saturate(1.1);
 }
 
 /* Unified compact contact form spacing */
@@ -1654,7 +1643,6 @@ span.italic-text {
     align-items: center;
   }
 
-  .about-tagline,
   .about-title,
   .about-description {
     text-align: center;
@@ -1727,11 +1715,6 @@ span.italic-text {
 
   .contact-description {
     max-width: 100%;
-  }
-
-  .contact-image-wrapper {
-    max-width: 400px;
-    margin: 0 auto;
   }
 
   .contact-img {
@@ -1830,30 +1813,27 @@ span.italic-text {
     display: none;
   }
 
-  /* Event image mobile optimization - full edge-to-edge */
+  /* Event image mobile - EXACT COPY of successful about-image pattern */
   .event-image {
+    position: relative;
     width: 100vw;
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    position: relative;
-    padding: 0;
-    box-sizing: border-box;
-    overflow: hidden;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    overflow: clip;
+    border-radius: 0;
+    line-height: 0;
   }
 
   .event-img {
-    width: 100vw; /* Full viewport width - no side gaps */
-    height: auto;
-    max-height: 40vh; /* reduce length - shorter on mobile */
-    object-fit: cover; /* Fill width completely, crop height if needed */
+    width: 100%;
+    height: clamp(160px, 32vh, 240px);
+    object-fit: cover;
     object-position: center center;
     border-radius: 0;
-    background: transparent;
     display: block;
-    margin: 0;
-    padding: 0;
+    aspect-ratio: 21 / 9;
   }
 
   /* Mobile-specific placeholder font size */
@@ -1954,11 +1934,10 @@ span.italic-text {
   }
 
   /* === Full-Bleed Images After Hero (Mobile) === */
-  /* Ensure Learn More (expanded event details) image spans edge-to-edge */
+  /* About, Event, Learn More - keep existing behavior */
   .about-image,
   .event-image,
-  .learn-more-image-wrapper,
-  .contact-image-wrapper {
+  .learn-more-image-wrapper {
     width: 100vw !important;
     max-width: 100vw !important;
     margin-left: calc(50% - 50vw) !important;
@@ -1968,7 +1947,6 @@ span.italic-text {
     padding: 0 !important;
   }
   .learn-more-section-img,
-  .contact-img,
   .about-img,
   .event-img {
     width: 100% !important;
@@ -1976,18 +1954,61 @@ span.italic-text {
     display: block;
     border-radius: 0 !important;
   }
-  /* Maintain original "show full image" intent for event & about with contain; others cover for impact */
-  .about-img,
-  .event-img { object-fit: cover !important; background: transparent !important; }
-  .learn-more-section-img,
-  .contact-img { object-fit: cover !important; object-position: center center !important; }
+  /* About stays cover; event & contact will be overridden below to hero banners */
+  .about-img { object-fit: cover !important; background: transparent !important; }
+  .learn-more-section-img { object-fit: cover !important; object-position: center center !important; }
   .learn-more-section-img { height: clamp(200px, 40vh, 320px) !important; }
-  .contact-img { height: clamp(240px, 45vh, 420px) !important; }
+  
+  /* Unified hero/banner pattern (minimal crop) for event & contact images */
+  .event-image,
+  .contact-image {
+    position: relative;
+    width: 100vw !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: calc(50% - 50vw) !important;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    overflow: hidden !important; /* ensure clean edge */
+    border-radius: 0 !important;
+    line-height: 0;
+    aspect-ratio: 4 / 3; /* matches intrinsic 800x600, so virtually no crop */
+    max-height: clamp(260px, 75vw, 300px); /* keeps vertical footprint balanced */
+  }
+
+  .event-img,
+  .contact-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important; /* hero feel; with matching aspect ratio crop is negligible */
+    object-position: center center !important;
+    display: block;
+    border-radius: 0 !important;
+    background: transparent !important;
+    /* Safety: if browser ignores parent aspect-ratio */
+    aspect-ratio: 4 / 3;
+  }
+
+  /* Optional: fine-tune vertical framing if forehead/top is tight */
+  .event-img.minimal-shift,
+  .contact-img.minimal-shift { object-position: 50% 48% !important; }
 }
 
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+}
+
+/* Subtle fade-in for newly swapped media (e.g., updated about image) */
+.fade-in-media {
+  opacity: 0;
+  animation: mediaFadeIn 1.1s ease-out forwards;
+  transition: filter .6s ease;
+}
+
+@keyframes mediaFadeIn {
+  from { opacity: 0; transform: scale(1.015); }
+  60% { opacity: .85; }
+  to { opacity: 1; transform: scale(1); }
 }
 
 /* Loading animation */
@@ -2018,14 +2039,7 @@ html {
   opacity: 0.8;
 }
 
-.about-tagline::after {
-  content: '';
-  display: block;
-  width: 40px;
-  height: 2px;
-  background: var(--primary-mustard);
-  margin: 1rem 0;
-}
+
 
 /* Enhanced text styling */
 .hero-title {
@@ -2550,17 +2564,12 @@ html {
     align-items: center;
     justify-content: center;
   }
-
-
 }
 
-/* Desktop: revert hero to full-background with centered overlay text (keep mobile behavior) */
+/* Desktop hero adjustments */
 @media (min-width: 769px) {
-  .hero-split { position: relative; text-align: center; color: var(--primary-white); background: #000; height: 100vh; min-height: 100vh; }
-  .hero-inner { display: block; height: 100%; padding: 0; }
-  .hero-image-col { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-  .hero-img-split { width: 100%; height: 100%; object-fit: cover; }
-  .hero-image-overlay { background: linear-gradient(135deg, rgba(0,0,0,0.55), rgba(0,0,0,0.2)); mix-blend-mode: normal; }
-  .hero-text-col { position: relative; z-index: 2; width: 100%; max-width: 1100px; margin: 0 auto; height: 100%; display: flex; align-items: flex-end; justify-content: flex-start; padding: 0 4rem 4rem 4rem; }
-  .hero-main-text-left { text-align: left; color: var(--primary-white); font-size: clamp(2.2rem, 4vw, 3.5rem); line-height: 1.25; }
+  .hero-main-text-left { 
+    text-align: left; 
+    font-size: clamp(1.8rem, 3vw, 2.5rem); 
+  }
 }

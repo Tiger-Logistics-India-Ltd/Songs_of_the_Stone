@@ -107,7 +107,7 @@ const EventsSection = () => {
           <div className="events-grid">
             {/* Event Details Section */}
             <div className="event-details">
-              <div className="event-category">Musical Experience</div>
+              <div className="event-category">The First Chapter</div>
               
               <h2 className="event-title">The Mehtab Ali Niazi Experience</h2>
               
@@ -119,33 +119,37 @@ const EventsSection = () => {
               </div>
               
               <p className="event-description">
-                Join us for a spellbinding musical rendition - an auditory journey where timeless melodies 
-                are juxtaposed against the grandeur of India's architectural marvels. Experience the magic 
-                of classical music resonating through centuries-old stones.
+                Join us for a spellbinding musical evening with Mehtab Ali Niazi and his ensemble, where the classical meets the contemporary, and tradition finds new rhythm. His semi-classical fusion — weaving raga with elements of jazz and modern soundscapes — creates an experience both timeless and alive, set against the breathtaking backdrop of the Qutub Minar, a UNESCO World Heritage Site.
               </p>
             </div>
 
-            {/* Event Image Section */}
+            {/* Event Image Section - Clean slate approach matching About section exactly */}
             <motion.div 
               className="event-image"
-              variants={{
-                hidden: { opacity: 0, scale: 0.8 },
-                visible: { opacity: 1, scale: 1, transition: { duration: 1.2, delay: 0.4 } }
-              }}
+              variants={imageVariants}
             >
-              <img 
-                src="/Images/Event_mehtab_ali_1920x1080 px.png" 
-                alt="Qutub Minar - Venue for The Mehtab Ali Niazi Experience" 
-                className="event-img"
-                loading="lazy"
-              />
-              
-              {/* Date Badge - positioned over the image */}
-              <div className="event-date-badge">
-                <span className="date-day">13</span>
-                <span className="date-month">DEC</span>
-                <span className="date-year">2025</span>
-              </div>
+              <picture>
+                {/* Mobile Songs of the Stone banner - full width */}
+                <source 
+                  media="(max-width: 767px)" 
+                  srcSet="/Images/Mobile/Songs_of_the_stone_600x400 px.svg" 
+                  type="image/svg+xml" 
+                />
+                
+                {/* Desktop Songs of the Stone image */}
+                <source 
+                  srcSet="/Images/desktop/Songs_of_the_stone_800x600 px.svg" 
+                  type="image/svg+xml" 
+                />
+                
+                {/* Fallback */}
+                <img 
+                  src="/Images/desktop/Songs_of_the_stone_800x600 px.svg" 
+                  alt="Songs of the Stone - Heritage Monuments and Music" 
+                  className="event-img"
+                  loading="lazy"
+                />
+              </picture>
             </motion.div>
             
             {/* Call to Action Buttons - Separate section for flexible positioning */}
@@ -191,7 +195,7 @@ const EventsSection = () => {
                     
                     <div className="learn-more-description">
                       <p>
-                        The premiere features Ustad Mehtaab Ali Niazi of the Rampur-Sahaswan Gharana — one of India's most nuanced classical lineages. Trained under Ustad Ghulam Mustafa Niazi, Mehtaab bridges raga and rhythm with modern soundscapes, perfectly balancing the old and the new.
+                        The premiere features Mehtaab Ali Niazi of the Rampur-Sahaswan Gharana — one of India's most nuanced classical lineages. Trained under Ustad Ghulam Mustafa Niazi, Mehtaab bridges raga and rhythm with modern soundscapes, perfectly balancing the old and the new.
                       </p>
                     </div>
 
