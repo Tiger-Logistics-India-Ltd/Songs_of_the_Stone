@@ -1378,9 +1378,9 @@ span.italic-text {
   opacity: 0.9;
 }
 
-.contact-form-wrapper {
+/* .contact-form-wrapper {
   max-width: 100%;
-}
+} */
 
 .contact-image {
   position: relative;
@@ -1403,11 +1403,11 @@ span.italic-text {
 }
 
 /* Unified compact contact form spacing */
-.contact-form {
+/* .contact-form {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
-}
+} */
 
 /* Form row layout */
 .form-row { 
@@ -1439,7 +1439,7 @@ span.italic-text {
   text-align: center;
 }
   /* Full width single-line fields alignment */
-  .full-width-input input { width: 100%; display: block; }
+  /* .full-width-input input { width: 100%; display: block; } */
 
 /* Desktop placeholder normalization */
 .contact-form input::placeholder,
@@ -2659,9 +2659,9 @@ html {
     padding: 0 1rem;
   }
 
-  .contact-form .form-row {
+  /* .contact-form .form-row {
     gap: 1rem;
-  }
+  } */
 
   /* Additional text wrapping and sizing fixes */
   .hero-title {
