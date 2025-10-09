@@ -274,7 +274,7 @@ a {
 }
 
 .logo-img {
-  height: 60px; /* Increased by 1.5x from 40px */
+  height: 80px; /* Increased by 1.5x from 40px */
   width: auto;
   object-fit: contain;
 }
@@ -1098,7 +1098,7 @@ span.italic-text {
   width: 40px;
   height: 2px;
   background: var(--primary-mustard);
-  margin: 1rem 0;
+  margin: 0;
 }
 
 .event-title {
