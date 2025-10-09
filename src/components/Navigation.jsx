@@ -100,8 +100,14 @@ const Navigation = () => {
         </button>
       </div>
 
-      {/* Mobile Slide Panel */}
-      <div className={`mobile-menu-panel ${mobileOpen ? 'open' : ''}`}>
+      {/* Mobile Dropdown Menu */}
+      <div className={`mobile-menu-dropdown ${mobileOpen ? 'open' : ''}`}>
+        <div className="mobile-menu-header">
+          <span className="mobile-menu-title">Menu</span>
+          <button className="mobile-menu-close" aria-label="Close menu" onClick={closeMobile}>
+            &#10005;
+          </button>
+        </div>
         <div className="mobile-menu-inner">
           <a href="#home" onClick={(e) => handleNavClick('home', e)}>Home</a>
           <a href="#about" onClick={(e) => handleNavClick('about', e)}>About</a>
