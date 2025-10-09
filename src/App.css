@@ -1130,13 +1130,23 @@ span.italic-text {
   text-transform: uppercase;
 }
 
-.event-description {
+/* .event-description {
   font-family: var(--font-body);
   font-size: 1.1rem;
   font-weight: 400;
   color: var(--primary-brown);
   line-height: 1.8;
   margin-bottom: 1rem;
+  max-width: 500px;
+} */
+
+
+.event-description {
+  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--primary-brown);
+  line-height: 1.8;
   max-width: 500px;
 }
 
