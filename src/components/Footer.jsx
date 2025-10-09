@@ -31,7 +31,7 @@ const Footer = () => {
           {/* Main Footer Text */}
           <div className="footer-text">
             <p className="copyright">
-              Song of the Stone © {currentYear}. All rights reserved.
+              Songs of the Stone © {currentYear}. All rights reserved.
             </p>
           </div>
           
