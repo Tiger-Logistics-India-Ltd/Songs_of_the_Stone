@@ -22,7 +22,7 @@ const Footer = () => {
           {/* Footer Logo */}
           <div className="footer-logo">
             <img 
-              src="/footer_logo.svg" 
+              src="/Images/desktop/new_footer.svg" 
               alt="Inkpot India & Songs of the Stone" 
               className="footer-logo-img"
             />
