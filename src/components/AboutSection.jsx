@@ -91,13 +91,13 @@ const AboutSection = () => {
                 {/* Desktop about inkpot image - updated PNG (higher fidelity / branding) */}
                 <source 
                   media="(min-width: 768px)"
-                  srcSet="/Images/desktop/inkpot.png" 
-                  type="image/png" 
+                  srcSet="/Images/desktop/Inkpot_600x400 px.svg" 
+                  type="image/svg+xml" 
                 />
                 
-                {/* Fallback / default (will load PNG on desktop, SVG on mobile if supported) */}
+                {/* Fallback / default (will load SVG on desktop, SVG on mobile if supported) */}
                 <img 
-                  src="/Images/desktop/inkpot.png" 
+                  src="/Images/desktop/Inkpot_600x400 px.svg" 
                   alt="Inkpot — Contemporary revival of Indian cultural heritage" 
                   className="about-img fade-in-media"
                   loading="lazy"
