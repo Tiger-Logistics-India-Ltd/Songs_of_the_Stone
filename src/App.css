@@ -1077,10 +1077,10 @@ span.italic-text {
 }
 
 
-
+/* 
 .event-details {
   padding: 2rem 0;
-}
+} */
 
 .event-category {
   font-family: var(--font-accent);
@@ -1136,7 +1136,7 @@ span.italic-text {
   font-weight: 400;
   color: var(--primary-brown);
   line-height: 1.8;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1rem;
   max-width: 500px;
 }
 
@@ -1370,7 +1370,7 @@ span.italic-text {
 
 .contact-description {
   font-family: var(--font-body);
-  font-size: 1.1rem;
+  font-size: 13.2px;
   font-weight: 400;
   color: var(--primary-brown);
   line-height: 1.8;
@@ -1789,9 +1789,6 @@ span.italic-text {
     order: 3;
   }
 
-  .event-description {
-    max-width: 100%;
-  }
 
   .contact-grid {
     grid-template-columns: 1fr;
@@ -1803,9 +1800,9 @@ span.italic-text {
     text-align: center;
   }
 
-  .contact-description {
+  /* .contact-description {
     max-width: 100%;
-  }
+  } */
 
   .contact-img {
     height: 400px;
@@ -1883,19 +1880,21 @@ span.italic-text {
     margin-right: calc(50% - 50vw); /* pull to right edge */
     margin-top: 2rem;
     margin-bottom: 2rem;
-    overflow: clip;
+    overflow: hidden; /* Match event section */
     border-radius: 0;
     line-height: 0; /* remove inline-gap */
+    aspect-ratio: 4 / 3; /* Match event section for consistent rendering */
+    max-height: clamp(260px, 75vw, 300px); /* Match event section height */
   }
 
   .about-img {
     width: 100%;
-    height: clamp(160px, 32vh, 240px); /* responsive banner height */
+    height: 100%; /* Match event section pattern */
     object-fit: cover;
     object-position: center center;
     border-radius: 0;
     display: block;
-    aspect-ratio: 21 / 9; /* cinematic wide look without forcing fixed px height */
+    aspect-ratio: 4 / 3; /* Match event section - fixes rendering size */
   }
 
   /* Remove image overlay on mobile for cleaner banner look */
@@ -2101,7 +2100,7 @@ html {
   .about + .events { margin-top: 0.75rem !important; }
   /* Tighten heading top spacing when it immediately follows an image */
   .about-image + .about-text .event-category,
-  .event-image + .event-details .event-category,
+  .event-image ,
   .contact-image + .contact-text-section .contact-title { margin-top: 0.25rem !important; }
   /* Ensure no unintended extra space from first child margins */
   .about-section > *:first-child,
@@ -2278,7 +2277,7 @@ html {
 
   .event-details {
     order: 1; /* Text content first */
-    grid-area: unset; /* Remove grid area */
+    grid-area: 80%; /* Remove grid area */
   }
 
   .event-image {
@@ -2498,12 +2497,12 @@ html {
 
 .event-details-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat( minmax(100px, 1fr));
   gap: 1.5rem;
   padding: 2rem;
   background: rgba(233, 223, 206, 0.3);
   border-radius: 12px;
-  border-left: 4px solid var(--primary-brown);
+  border-left: 10px solid var(--primary-brown);
 }
 
 .detail-item {
@@ -2626,12 +2625,12 @@ html {
     font-size: 1rem;
   }
 
-  .event-details-grid {
+  /* .event-details-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
     padding: 1.5rem;
     text-align: left;
-  }
+  } */
 
   /* Mobile order: Image first, then text */
   .learn-more-grid {
@@ -2798,19 +2797,19 @@ html {
 @media (max-width: 768px) {
   /* Ensure no unintended padding remains on primary sections */
   section.about, section.events, section.contact { padding-top: 0.75rem !important; padding-bottom: 0.9rem !important; }
-  /* Collapse margins between any consecutive sections */
+  /* Collapse margin3s between any consecutive sections */
   section + section { margin-top: 0.6rem !important; }
   /* Full-bleed images tighter spacing */
   .about-image, .event-image, .contact-image, .learn-more-image-wrapper { margin-top: 0.6rem !important; margin-bottom: 0.6rem !important; }
   /* About subsections specific tightening */
-  .about-section { margin-bottom: 1.5rem !important; }
+  .about-section { margin-bottom: 1rem !important; }
   .about-section:last-child { margin-bottom: 1.5rem !important; }
   /* Remove extra container side padding interference just in case */
   .about .container, .events .container, .contact .container { padding-left: 0 !important; padding-right: 0 !important; }
   /* Headings directly after images minimal top margin */
   .about-image + .about-text .event-category,
-  .event-image + .event-details .event-category,
-  .contact-image + .contact-text-section .contact-title { margin-top: 0.15rem !important; }
+  .event-image ,
+  .contact-image + .contact-text-section .contact-title { margin-top: 0.10rem !important; }
   /* Prevent double-spacing if first child has margin */
   .about-section > *:first-child, .events > *:first-child, .contact > *:first-child { margin-top: 0 !important; }
   /* Hero to about transition minimal */

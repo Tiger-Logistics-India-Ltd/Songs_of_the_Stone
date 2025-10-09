@@ -156,6 +156,14 @@ const EventsSection = () => {
             <div className="event-cta-section">
               <div className="event-cta">
                 <button 
+                  className="event-btn-secondary"
+                  onClick={handleLearnMore}
+                  aria-label={showLearnMore ? "Hide event details" : "Learn more about the event"}
+                >
+                  {showLearnMore ? "Show Less" : "Learn More"}
+                </button>
+                
+                <button 
                   className="event-btn"
                   onClick={handleEventRegistration}
                   aria-label="Reserve your spot for The Mehtab Ali Niazi Experience"
@@ -163,13 +171,7 @@ const EventsSection = () => {
                   Reserve Your Experience
                 </button>
                 
-                <button 
-                  className="event-btn-secondary"
-                  onClick={handleLearnMore}
-                  aria-label={showLearnMore ? "Hide event details" : "Learn more about the event"}
-                >
-                  {showLearnMore ? "Show Less" : "Learn More"}
-                </button>
+                
               </div>
             </div>
           </div>
