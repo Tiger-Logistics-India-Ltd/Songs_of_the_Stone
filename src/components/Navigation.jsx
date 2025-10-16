@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useScrollPosition } from '../hooks/useResponsive';
 
 /**
@@ -15,6 +16,7 @@ const Navigation = () => {
   // Get scroll position using custom hook
   const { scrollY } = useScrollPosition();
   const scrollingRef = useRef(false);
+  const location = useLocation();
   
   // State to track if the user has scrolled past a certain point
   const [scrolled, setScrolled] = useState(false);
@@ -71,20 +73,17 @@ const Navigation = () => {
       <div className="nav-container">
         {/* Logo Section */}
         <div className="nav-logo">
-          <img src="/footer_logo.svg" alt="Songs of the Stone" className="logo-img" />
+          <Link to="/">
+            <img src="/Images/desktop/new_footer.svg" alt="Songs of the Stone" className="logo-img" />
+          </Link>
         </div>
 
         {/* Desktop Navigation Menu */}
         <div className="nav-menu">
-          <a href="#home" className="nav-link">Home</a>
-          <a href="#about" className="nav-link">About</a>
-            <a href="#events" className="nav-link">Events</a>
+          <Link to="/" className="nav-link">Home</Link>
+          <Link to="/about" className="nav-link">About</Link>
+          <a href="#events" className="nav-link" onClick={(e) => scrollToSection('events', e)}>Events</a>
           <a href="#contact" className="nav-link" onClick={(e) => scrollToSection('contact', e)}>Contact</a>
-        </div>
-
-        {/* Desktop CTA */}
-        <div className="nav-cta desktop-only">
-          <a href="#events" className="cta-button" onClick={(e) => scrollToSection('events', e)}>Explore</a>
         </div>
 
         {/* Mobile Hamburger */}
@@ -109,8 +108,8 @@ const Navigation = () => {
           </button>
         </div>
         <div className="mobile-menu-inner">
-          <a href="#home" onClick={(e) => handleNavClick('home', e)}>Home</a>
-          <a href="#about" onClick={(e) => handleNavClick('about', e)}>About</a>
+          <Link to="/" onClick={closeMobile}>Home</Link>
+          <Link to="/about" onClick={closeMobile}>About</Link>
           <a href="#events" onClick={(e) => handleNavClick('events', e)}>Events</a>
           <a href="#contact" onClick={(e) => handleNavClick('contact', e)}>Contact</a>
         </div>

@@ -126,33 +126,25 @@ const EventsSection = () => {
               </p>
             </div>
 
-            {/* Event Image Section - Clean slate approach matching About section exactly */}
+            {/* Event Video Section - Portrait mode video */}
             <motion.div 
-              className="event-image"
+              className="event-video-container"
               variants={imageVariants}
             >
-              <picture>
-                {/* Mobile Songs of the Stone banner - full width */}
+              <video 
+                className="event-video"
+                autoPlay
+                loop
+                muted
+                playsInline
+                poster="/Images/desktop/Songs_of_the_stone_800x600 px.svg"
+              >
                 <source 
-                  media="(max-width: 767px)" 
-                  srcSet="/Images/Mobile/Songs_of_the_stone_600x400 px.svg" 
-                  type="image/svg+xml" 
+                  src="/Images/desktop/event_video.mp4" 
+                  type="video/mp4"
                 />
-                
-                {/* Desktop Songs of the Stone image */}
-                <source 
-                  srcSet="/Images/desktop/Songs_of_the_stone_800x600 px.svg" 
-                  type="image/svg+xml" 
-                />
-                
-                {/* Fallback */}
-                <img 
-                  src="/Images/desktop/Songs_of_the_stone_800x600 px.svg" 
-                  alt="Songs of the Stone - Heritage Monuments and Music" 
-                  className="event-img"
-                  loading="lazy"
-                />
-              </picture>
+                Your browser does not support the video tag.
+              </video>
             </motion.div>
             
             {/* Call to Action Buttons - Separate section for flexible positioning */}
