@@ -135,7 +135,7 @@ const EventsSection = () => {
                 className="event-video"
                 autoPlay
                 loop
-                muted
+                controls
                 playsInline
                 poster="/Images/desktop/Songs_of_the_stone_800x600 px.svg"
               >
