@@ -4,12 +4,51 @@ const HeroSection = () => {
   const videoRef = useRef(null);
 
   useEffect(() => {
-    // Ensure video plays on mount
+    // Aggressive autoplay for mobile and desktop
     const video = videoRef.current;
     if (video) {
-      video.play().catch(error => {
-        console.log('Video autoplay prevented:', error);
-      });
+      // Set attributes programmatically for better mobile support
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+      video.muted = true;
+      video.defaultMuted = true;
+      video.autoplay = true;
+
+      // Multiple attempts to play
+      const attemptPlay = () => {
+        video.play()
+          .then(() => {
+            console.log('Video autoplay started successfully');
+          })
+          .catch(error => {
+            console.log('Retrying video autoplay:', error);
+            // Retry after a short delay
+            setTimeout(() => {
+              video.play().catch(err => console.log('Final autoplay attempt failed:', err));
+            }, 100);
+          });
+      };
+
+      // Try to play immediately
+      attemptPlay();
+
+      // Also try when video is loaded
+      video.addEventListener('loadeddata', attemptPlay);
+      video.addEventListener('canplay', attemptPlay);
+
+      // Ensure it's playing when page becomes visible
+      const handleVisibilityChange = () => {
+        if (!document.hidden && video.paused) {
+          attemptPlay();
+        }
+      };
+      document.addEventListener('visibilitychange', handleVisibilityChange);
+
+      return () => {
+        video.removeEventListener('loadeddata', attemptPlay);
+        video.removeEventListener('canplay', attemptPlay);
+        document.removeEventListener('visibilitychange', handleVisibilityChange);
+      };
     }
   }, []);
 
@@ -21,9 +60,14 @@ const HeroSection = () => {
         className="hero-obeetee-img"
         autoPlay
         muted
-        loop
         playsInline
+        loop
         preload="auto"
+        webkit-playsinline="true"
+        x5-playsinline="true"
+        x5-video-player-type="h5"
+        x5-video-player-fullscreen="false"
+        x-webkit-airplay="true"
       />
       <div className="hero-text-overlay">
         <h1 className="hero-chapter-text">THE FIRST CHAPTER</h1>

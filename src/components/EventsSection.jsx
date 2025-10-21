@@ -96,7 +96,14 @@ const EventsSection = () => {
               
               <div className="event-location">
                 <span className="location-icon" aria-hidden="true">📍</span>
-                Qutub Minar, Delhi
+                <span className="event-location-text">Qutub Minar, Delhi</span>
+              </div>
+              <div className="event-date-time">
+                <span className="location-icon" aria-hidden="true">📅</span>
+                <span className="event-date">13th December 2025<br /></span>
+                <span className="event-time" style={{marginTop: '-4px', display: 'inline-block'}}>
+                  <span className="time-icon" aria-hidden="true">⏰</span> 7pm Onwards
+                </span>
               </div>
               
               <p className="event-description">
