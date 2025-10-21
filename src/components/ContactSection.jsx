@@ -167,34 +167,10 @@ const ContactSection = () => {
    */
   const contentVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { 
-      opacity: 1, 
+    visible: {
+      opacity: 1,
       y: 0,
       transition: { duration: 1, delay: 0.2, ease: "easeOut" }
-    }
-  };
-
-  /**
-   * Animation variants for success popup
-   */
-  const popupVariants = {
-    hidden: { 
-      opacity: 0, 
-      scale: 0.8, 
-      y: -50,
-      transition: { duration: 0.3 }
-    },
-    visible: { 
-      opacity: 1, 
-      scale: 1, 
-      y: 0,
-      transition: { 
-        duration: 0.5, 
-        ease: "easeOut",
-        type: "spring",
-        stiffness: 300,
-        damping: 30
-      }
     }
   };
 
@@ -213,10 +189,10 @@ const ContactSection = () => {
     >
       <motion.div
         className="success-popup"
-        variants={popupVariants}
-        initial="hidden"
-        animate="visible"
-        exit="hidden"
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.8, opacity: 0 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="popup-icon">
@@ -230,15 +206,10 @@ const ContactSection = () => {
             />
           </svg>
         </div>
-        <h3 className="popup-title">Message Sent Successfully!</h3>
+        <h3 className="popup-title">Thank You!</h3>
         <p className="popup-message">
-          Thank you for reaching out to us. We have received your message and will connect with you shortly to discuss your cultural journey.
+          Thank you for reaching out. Will get back to you soon!
         </p>
-        <div className="popup-decoration">
-          <span>✦</span>
-          <span>✧</span>
-          <span>✦</span>
-        </div>
       </motion.div>
     </motion.div>
   );

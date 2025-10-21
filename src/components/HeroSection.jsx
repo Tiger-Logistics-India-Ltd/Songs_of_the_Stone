@@ -4,52 +4,81 @@ const HeroSection = () => {
   const videoRef = useRef(null);
 
   useEffect(() => {
-    // Aggressive autoplay for mobile and desktop
+    // Ultra-aggressive autoplay for mobile devices
     const video = videoRef.current;
-    if (video) {
-      // Set attributes programmatically for better mobile support
-      video.setAttribute('playsinline', '');
-      video.setAttribute('webkit-playsinline', '');
-      video.muted = true;
-      video.defaultMuted = true;
-      video.autoplay = true;
+    if (!video) return;
 
-      // Multiple attempts to play
-      const attemptPlay = () => {
-        video.play()
-          .then(() => {
-            console.log('Video autoplay started successfully');
-          })
-          .catch(error => {
-            console.log('Retrying video autoplay:', error);
-            // Retry after a short delay
-            setTimeout(() => {
-              video.play().catch(err => console.log('Final autoplay attempt failed:', err));
-            }, 100);
-          });
-      };
+    // Force all necessary attributes for mobile autoplay
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.autoplay = true;
+    video.setAttribute('playsinline', 'playsinline');
+    video.setAttribute('webkit-playsinline', 'webkit-playsinline');
+    video.setAttribute('muted', 'muted');
+    video.volume = 0;
 
-      // Try to play immediately
-      attemptPlay();
+    // Force load the video
+    video.load();
 
-      // Also try when video is loaded
-      video.addEventListener('loadeddata', attemptPlay);
-      video.addEventListener('canplay', attemptPlay);
+    // Aggressive play function with retries
+    const forcePlay = async () => {
+      try {
+        video.muted = true;
+        video.volume = 0;
+        await video.play();
+        console.log('✓ Video playing successfully');
+      } catch (err) {
+        console.log('Retry attempt:', err.message);
+        // Retry multiple times with increasing delays
+        setTimeout(() => forcePlay(), 50);
+      }
+    };
 
-      // Ensure it's playing when page becomes visible
-      const handleVisibilityChange = () => {
-        if (!document.hidden && video.paused) {
-          attemptPlay();
-        }
-      };
-      document.addEventListener('visibilitychange', handleVisibilityChange);
+    // Start playing as soon as possible
+    forcePlay();
 
-      return () => {
-        video.removeEventListener('loadeddata', attemptPlay);
-        video.removeEventListener('canplay', attemptPlay);
-        document.removeEventListener('visibilitychange', handleVisibilityChange);
-      };
-    }
+    // Listen to multiple events that indicate video is ready
+    const playOnReady = () => {
+      if (video.paused) {
+        forcePlay();
+      }
+    };
+
+    video.addEventListener('loadedmetadata', playOnReady);
+    video.addEventListener('loadeddata', playOnReady);
+    video.addEventListener('canplay', playOnReady);
+    video.addEventListener('canplaythrough', playOnReady);
+
+    // Handle visibility changes (user switches tabs)
+    const handleVisibilityChange = () => {
+      if (!document.hidden && video.paused) {
+        forcePlay();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Handle user interaction anywhere on page to start video on mobile
+    const handleUserInteraction = () => {
+      if (video.paused) {
+        forcePlay();
+      }
+    };
+
+    // Try to play on any touch/click event (mobile requirement)
+    document.addEventListener('touchstart', handleUserInteraction, { once: true });
+    document.addEventListener('click', handleUserInteraction, { once: true });
+
+    // Cleanup
+    return () => {
+      video.removeEventListener('loadedmetadata', playOnReady);
+      video.removeEventListener('loadeddata', playOnReady);
+      video.removeEventListener('canplay', playOnReady);
+      video.removeEventListener('canplaythrough', playOnReady);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener('touchstart', handleUserInteraction);
+      document.removeEventListener('click', handleUserInteraction);
+    };
   }, []);
 
   return (
