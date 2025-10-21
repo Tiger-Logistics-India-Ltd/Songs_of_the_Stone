@@ -1,52 +1,35 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 const FeaturedSections = () => {
-  const navigate = useNavigate();
-  const { ref, inView } = useInView({ 
-    threshold: 0.1, 
-    triggerOnce: true 
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true
   });
 
   const categories = [
     {
       id: 'architecture',
-      title: 'Architecture',
-      image: '/new_feature1.jpeg',
-      link: '/about'
+      title: 'Monumental Heritage',
+      image: '/1.png'
     },
     {
       id: 'music',
-      title: 'Cultural Heritage',
-      image: '/new_feature2.jpeg',
-      link: '#events'
+      title: 'Cross-Over Classical',
+      image: '/2.png'
     },
     {
       id: 'performance',
-      title: 'Classical Music',
-      image: '/Images/Mobile/Songs_of_the_stone_600x400 px.svg',
-      link: '#events'
+      title: 'Intimate Audience',
+      image: '/3.png'
     },
     {
       id: 'heritage',
-      title: 'Cultural Heritage',
-      image: '/Feature_4.png',
-      link: '/about'
+      title: 'After Dark Experience',
+      image: '/4.png'
     }
   ];
-
-  const handleClick = (link) => {
-    if (link.startsWith('#')) {
-      const section = document.querySelector(link);
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    } else {
-      navigate(link);
-    }
-  };
 
   return (
     <section className="obeetee-category-section" ref={ref}>
@@ -57,9 +40,9 @@ const FeaturedSections = () => {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
       >
-        <h3 className="obeetee-subtitle">EXPLORE OUR WORLD</h3>
-        <h2 className="obeetee-title">Reimagining India's Cultural Soul </h2>
-        <p className="obeetee-description">Art, Architecture, and Performance in dialogue with time</p>
+        <h3 className="obeetee-subtitle">IN DIALOGUE WITH TIME</h3>
+        <h2 className="obeetee-title">Art. Architecture. Performance. </h2>
+        <p className="obeetee-description">A Musical Evening at the Qutub Minar</p>
       </motion.div>
 
       {/* Category Grid */}
@@ -77,11 +60,10 @@ const FeaturedSections = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
-              onClick={() => handleClick(category.link)}
             >
               <div className="obeetee-card-image-wrapper">
-                <img 
-                  src={category.image} 
+                <img
+                  src={category.image}
                   alt={category.title}
                   className="obeetee-card-image"
                   loading="lazy"

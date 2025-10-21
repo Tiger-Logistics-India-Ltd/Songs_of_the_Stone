@@ -3,22 +3,18 @@ import React from 'react';
 const HeroSection = () => {
   return (
     <section id="home" className="hero-obeetee">
-      <picture>
-        <source 
-          media="(max-width: 767px)" 
-          srcSet="/Images/Mobile/hero.svg"
-        />
-        <source 
-          media="(min-width: 768px)" 
-          srcSet="/Images/desktop/new_hero.png"
-        />
-        <img
-          src="/Images/desktop/new_hero.png"
-          alt="Songs of the Stone"
-          className="hero-obeetee-img"
-          loading="priority"
-        />
-      </picture>
+      <video
+        src="/new_hero_video.mp4"
+        className="hero-obeetee-img"
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
+      <div className="hero-text-overlay">
+        <h1 className="hero-chapter-text">THE FIRST CHAPTER</h1>
+        <p className="hero-date-text">13-12-2025</p>
+      </div>
     </section>
   );
 };

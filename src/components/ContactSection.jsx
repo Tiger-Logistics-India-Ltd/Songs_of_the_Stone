@@ -261,11 +261,12 @@ const ContactSection = () => {
               <div className="contact-header">
                 <div className="contact-tagline">Connect With Heritage</div>
                 
-                <h2 className="contact-title">Join The Community</h2>
+                <h2 className="contact-title">Reserve your Experience</h2>
                 
                 <p className="contact-description">
-                  We’re so glad you’ve found us. Inkpot isn’t just an initiative – it’s a space for those seeking meaning, connection, and beauty – in art, in stories, in each other.
-                  We’d love to get to know you. Share a few lines, and we’ll be in touch about upcoming events and ways to engage.
+                  We’re so glad you found us. Songs of The Stone is an experience for those seeking meaning, connection, and beauty -- in art, in stories, and in each other.
+
+                  Please fill out the form below to reserve your seat for our First Chapter - The Mehtab Ali Niazi Experience at Qutub Minar. Our team will connect with you to guide you through the next steps.
 
                 </p>
               </div>
@@ -319,7 +320,7 @@ const ContactSection = () => {
                   <div className="form-field">
                     <textarea 
                       name="message"
-                      placeholder="What draws you to this world, what you love about culture, and what you do in your own life or work?"
+                      placeholder="We'd love to get to know you. What draws you to this world of culture and what do you do in your own life or work?"
                       rows="4"
                       value={formData.message}
                       onChange={handleInputChange}
