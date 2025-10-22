@@ -95,14 +95,8 @@ const AboutSection = () => {
                   type="image/svg+xml" 
                 />
                 
-                {/* Fallback / default (will load SVG on desktop, SVG on mobile if supported) */}
-                <img 
-                  src="/Images/desktop/Inkpot_600x400 px.svg" 
-                  alt="Inkpot — Contemporary revival of Indian cultural heritage" 
-                  className="about-img fade-in-media"
-                  loading="lazy"
-                  decoding="async"
-                />
+                
+                
               </picture>
               {/* Decorative overlay for enhanced visual appeal */}
               <div className="about-image-overlay" aria-hidden="true">

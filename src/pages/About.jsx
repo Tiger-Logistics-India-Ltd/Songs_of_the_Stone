@@ -57,11 +57,8 @@ const About = () => {
                   but to reframe — to make our traditions aspirational and relevant in the contemporary global imagination.
                 </p>
                 <p>
-                  Through intimate, thoughtfully crafted experiences, we weave together space, sound, and story. 
+                  Through intimate, thoughtfully crafted experiences, we weave together space, sound, and story.
                   Each event is an invitation to pause, listen, and rediscover the pulse of Indian artistry in a new light.
-                </p>
-                <p className="about-signature">
-                  <strong>Inkpot</strong> — Contemporary revival of Indian cultural heritage
                 </p>
               </div>
             </div>

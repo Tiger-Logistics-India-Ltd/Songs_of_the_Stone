@@ -94,16 +94,21 @@ const EventsSection = () => {
               
               <h3 className="event-subtitle">A Classical Rhapsody</h3>
               
-              <div className="event-location">
-                <span className="location-icon" aria-hidden="true">📍</span>
-                <span className="event-location-text">Qutub Minar, Delhi</span>
-              </div>
+              
+               
+                
+              
               <div className="event-date-time">
-                <span className="location-icon" aria-hidden="true">📅</span>
-                <span className="event-date">13th December 2025<br /></span>
+                
+                <span className="event-date">
+                                13<sup>th</sup> December 2025<br />
+                              </span>
                 <span className="event-time" style={{marginTop: '-4px', display: 'inline-block'}}>
-                  <span className="time-icon" aria-hidden="true">⏰</span> 7pm Onwards
+                  <span className="time-icon" aria-hidden="true"></span> 7pm Onwards
                 </span>
+              <div className="event-location"><span className="event-location-text">Qutub Minar, Delhi</span></div>
+                
+                  
               </div>
               
               <p className="event-description">
