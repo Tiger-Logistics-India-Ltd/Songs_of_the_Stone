@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.songsofthestone.com/sitemap.xml
+Sitemap: https://songsofthestone.com/sitemap.xml

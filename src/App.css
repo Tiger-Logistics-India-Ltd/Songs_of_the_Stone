@@ -288,11 +288,11 @@ a {
   display: flex;
   align-items: left;
   position: absolute;
-  left: 4rem;
+  left: 2rem;
 }
 
 .logo-img {
-  height: 140px; /* Increased by 1.5x from 40px */
+  height: 120px; /* Increased by 1.5x from 40px */
   width: auto;
   object-fit: contain;
 }
@@ -469,7 +469,7 @@ video.hero-obeetee-img {
 
 .hero-chapter-text {
   font-family: var(--font-subheading);
-  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  font-size: clamp(1rem, 4vw, 3.5rem);
   font-weight: 600;
   color: var(--primary-white);
   text-transform: uppercase;
@@ -483,7 +483,7 @@ video.hero-obeetee-img {
 
 .hero-date-text {
   font-family: var(--font-subheading);
-  font-size: clamp(1.2rem, 2.5vw, 2rem);
+  font-size: clamp(.9rem, 2.5vw, 2rem);
   font-weight: 500;
   color: var(--primary-white);
   text-transform: uppercase;
@@ -1862,8 +1862,9 @@ span.italic-text {
   font-weight: 600;
   color: var(--primary-brown);
   line-height: 1.2;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
+
 
 .obeetee-description {
   font-family: var(--font-body);
