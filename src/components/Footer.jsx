@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 /**
  * Footer Component
@@ -53,17 +54,10 @@ const Footer = () => {
             */}
           </div>
           
-          {/* Future: Additional Links Section */}
-          <div className="footer-links" style={{ display: 'none' }}>
-            {/* 
-              Placeholder for future footer links
-              Uncomment and customize when needed:
-              
-              <a href="#privacy" className="footer-link">Privacy Policy</a>
-              <a href="#terms" className="footer-link">Terms of Service</a>
-              <a href="#accessibility" className="footer-link">Accessibility</a>
-            */}
-          </div>
+              {/* Privacy Policy Link */}
+              <div className="footer-links">
+                <Link to="/privacy-policy" className="footer-link">Privacy Policy</Link>
+              </div>
         </div>
       </div>
     </footer>

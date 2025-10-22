@@ -3290,3 +3290,13 @@ html {
 }
 
 
+.footer-link {
+  color: var(--primary-cream);
+  text-decoration: underline;
+  margin-left: 1rem;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+.footer-link:hover {
+  color: var(--primary-black);
+}

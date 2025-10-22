@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 // Import pages
 import Home from './pages/Home';
 import About from './pages/About';
+import PrivacyPolicy from './components/Privacypolicy';
 
 /**
  * Main App Component
@@ -32,6 +33,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       </Routes>
       <Footer />
     </div>
