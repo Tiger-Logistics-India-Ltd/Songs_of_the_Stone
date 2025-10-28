@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useScrollPosition } from '../hooks/useResponsive';
@@ -7,6 +8,7 @@ import { useScrollPosition } from '../hooks/useResponsive';
  * 
  * Features:
  * - Sticky navigation bar that changes appearance on scroll
+ * - Static navbar on all pages except landing page
  * - Mobile-responsive hamburger menu
  * - Smooth scroll behavior for navigation links
  * - Logo and call-to-action button
@@ -21,6 +23,9 @@ const Navigation = () => {
   // State to track if the user has scrolled past a certain point
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  
+  // Check if current page is landing page (home)
+  const isLandingPage = location.pathname === '/';
   
   /**
    * Effect to handle scroll position changes using custom hook
@@ -50,8 +55,8 @@ const Navigation = () => {
     if (!section) return;
     scrollingRef.current = true;
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  // Release lock after animation window
-  setTimeout(() => { scrollingRef.current = false; }, 800);
+    // Release lock after animation window
+    setTimeout(() => { scrollingRef.current = false; }, 800);
     if (sectionId === 'contact') {
       setTimeout(() => {
         const firstInput = section.querySelector('input[name="name"]');
@@ -69,7 +74,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+    <nav className={`navbar ${scrolled || !isLandingPage ? 'scrolled' : ''} ${!isLandingPage ? 'static-nav' : ''}`}>
       <div className="nav-container">
         {/* Logo Section */}
         <div className="nav-logo">

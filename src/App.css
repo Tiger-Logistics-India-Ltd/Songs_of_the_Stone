@@ -1,12 +1,11 @@
 /* Google Fonts import updated to include italic variants for EB Garamond */
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700;1,800&family=Montserrat:wght@300;400;500;600;700&family=Belleza&display=swap');
 
-/* * {
-} */
-  /* margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-} */
+@media (max-width: 767px) {
+  .about-section {
+    margin-top: 4.5rem;
+  }
+}
 
 :root {
   /* Inkpot Brand Color Palette */
@@ -314,7 +313,7 @@ a {
 }
 
 .navbar.scrolled .nav-link {
-  color: var(--primary-brown);
+  color: var(--primary-white);
 }
 
 .navbar:hover .nav-link {
@@ -323,15 +322,15 @@ a {
 }
 
 .navbar.scrolled:hover .nav-link {
-  color: var(--primary-brown);
+  color: var(--primary-cream);
 }
 
 .nav-link:hover {
-  color: var(--primary-red);
+  color: var(--primary-cream);
 }
 
 .navbar:hover .nav-link:hover {
-  color: var(--primary-cream);
+  color: var(--primary-white);
 }
 
 /* Logo color on hover */
@@ -3322,4 +3321,159 @@ html {
 }
 .footer-link:hover {
   color: var(--primary-black);
+}
+
+
+
+/* ========================================
+   NAVBAR STATIC STYLING
+   ======================================== */
+
+/* Static navbar styling for non-landing pages */
+.navbar.static-nav {
+  background-color: var(--primary-red);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure page content doesn't overlap navbar */
+.page-content {
+  padding-top: 80px; /* Adjust based on your navbar height */
+}
+
+/* No padding on landing page */
+.landing-page .page-content {
+  padding-top: 0;
+}
+
+/* Alternative: Add padding to main content on all pages except home */
+body:not(.landing-page) main,
+body:not(.landing-page) .about {
+  margin-top: 80px; /* Adjust to match navbar height */
+}
+
+
+/* ========================================
+   FOUNDER SECTION STYLING
+   ======================================== */
+
+/* Founder section specific styling */
+.founder-section {
+  margin-bottom: 4rem;
+}
+
+.founder-section .about-grid {
+  gap: 3rem;
+  align-items: center;
+}
+
+/* Founder signature styling */
+.founder-signature {
+  margin-top: 2rem;
+  font-style: italic;
+  color: #666;
+  line-height: 1.8;
+}
+
+.founder-signature strong {
+  color: #1a1a1a;
+  font-size: 1.1em;
+  font-style: normal;
+}
+
+/* ========================================
+   RESPONSIVE LAYOUT ADJUSTMENTS
+   ======================================== */
+
+/* Desktop: side-by-side layout */
+@media (min-width: 768px) {
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  
+  /* Reverse layout for alternating sections */
+  .about-grid.reverse {
+    direction: rtl;
+  }
+  
+  .about-grid.reverse > * {
+    direction: ltr;
+  }
+  
+  /* Founder section - image on right */
+  .founder-section .about-image {
+    order: 2;
+  }
+  
+  .founder-section .about-text {
+    order: 1;
+  }
+}
+
+/* Mobile: stacked layout */
+@media (max-width: 767px) {
+  .about-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  /* Text always comes first on mobile */
+  .about-text {
+    order: 1;
+  }
+  
+  .about-image {
+    order: 2;
+  }
+  
+  .founder-signature {
+    font-size: 0.9em;
+  }
+  
+  /* Adjust navbar spacing for mobile */
+  .page-content,
+  body:not(.landing-page) main,
+  body:not(.landing-page) .about {
+    margin-top: 60px; /* Smaller navbar on mobile */
+    padding-top: 60px;
+  }
+}
+
+/* ========================================
+   IMAGE STYLING
+   ======================================== */
+
+.about-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.about-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* ========================================
+   SECTION SPACING
+   ======================================== */
+
+.about-section {
+  padding: 4rem 0;
+}
+
+.about-section:first-child {
+  padding-top: 2rem;
+}
+
+@media (max-width: 767px) {
+  .about-section {
+    padding: 2rem 0;
+  }
 }
