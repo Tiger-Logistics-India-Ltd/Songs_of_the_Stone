@@ -42,18 +42,11 @@ const About = () => {
         
 
         {/* Songs of the Stone Section */}
-        <motion.div 
-          className="about-section founder-section"
-          ref={founderRef}
-          initial="hidden"
-          animate={founderInView ? "visible" : "hidden"}
-          variants={contentVariants}
-        >
+        <div className="about-section founder-section">
           <div className="about-grid">
             {/* Text Content */}
             <div className="about-text">
               <div className="event-category">Songs of the Stone</div>
-              
               <div className="about-description">
                 <p>
                   <strong>Songs of the Stone</strong> is Inkpot's series of after-hours cultural evenings 
@@ -70,7 +63,6 @@ const About = () => {
                 </p>
               </div>
             </div>
-            
             {/* Image Section - Songs of the Stone */}
             <div className="about-image">
               <picture>
@@ -93,7 +85,7 @@ const About = () => {
               </picture>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Inkpot India Section */}
         <motion.div 
@@ -188,16 +180,16 @@ const About = () => {
               <picture>
                 <source 
                   media="(max-width: 767px)" 
-                  srcSet="public\About\About_founder_image.svg" 
+                  srcSet="/About/About_founder_image.svg" 
                   type="image/svg+xml" 
                 />
                 <source 
                   media="(min-width: 768px)"
-                  srcSet="public\About\About_founder_image.svg" 
+                  srcSet="/About/About_founder_image.svg" 
                   type="image/svg+xml" 
                 />
                 <img 
-                  src="public\About\About_founder_image.svg" 
+                  src="/About/About_founder_image.svg" 
                   alt="Simar Malhotra - Founder of Inkpot India" 
                   className="about-img"
                   loading="lazy"
