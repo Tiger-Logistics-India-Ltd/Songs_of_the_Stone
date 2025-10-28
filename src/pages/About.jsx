@@ -56,11 +56,11 @@ const About = () => {
               
               <div className="about-description">
                 <p>
-                  <strong>Songs of the Stone</strong> is Inkpot's flagship series of after-hours cultural evenings 
+                  <strong>Songs of the Stone</strong> is Inkpot's series of after-hours cultural evenings 
                   at Delhi's heritage monuments. Here, space becomes stage, arches become resonance, and stone becomes story.
                 </p>
                 <p>
-                  Our debut edition unfolds at the Qutub Minar, transforming the monument into a living arena of music and memory. 
+                  Our debut edition unfolds at the Qutub Minar a UNESCO World Heritage Site, transforming the monument into a living arena of music and memory. 
                   Presented in association with the Delhi Government and the Archaeological Survey of India, the evening celebrates 
                   the dialogue between heritage and contemporary expression.
                 </p>
@@ -118,7 +118,7 @@ const About = () => {
                   but to reframe — to make our traditions aspirational and relevant in the contemporary global imagination.
                 </p>
                 <p>
-                  Through intimate, thoughtfully crafted experiences, we weave together space, sound, and story.
+                  Through intimate, thoughtfully crafted experiences.
                   Each event is an invitation to pause, listen, and rediscover the pulse of Indian artistry in a new light.
                 </p>
               </div>
