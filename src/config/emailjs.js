@@ -10,6 +10,6 @@ export const EMAILJS_CONFIG = {
 // Example of how to get these values:
 // 1. Go to https://www.emailjs.com/
 // 2. Sign in to your account
-// 3. Go to Email Services - copy the Service ID
+// 3. Go to Email Services - copy the Service IDgit 
 // 4. Go to Email Templates - copy the Template ID  
 // 5. Go to Account (Integration tab) - copy the Public Key
