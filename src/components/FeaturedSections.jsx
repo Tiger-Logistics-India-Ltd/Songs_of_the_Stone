@@ -32,23 +32,23 @@ const FeaturedSections = () => {
   ];
 
   return (
-    <section className="obeetee-category-section" ref={ref}>
+    <section className="featured-category-section" ref={ref}>
       {/* Heading Section */}
       <motion.div 
-        className="obeetee-heading"
+        className="featured-heading"
         initial={{ opacity: 0, y: 30 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
       >
-        <h3 className="obeetee-subtitle">IN DIALOGUE WITH TIME</h3>
-        <h2 className="obeetee-title">Art. Architecture. Performance. </h2>
-        <p className="obeetee-description">A Musical Evening at the Qutub Minar</p>
+        <h3 className="featured-subtitle">IN DIALOGUE WITH TIME</h3>
+        <h2 className="featured-title">Art. Architecture. Performance. </h2>
+        <p className="featured-description">A Musical Evening at the Qutub Minar</p>
       </motion.div>
 
       {/* Category Grid */}
-      <div className="obeetee-category-scroll-container">
+      <div className="featured-category-scroll-container">
         <motion.div 
-          className="obeetee-category-grid"
+          className="featured-category-grid"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 1, delay: 0.3 }}
@@ -56,20 +56,20 @@ const FeaturedSections = () => {
           {categories.map((category, index) => (
             <motion.div
               key={category.id}
-              className="obeetee-category-card"
+              className="featured-category-card"
               initial={{ opacity: 0, y: 40 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 + index * 0.1 }}
             >
-              <div className="obeetee-card-image-wrapper">
+              <div className="featured-card-image-wrapper">
                 <img
                   src={category.image}
                   alt={category.title}
-                  className="obeetee-card-image"
+                  className="featured-card-image"
                   loading="lazy"
                 />
               </div>
-              <h4 className="obeetee-card-title">{category.title}</h4>
+              <h4 className="featured-card-title">{category.title}</h4>
             </motion.div>
           ))}
         </motion.div>

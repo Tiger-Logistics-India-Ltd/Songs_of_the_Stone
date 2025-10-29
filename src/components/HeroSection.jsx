@@ -82,11 +82,11 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section id="home" className="hero-obeetee">
+    <section id="home" className="hero-featured">
       <video
         ref={videoRef}
         src="/new_hero_video.mp4"
-        className="hero-obeetee-img"
+        className="hero-featured-img"
         autoPlay
         muted
         playsInline
