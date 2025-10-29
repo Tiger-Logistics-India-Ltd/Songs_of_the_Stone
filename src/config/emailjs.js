@@ -2,8 +2,8 @@
 // Uses environment variables for better security
 
 export const EMAILJS_CONFIG = {
-  SERVICE_ID: import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_kc85ggl',
-  TEMPLATE_ID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_15jye58',
+  SERVICE_ID: import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_ddpdj65',
+  TEMPLATE_ID: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_bd9mmgt',
   PUBLIC_KEY: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'hU7gdDpwzNyOeHzah'
 };
 
