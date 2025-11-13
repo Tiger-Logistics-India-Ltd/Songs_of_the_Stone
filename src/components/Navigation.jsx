@@ -87,8 +87,8 @@ const Navigation = () => {
         <div className="nav-menu">
           <Link to="/" className="nav-link">Home</Link>
           <Link to="/about" className="nav-link">About</Link>
-          <a href="#events" className="nav-link" onClick={(e) => scrollToSection('events', e)}>Events</a>
-          <a href="#contact" className="nav-link" onClick={(e) => scrollToSection('contact', e)}>Contact</a>
+          <Link to="/#events" className="nav-link" onClick={(e) => { if (location.pathname === '/') scrollToSection('events', e); }}>Events</Link>
+          <Link to="/#contact" className="nav-link" onClick={(e) => { if (location.pathname === '/') scrollToSection('contact', e); }}>Contact</Link>
         </div>
 
         {/* Mobile Hamburger */}
@@ -115,8 +115,8 @@ const Navigation = () => {
         <div className="mobile-menu-inner">
           <Link to="/" onClick={closeMobile}>Home</Link>
           <Link to="/about" onClick={closeMobile}>About</Link>
-          <a href="#events" onClick={(e) => handleNavClick('events', e)}>Events</a>
-          <a href="#contact" onClick={(e) => handleNavClick('contact', e)}>Contact</a>
+          <Link to="/#events" onClick={(e) => { if (location.pathname === '/') handleNavClick('events', e); else closeMobile(); }}>Events</Link>
+          <Link to="/#contact" onClick={(e) => { if (location.pathname === '/') handleNavClick('contact', e); else closeMobile(); }}>Contact</Link>
         </div>
       </div>
     </nav>

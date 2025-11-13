@@ -1,7 +1,21 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const HeroSection = () => {
   const videoRef = useRef(null);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    // Parallax scroll effect
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     // Ultra-aggressive autoplay for mobile devices
@@ -87,6 +101,10 @@ const HeroSection = () => {
         ref={videoRef}
         src="/new_hero_video.mp4"
         className="hero-featured-img"
+        style={{
+          transform: `translateY(${scrollY * 0.5}px)`,
+          transition: 'transform 0.1s ease-out'
+        }}
         autoPlay
         muted
         playsInline
@@ -101,6 +119,15 @@ const HeroSection = () => {
       <div className="hero-text-overlay">
         <h1 className="hero-chapter-text">THE FIRST CHAPTER</h1>
         <p className="hero-date-text">13-12-2025</p>
+        <a 
+          href="https://www.district.in/events/songs-of-the-stone-after-dark-musical-experience-qutub-minar-mehtab-ali-niazi-dec13-2025-buy-tickets" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="hero-ticket-button"
+        >
+          <span className="button-text">Book Your Ticket</span>
+          <span className="button-arrow">→</span>
+        </a>
       </div>
     </section>
   );

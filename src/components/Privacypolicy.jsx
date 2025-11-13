@@ -1,41 +1,33 @@
 import React from "react";
 
 const PrivacyPolicy = () => (
-  <div style={{
-    minHeight: '100vh',
-    background: 'linear-gradient(120deg, #f8f6f2 0%, #e2cba3 100%)',
-    padding: '0',
-    margin: '0',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '100%'
-  }}>
-    <div className="max-w-5xl w-full mx-auto px-6 py-12 bg-white" style={{marginTop: '3rem', marginBottom: '3rem', boxShadow: '0 4px 32px rgba(144,26,28,0.10)', borderRadius: '1.5rem', border: '1px solid #e2cba3'}}>
-      <header className="mb-10" style={{textAlign: 'center'}}>
-        <h1 className="text-4xl font-bold mb-2" style={{color: '#901A1C', letterSpacing: '1px'}}>Privacy Policy of Inkpot India Pvt. Ltd.</h1>
-        <p className="text-sm" style={{color: '#A4481C'}}>
-          <strong>Effective Date:</strong> October 24, 2025<br />
-          <strong>Last Updated:</strong> October 24, 2025
-        </p>
+  <div className="privacy-policy-page">
+    <div className="privacy-policy-container">
+      <header className="privacy-header">
+        <h1 className="privacy-title">Privacy Policy</h1>
+        <p className="privacy-subtitle">Inkpot India Pvt. Ltd.</p>
+        <div className="privacy-dates">
+          <span><strong>Effective Date:</strong> October 24, 2025</span>
+          <span><strong>Last Updated:</strong> October 24, 2025</span>
+        </div>
       </header>
 
-      <div className="space-y-10 text-gray-800 leading-relaxed">
-      <section>
+      <div className="privacy-content">
+      <section className="privacy-section">
         <p>
           Inkpot India Pvt. Ltd. (“Inkpot India”, “Company”, “we”, “us”, or “our”) values your trust and respects your right to privacy. We are committed to protecting your personal data and ensuring transparency in how we collect, use, and safeguard information provided to us through our website, applications, ticketing platforms, social media pages, partner websites, and offline or online event registrations (collectively referred to as the “Platform”).
         </p>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold mb-4" style={{color: '#3D3F21', borderBottom: '2px solid #e2cba3', paddingBottom: '0.5rem'}}>Introduction</h2>
+      <section className="privacy-section">
+        <h2 className="section-title">Introduction</h2>
         <p>
           This Privacy Policy (“Policy”) outlines how Inkpot India collects, stores, uses, discloses, and protects the personal data and sensitive personal information of individuals who interact with us — whether as visitors, event participants, artists, vendors, partners, or customers. By accessing or using the Platform, or by voluntarily providing any Personal Data to us, you acknowledge and consent to the collection, storage, processing, and disclosure of your data in accordance with this Policy and the applicable laws of India.
         </p>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold mb-4" style={{color: '#3D3F21', borderBottom: '2px solid #e2cba3', paddingBottom: '0.5rem'}}>1. Collection of Information</h2>
+      <section className="privacy-section">
+        <h2 className="section-title">1. Collection of Information</h2>
         <p className="mb-4">
           Inkpot India Pvt. Ltd. (“Inkpot India” or “the Company”) recognizes that the information you share with us is personal and confidential. Accordingly, we are committed to collecting only such information as is necessary for lawful, legitimate, and transparent business purposes. We ensure that the collection, use, and handling of such information comply with the Information Technology Act, 2000, the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011, and other applicable data protection regulations.
         </p>
@@ -240,8 +232,8 @@ const PrivacyPolicy = () => (
         </p>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold mb-4" style={{color: '#3D3F21', borderBottom: '2px solid #e2cba3', paddingBottom: '0.5rem'}}>2. Purpose and Use of Collected Information</h2>
+      <section className="privacy-section">
+        <h2 className="section-title">2. Purpose and Use of Collected Information</h2>
         <p className="mb-6">
           Songs of the Stone ("the Company", "we", "us", or "our") collects and processes personal and sensitive personal data strictly in accordance with applicable laws, and only for lawful, legitimate, and necessary purposes. We ensure that all data is used fairly, transparently, and solely for the objectives described below.
         </p>
@@ -482,8 +474,8 @@ const PrivacyPolicy = () => (
         </p>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold mb-4" style={{color: '#3D3F21', borderBottom: '2px solid #e2cba3', paddingBottom: '0.5rem'}}>3. Disclosure of Information</h2>
+      <section className="privacy-section">
+        <h2 className="section-title">3. Disclosure of Information</h2>
         <p className="mb-6">
           Songs of the Stone may share your personal data with third parties strictly for legitimate business purposes and in compliance with applicable law.
         </p>
@@ -517,8 +509,8 @@ const PrivacyPolicy = () => (
         </p>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold mb-4" style={{color: '#3D3F21', borderBottom: '2px solid #e2cba3', paddingBottom: '0.5rem'}}>4. International Data Transfers</h2>
+      <section className="privacy-section">
+        <h2 className="section-title">4. International Data Transfers</h2>
         <p className="mb-6">
           Songs of the Stone may transfer personal data to countries outside India when necessary to provide services.
         </p>
@@ -540,8 +532,8 @@ const PrivacyPolicy = () => (
         </p>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold mb-4" style={{color: '#3D3F21', borderBottom: '2px solid #e2cba3', paddingBottom: '0.5rem'}}>5. Data Retention and Destruction</h2>
+      <section className="privacy-section">
+        <h2 className="section-title">5. Data Retention and Destruction</h2>
         <p className="mb-6">
           Songs of the Stone retains personal data only as long as necessary for the purposes for which it was collected, or as required by law.
         </p>
@@ -562,8 +554,8 @@ const PrivacyPolicy = () => (
         </p>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold mb-4" style={{color: '#3D3F21', borderBottom: '2px solid #e2cba3', paddingBottom: '0.5rem'}}>6. Security Practices and Procedures</h2>
+      <section className="privacy-section">
+        <h2 className="section-title">6. Security Practices and Procedures</h2>
         <p className="mb-6">
           Songs of the Stone implements technical, administrative, and physical safeguards to protect personal data.
         </p>
@@ -594,8 +586,8 @@ const PrivacyPolicy = () => (
         </p>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold mb-4" style={{color: '#3D3F21', borderBottom: '2px solid #e2cba3', paddingBottom: '0.5rem'}}>7. Your Rights and Choices</h2>
+      <section className="privacy-section">
+        <h2 className="section-title">7. Your Rights and Choices</h2>
         <p className="mb-6">
           You may access, correct, or delete your personal data or withdraw consent by contacting our Grievance Officer. Verification may be required. Requests may be declined where law requires retention.
         </p>
@@ -620,8 +612,8 @@ const PrivacyPolicy = () => (
         </p>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold mb-4" style={{color: '#3D3F21', borderBottom: '2px solid #e2cba3', paddingBottom: '0.5rem'}}>8. Use of Cookies and Tracking Technologies</h2>
+      <section className="privacy-section">
+        <h2 className="section-title">8. Use of Cookies and Tracking Technologies</h2>
         <p className="mb-6">
           Songs of the Stone uses cookies and similar technologies for improving functionality and personalizing user experience.
         </p>
@@ -642,8 +634,8 @@ const PrivacyPolicy = () => (
         </p>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold mb-4" style={{color: '#3D3F21', borderBottom: '2px solid #e2cba3', paddingBottom: '0.5rem'}}>9. Limitation of Liability</h2>
+      <section className="privacy-section">
+        <h2 className="section-title">9. Limitation of Liability</h2>
         <p className="mb-3">Songs of the Stone shall not be liable for:</p>
         <ul className="list-disc ml-8 mb-6 space-y-2">
           <li>Indirect, incidental, or consequential losses arising from misuse or unauthorized disclosure of data</li>
@@ -654,8 +646,8 @@ const PrivacyPolicy = () => (
         </p>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold mb-4" style={{color: '#3D3F21', borderBottom: '2px solid #e2cba3', paddingBottom: '0.5rem'}}>10. Policy Updates</h2>
+      <section className="privacy-section">
+        <h2 className="section-title">10. Policy Updates</h2>
         <p className="mb-3">
           Songs of the Stone may update this Privacy Policy from time to time to reflect changes in law, technology, or business practices.
         </p>
@@ -667,8 +659,8 @@ const PrivacyPolicy = () => (
         </p>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold mb-4" style={{color: '#3D3F21', borderBottom: '2px solid #e2cba3', paddingBottom: '0.5rem'}}>11. Grievance Officer and Contact Information</h2>
+      <section className="privacy-section">
+        <h2 className="section-title">11. Grievance Officer and Contact Information</h2>
         <div className="bg-gray-50 p-6 rounded-lg mb-6">
           <p className="font-semibold text-gray-900 mb-2">Grievance Officer</p>
           <p className="mb-2">Songs of the Stone</p>
@@ -678,8 +670,8 @@ const PrivacyPolicy = () => (
         </div>
       </section>
 
-      <section>
-        <h2 className="text-2xl font-bold mb-4" style={{color: '#3D3F21', borderBottom: '2px solid #e2cba3', paddingBottom: '0.5rem'}}>12. Governing Law and Jurisdiction</h2>
+      <section className="privacy-section">
+        <h2 className="section-title">12. Governing Law and Jurisdiction</h2>
         <p>
           This Privacy Policy shall be governed by and construed in accordance with the laws of India. Any disputes arising hereunder shall be subject to the exclusive jurisdiction of the competent courts at New Delhi, India.
         </p>
@@ -690,3 +682,4 @@ const PrivacyPolicy = () => (
 );
 
 export default PrivacyPolicy;
+
