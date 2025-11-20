@@ -3499,6 +3499,136 @@ body:not(.landing-page) .about {
 }
 
 /* ========================================
+   PARTNERS SECTION
+   ======================================== */
+
+.partners-section {
+  width: 100%;
+  background: var(--primary-white);
+  padding: 1rem 0;
+  overflow: hidden;
+}
+
+.partners-container {
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.partners-heading {
+  font-family: var(--font-subheading);
+  font-size: clamp(0.85rem, 1.5vw, 1rem);
+  text-align: center;
+  color: var(--primary-red);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+  position: relative;
+}
+
+.partners-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 1px;
+  background: var(--primary-red);
+}
+
+.partners-scroll-wrapper {
+  position: relative;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: 1rem 0;
+}
+
+.partners-scroll-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.partners-grid {
+  display: flex;
+  gap: 6rem;
+  align-items: center;
+  justify-content: center;
+  min-width: min-content;
+  padding: 1rem;
+}
+
+.partner-card {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.partner-logo {
+  max-width: 200px;
+  height: 120px;
+  width: auto;
+  object-fit: contain;
+  filter: none;
+  transition: all 0.4s ease;
+}
+
+.partner-card:hover .partner-logo {
+  filter: brightness(1.05);
+  transform: scale(1.08);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .partners-section {
+    padding:  0;
+  }
+
+  
+
+  .partners-heading {
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+  }
+
+  .partners-grid {
+    gap: 1rem;
+    justify-content: flex-start;
+  }
+
+  .partner-logo {
+    max-width: 200px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .partners-section {
+    padding: 2rem 0;
+  }
+
+  .partners-heading {
+    font-size: 0.7rem;
+    letter-spacing: 2.5px;
+  }
+
+  .partners-grid {
+    gap: .5rem;
+  }
+
+  .partner-logo {
+    max-width: 120px;
+    height: 80px;
+  }
+}
+
+/* ========================================
    PRIVACY POLICY PAGE STYLING
    ======================================== */
 
