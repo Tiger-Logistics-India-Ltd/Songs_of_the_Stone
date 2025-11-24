@@ -3587,31 +3587,41 @@ body:not(.landing-page) .about {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
+  perspective: 1000px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 .partner-logo {
-  max-width: 200px;
-  height: 120px;
   width: auto;
+  height: 120px;
+  max-width: 200px;
   object-fit: contain;
   filter: none;
   transition: all 0.4s ease;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .partner-card:hover .partner-logo {
   filter: brightness(1.05);
-  transform: scale(1.08);
+  transform: scale(1.08) translateZ(0);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
   .partners-section {
-    padding:  0;
+    padding: 2.5rem 0;
   }
-
-  
 
   .partners-heading {
     font-size: 0.75rem;
@@ -3620,14 +3630,20 @@ body:not(.landing-page) .about {
   }
 
   .partners-grid {
-    gap: 1rem;
+    gap: 3rem;
     justify-content: flex-start;
+  }
+
+  .partner-card {
+    transform: translateZ(0) scale(1);
   }
 
   .partner-logo {
     width: auto;
-    height: 90px;
-    max-width: none;
+    height: 80px;
+    max-width: 160px;
+    image-rendering: auto;
+    -webkit-font-smoothing: subpixel-antialiased;
   }
 }
 
@@ -3642,13 +3658,19 @@ body:not(.landing-page) .about {
   }
 
   .partners-grid {
-    gap: .5rem;
+    gap: 2rem;
+  }
+
+  .partner-card {
+    transform: translateZ(0) scale(1);
   }
 
   .partner-logo {
     width: auto;
-    height: 70px;
-    max-width: none;
+    height: 60px;
+    max-width: 120px;
+    image-rendering: auto;
+    -webkit-font-smoothing: subpixel-antialiased;
   }
 }
 
