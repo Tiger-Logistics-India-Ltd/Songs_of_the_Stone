@@ -3541,11 +3541,12 @@ body:not(.landing-page) .about {
 .partners-scroll-wrapper {
   position: relative;
   width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: hidden;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   padding: 1rem 0;
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
 }
 
 .partners-scroll-wrapper::-webkit-scrollbar {
@@ -3559,6 +3560,25 @@ body:not(.landing-page) .about {
   justify-content: center;
   min-width: min-content;
   padding: 1rem;
+}
+
+/* Auto-scroll animation */
+.partners-grid-auto-scroll {
+  animation: scroll-partners 30s linear infinite;
+  justify-content: flex-start;
+}
+
+.partners-scroll-wrapper:hover .partners-grid-auto-scroll {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-partners {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% / 3));
+  }
 }
 
 .partner-card {
@@ -3576,6 +3596,8 @@ body:not(.landing-page) .about {
   object-fit: contain;
   filter: none;
   transition: all 0.4s ease;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
 }
 
 .partner-card:hover .partner-logo {
@@ -3603,8 +3625,9 @@ body:not(.landing-page) .about {
   }
 
   .partner-logo {
-    max-width: 200px;
-    height: 100px;
+    width: auto;
+    height: 90px;
+    max-width: none;
   }
 }
 
@@ -3623,8 +3646,9 @@ body:not(.landing-page) .about {
   }
 
   .partner-logo {
-    max-width: 120px;
-    height: 80px;
+    width: auto;
+    height: 70px;
+    max-width: none;
   }
 }
 

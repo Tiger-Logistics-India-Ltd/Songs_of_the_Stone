@@ -12,8 +12,12 @@ const PartnersSection = () => {
     { id: 1, name: 'ARC', logo: '/partner/arc.svg' },
     { id: 2, name: 'Delhi Tourism', logo: '/partner/delhi.svg' },
     { id: 3, name: 'Max', logo: '/partner/max.svg' },
-    { id: 4, name: 'Stanford', logo: '/partner/stanford.svg' }
+    { id: 4, name: 'Stanford', logo: '/partner/stanford.svg' },
+    { id: 5, name: 'Hyder', logo: '/partner/hyder.svg' }
   ];
+
+  // Triple partners array for seamless infinite scroll
+  const duplicatedPartners = [...partners, ...partners, ...partners];
 
   return (
     <section className="partners-section" ref={ref}>
@@ -27,18 +31,18 @@ const PartnersSection = () => {
         
         <div className="partners-scroll-wrapper">
           <motion.div 
-            className="partners-grid"
+            className="partners-grid partners-grid-auto-scroll"
             initial={{ opacity: 0 }}
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            {partners.map((partner, index) => (
+            {duplicatedPartners.map((partner, index) => (
               <motion.div
-                key={partner.id}
+                key={`${partner.id}-${index}`}
                 className="partner-card"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                transition={{ duration: 0.5, delay: 0.3 + (index % partners.length) * 0.1 }}
               >
                 <img
                   src={partner.logo}
