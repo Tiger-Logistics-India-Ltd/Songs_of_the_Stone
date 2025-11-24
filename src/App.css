@@ -3599,19 +3599,17 @@ body:not(.landing-page) .about {
   height: 120px;
   max-width: 200px;
   object-fit: contain;
-  object-position: center;
-  display: block;
   filter: none;
   transition: all 0.4s ease;
-  image-rendering: crisp-edges;
   image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform: translateZ(0);
+  transform-style: preserve-3d;
   will-change: transform;
-  -webkit-user-drag: none;
 }
 
 .partner-card:hover .partner-logo {
@@ -3619,7 +3617,7 @@ body:not(.landing-page) .about {
   transform: scale(1.08) translateZ(0);
 }
 
-/* Tablet - 768px and below */
+/* Responsive Design */
 @media (max-width: 768px) {
   .partners-section {
     padding: 2.5rem 0;
@@ -3637,21 +3635,18 @@ body:not(.landing-page) .about {
   }
 
   .partner-card {
-    transform: translateZ(0);
+    transform: translateZ(0) scale(1);
   }
 
   .partner-logo {
+    width: auto;
     height: 80px;
     max-width: 160px;
-    /* KEEP crisp-edges - DO NOT use auto */
-    image-rendering: crisp-edges;
-    image-rendering: -webkit-optimize-contrast;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    image-rendering: auto;
+    -webkit-font-smoothing: subpixel-antialiased;
   }
 }
 
-/* Mobile - 480px and below */
 @media (max-width: 480px) {
   .partners-section {
     padding: 2rem 0;
@@ -3667,20 +3662,15 @@ body:not(.landing-page) .about {
   }
 
   .partner-card {
-    width: 130px;
-    height: 100px;
-    padding: 12px;
-    transform: translateZ(0);
+    transform: translateZ(0) scale(1);
   }
 
   .partner-logo {
-    height: 70px;
-    max-width: 140px;
-    /* CRITICAL: Keep crisp rendering on mobile */
-    image-rendering: crisp-edges;
-    image-rendering: -webkit-optimize-contrast;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    width: auto;
+    height: 60px;
+    max-width: 120px;
+    image-rendering: auto;
+    -webkit-font-smoothing: subpixel-antialiased;
   }
 }
 
