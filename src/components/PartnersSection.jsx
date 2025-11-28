@@ -9,11 +9,12 @@ const PartnersSection = () => {
   });
 
   const partners = [
-    { id: 1, name: 'ARC', logo: '/partner/arc.svg' },
-    { id: 2, name: 'Delhi Tourism', logo: '/partner/delhi.svg' },
-    { id: 3, name: 'Max', logo: '/partner/max.svg' },
-    { id: 4, name: 'Stanford', logo: '/partner/stanford.svg' },
-    { id: 5, name: 'Hyder', logo: '/partner/hyder.svg' }
+    { id: 1, name: 'ARC', logo: '/partner/arc.webp' },
+    { id: 2, name: 'Delhi Tourism', logo: '/partner/delhi.webp' },
+    { id: 3, name: 'Max', logo: '/partner/max.webp' },
+    { id: 4, name: 'Stanford', logo: '/partner/stanford.webp' },
+    { id: 5, name: 'Hyder', logo: '/partner/hyder.webp' },
+    { id: 6, name: 'Jaipur Rugs', logo: '/partner/jaipurrugs.webp' }
   ];
 
   // Triple partners array for seamless infinite scroll
