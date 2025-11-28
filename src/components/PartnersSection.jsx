@@ -8,13 +8,14 @@ const PartnersSection = () => {
     triggerOnce: true
   });
 
+  // Desktop: all SVG | Mobile: mixed SVG/WebP for better quality
   const partners = [
-    { id: 1, name: 'ARC', logo: '/partner/arc.webp' },
-    { id: 2, name: 'Delhi Tourism', logo: '/partner/delhi.webp' },
-    { id: 3, name: 'Max', logo: '/partner/max.webp' },
-    { id: 4, name: 'Stanford', logo: '/partner/stanford.webp' },
-    { id: 5, name: 'Hyder', logo: '/partner/hyder.webp' },
-    { id: 6, name: 'Jaipur Rugs', logo: '/partner/jaipurrugs.webp' }
+    { id: 1, name: 'ARC', desktop: '/partner/arc.svg', mobile: '/partner/arc.svg' },
+    { id: 2, name: 'Delhi Tourism', desktop: '/partner/delhi.svg', mobile: '/partner/delhi.webp' },
+    { id: 3, name: 'Max', desktop: '/partner/max.svg', mobile: '/partner/max.webp' },
+    { id: 4, name: 'Stanford', desktop: '/partner/stanford.svg', mobile: '/partner/stanford.webp' },
+    { id: 5, name: 'Hyder', desktop: '/partner/hyder.svg', mobile: '/partner/hyder.svg' },
+    { id: 6, name: 'Jaipur Rugs', desktop: '/partner/jaipurrugs.svg', mobile: '/partner/jaipurrugs.webp' }
   ];
 
   // Triple partners array for seamless infinite scroll
@@ -45,12 +46,16 @@ const PartnersSection = () => {
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.3 + (index % partners.length) * 0.1 }}
               >
-                <img
-                  src={partner.logo}
-                  alt={partner.name}
-                  className="partner-logo"
-                  loading="lazy"
-                />
+                <picture>
+                  <source media="(max-width: 768px)" srcSet={partner.mobile} />
+                  <source media="(min-width: 769px)" srcSet={partner.desktop} />
+                  <img
+                    src={partner.desktop}
+                    alt={partner.name}
+                    className="partner-logo"
+                    loading="lazy"
+                  />
+                </picture>
               </motion.div>
             ))}
           </motion.div>
