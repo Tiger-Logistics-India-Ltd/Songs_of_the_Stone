@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import './App.css';
 
 // Import modular components
@@ -38,6 +39,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
+      <SpeedInsights />
     </>
   );
 }
