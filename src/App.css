@@ -3564,8 +3564,12 @@ body:not(.landing-page) .about {
 
 /* Auto-scroll animation */
 .partners-grid-auto-scroll {
-  animation: scroll-partners 30s linear infinite;
+  animation: scroll-partners 35s linear infinite;
   justify-content: flex-start;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .partners-scroll-wrapper:hover .partners-grid-auto-scroll {
@@ -3574,10 +3578,10 @@ body:not(.landing-page) .about {
 
 @keyframes scroll-partners {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(calc(-100% / 3));
+    transform: translate3d(calc(-100% / 3), 0, 0);
   }
 }
 
