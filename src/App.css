@@ -3638,6 +3638,10 @@ body:not(.landing-page) .about {
     justify-content: flex-start;
   }
 
+  .partners-grid-auto-scroll {
+    animation: scroll-partners 20s linear infinite;
+  }
+
   .partner-card {
     transform: translateZ(0) scale(1);
   }
@@ -3663,6 +3667,10 @@ body:not(.landing-page) .about {
 
   .partners-grid {
     gap: 2rem;
+  }
+
+  .partners-grid-auto-scroll {
+    animation: scroll-partners 15s linear infinite;
   }
 
   .partner-card {
