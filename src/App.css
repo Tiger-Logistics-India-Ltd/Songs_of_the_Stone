@@ -3505,14 +3505,14 @@ body:not(.landing-page) .about {
 .partners-section {
   width: 100%;
   background: var(--primary-white);
-  padding: 1rem 0;
+  padding: 3rem 0;
   overflow: hidden;
 }
 
 .partners-container {
-  max-width: 750px;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1rem;
 }
 
 .partners-heading {
@@ -3538,15 +3538,46 @@ body:not(.landing-page) .about {
   background: var(--primary-red);
 }
 
+.partners-scroll-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.partners-scroll-btn {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: transparent;
+  color: var(--primary-brown, #482D18);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  font-weight: 300;
+  transition: all 0.3s ease;
+  z-index: 2;
+  opacity: 0.6;
+}
+
+.partners-scroll-btn:hover {
+  opacity: 1;
+  color: var(--primary-red, #901A1C);
+}
+
 .partners-scroll-wrapper {
   position: relative;
-  width: 100%;
-  overflow: hidden;
+  flex: 1;
+  overflow-x: auto;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   padding: 1rem 0;
-  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  scroll-behavior: smooth;
 }
 
 .partners-scroll-wrapper::-webkit-scrollbar {
@@ -3555,34 +3586,11 @@ body:not(.landing-page) .about {
 
 .partners-grid {
   display: flex;
-  gap: 6rem;
+  gap: 2.5rem;
   align-items: center;
-  justify-content: center;
-  min-width: min-content;
-  padding: 1rem;
-}
-
-/* Auto-scroll animation */
-.partners-grid-auto-scroll {
-  animation: scroll-partners 35s linear infinite;
   justify-content: flex-start;
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transform: translateZ(0);
-}
-
-.partners-scroll-wrapper:hover .partners-grid-auto-scroll {
-  animation-play-state: paused;
-}
-
-@keyframes scroll-partners {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(calc(-100% / 3), 0, 0);
-  }
+  min-width: min-content;
+  padding: 0.5rem 1rem;
 }
 
 .partner-card {
@@ -3591,34 +3599,20 @@ body:not(.landing-page) .about {
   align-items: center;
   justify-content: center;
   transition: all 0.3s ease;
-  perspective: 1000px;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transform: translateZ(0);
-  will-change: transform;
 }
 
 .partner-logo {
   width: auto;
-  height: 120px;
-  max-width: 200px;
+  height: 100px;
+  max-width: 180px;
   object-fit: contain;
   filter: none;
-  transition: all 0.4s ease;
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transform: translateZ(0);
-  transform-style: preserve-3d;
-  will-change: transform;
+  transition: all 0.3s ease;
 }
 
 .partner-card:hover .partner-logo {
   filter: brightness(1.05);
-  transform: scale(1.08) translateZ(0);
+  transform: scale(1.03);
 }
 
 /* Responsive Design */
@@ -3630,28 +3624,22 @@ body:not(.landing-page) .about {
   .partners-heading {
     font-size: 0.75rem;
     letter-spacing: 3px;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .partners-scroll-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 1.4rem;
   }
 
   .partners-grid {
-    gap: 3rem;
-    justify-content: flex-start;
-  }
-
-  .partners-grid-auto-scroll {
-    animation: scroll-partners 20s linear infinite;
-  }
-
-  .partner-card {
-    transform: translateZ(0) scale(1);
+    gap: 2rem;
   }
 
   .partner-logo {
-    width: auto;
     height: 80px;
-    max-width: 160px;
-    image-rendering: auto;
-    -webkit-font-smoothing: subpixel-antialiased;
+    max-width: 140px;
   }
 }
 
@@ -3665,24 +3653,19 @@ body:not(.landing-page) .about {
     letter-spacing: 2.5px;
   }
 
+  .partners-scroll-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 1.2rem;
+  }
+
   .partners-grid {
-    gap: 2rem;
-  }
-
-  .partners-grid-auto-scroll {
-    animation: scroll-partners 15s linear infinite;
-  }
-
-  .partner-card {
-    transform: translateZ(0) scale(1);
+    gap: 1.5rem;
   }
 
   .partner-logo {
-    width: auto;
-    height: 60px;
+    height: 65px;
     max-width: 120px;
-    image-rendering: auto;
-    -webkit-font-smoothing: subpixel-antialiased;
   }
 }
 
