@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -8,7 +8,7 @@ import { useInView } from 'react-intersection-observer';
  * Features:
  * - Hero video with infinite loop
  * - Text section with event description
- * - Embedded YouTube video (after story)
+ * - Embedded YouTube video (after story) with skip controls
  * - Auto-scrolling image marquee gallery
  * - Fully responsive design
  */
@@ -30,10 +30,76 @@ const marqueeImages = [
 ];
 
 const FirstChapter = () => {
+  // YouTube Player reference
+  const playerRef = useRef(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+
   // Scroll to top on component mount
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Load YouTube IFrame API
+  useEffect(() => {
+    // Load the YouTube IFrame API script
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // Initialize player when API is ready
+    window.onYouTubeIframeAPIReady = () => {
+      playerRef.current = new window.YT.Player('youtube-player', {
+        videoId: 'HxaNbvC4NhM',
+        playerVars: {
+          autoplay: 1,
+          mute: 1,
+          loop: 1,
+          playlist: 'HxaNbvC4NhM',
+          controls: 0,
+          modestbranding: 1,
+          rel: 0
+        },
+        events: {
+          onStateChange: (event) => {
+            setIsPlaying(event.data === window.YT.PlayerState.PLAYING);
+          }
+        }
+      });
+    };
+
+    // Cleanup
+    return () => {
+      window.onYouTubeIframeAPIReady = null;
+    };
+  }, []);
+
+  // Skip forward 10 seconds
+  const skipForward = () => {
+    if (playerRef.current && playerRef.current.getCurrentTime) {
+      const currentTime = playerRef.current.getCurrentTime();
+      playerRef.current.seekTo(currentTime + 10, true);
+    }
+  };
+
+  // Skip backward 10 seconds
+  const skipBackward = () => {
+    if (playerRef.current && playerRef.current.getCurrentTime) {
+      const currentTime = playerRef.current.getCurrentTime();
+      playerRef.current.seekTo(Math.max(0, currentTime - 10), true);
+    }
+  };
+
+  // Toggle play/pause
+  const togglePlayPause = () => {
+    if (playerRef.current) {
+      if (isPlaying) {
+        playerRef.current.pauseVideo();
+      } else {
+        playerRef.current.playVideo();
+      }
+    }
+  };
 
   // Intersection observer for animations
   const { ref: textRef, inView: textInView } = useInView({
@@ -252,14 +318,49 @@ const FirstChapter = () => {
           variants={fadeIn}
         >
           <div className="fc-video-wrapper">
-            <iframe
-              src="https://www.youtube.com/embed/HxaNbvC4NhM?autoplay=1&mute=1&loop=1&playlist=HxaNbvC4NhM&controls=0"
-              title="The First Chapter - After Story"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
+            <div id="youtube-player"></div>
+          </div>
+          
+          {/* Video Controls */}
+          <div className="fc-video-controls">
+            <button 
+              className="fc-video-control-btn" 
+              onClick={skipBackward}
+              aria-label="Skip back 10 seconds"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5V1L7 6L12 11V7C15.31 7 18 9.69 18 13C18 16.31 15.31 19 12 19C8.69 19 6 16.31 6 13H4C4 17.42 7.58 21 12 21C16.42 21 20 17.42 20 13C20 8.58 16.42 5 12 5Z" fill="currentColor"/>
+                <text x="9" y="14.5" fontSize="6" fill="currentColor" fontWeight="bold">10</text>
+              </svg>
+            </button>
+            
+            <button 
+              className="fc-video-control-btn fc-play-pause-btn" 
+              onClick={togglePlayPause}
+              aria-label={isPlaying ? "Pause" : "Play"}
+            >
+              {isPlaying ? (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor"/>
+                  <rect x="14" y="4" width="4" height="16" rx="1" fill="currentColor"/>
+                </svg>
+              ) : (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8 5V19L19 12L8 5Z" fill="currentColor"/>
+                </svg>
+              )}
+            </button>
+            
+            <button 
+              className="fc-video-control-btn" 
+              onClick={skipForward}
+              aria-label="Skip forward 10 seconds"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 5V1L17 6L12 11V7C8.69 7 6 9.69 6 13C6 16.31 8.69 19 12 19C15.31 19 18 16.31 18 13H20C20 17.42 16.42 21 12 21C7.58 21 4 17.42 4 13C4 8.58 7.58 5 12 5Z" fill="currentColor"/>
+                <text x="9" y="14.5" fontSize="6" fill="currentColor" fontWeight="bold">10</text>
+              </svg>
+            </button>
           </div>
         </motion.div>
       </section>
