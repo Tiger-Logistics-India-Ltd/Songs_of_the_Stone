@@ -338,19 +338,19 @@ const ContactSection = () => {
                 {/* Mobile contact image - edge to edge */}
                 <source 
                   media="(max-width: 767px)" 
-                  srcSet="public\SotS-35.jpg.jpeg" 
+                  srcSet="/SotS-35.jpg.jpeg" 
                   type="image/jpeg" 
                 />
                 
                 {/* Desktop contact image */}
                 <source 
-                  srcSet="public\SotS-35.jpg.jpeg" 
+                  srcSet="/SotS-35.jpg.jpeg" 
                   type="image/jpeg" 
                 />
                 
                 {/* Fallback */}
                 <img 
-                  src="public\SotS-35.jpg.jpeg" 
+                  src="/SotS-35.jpg.jpeg" 
                   alt="Musical Heritage and Cultural Expression" 
                   className="contact-img"
                   loading="lazy"

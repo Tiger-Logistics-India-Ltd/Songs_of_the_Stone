@@ -99,7 +99,7 @@ const HeroSection = () => {
     <section id="home" className="hero-featured">
       <video
         ref={videoRef}
-        src="public\chapter_one\Hero_first_chapter.mp4"
+        src="/chapter_one/Hero_first_chapter.mp4"
         className="hero-featured-img"
         style={{
           transform: `translateY(${scrollY * 0.5}px)`,

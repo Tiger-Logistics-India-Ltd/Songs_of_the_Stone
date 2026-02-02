@@ -100,22 +100,22 @@ const SecondChapter = () => {
     {
       id: 'Artist',
       title: '',
-      image: 'public/Chapter2/chapter 2 page/feature images section/Rakesh_chusrisia.png'
+      image: '/Chapter2/chapter 2 page/feature images section/Rakesh_chusrisia.png'
     },
     {
       id: 'music',
       title: '',
-      image: 'public/Chapter2/chapter 2 page/feature images section/second.jpeg'
+      image: '/Chapter2/chapter 2 page/feature images section/second.jpeg'
     },
     {
       id: 'performance',
       title: '',
-      image: 'public/Chapter2/chapter 2 page/feature images section/third.jpeg'
+      image: '/Chapter2/chapter 2 page/feature images section/third.jpeg'
     },
     {
       id: 'heritage',
       title: '',
-      image: 'public/Chapter2/chapter 2 page/feature images section/fourth.jpeg'
+      image: '/Chapter2/chapter 2 page/feature images section/fourth.jpeg'
     }
   ];
 
@@ -342,7 +342,7 @@ const SecondChapter = () => {
           transition={{ duration: 1 }}
         >
           <img
-            src="public\Chapter2\chapter 2 page\stage.jpeg"
+            src="/Chapter2/chapter 2 page/stage.jpeg"
             alt="Event Landscape"
             className="sc-landscape-image"
             loading="lazy"
@@ -558,19 +558,19 @@ const SecondChapter = () => {
                 {/* Mobile contact image - edge to edge */}
                 <source 
                   media="(max-width: 767px)" 
-                  srcSet="public\SotS-35.jpg.jpeg" 
+                  srcSet="/SotS-35.jpg.jpeg" 
                   type="image/jpeg" 
                 />
                 
                 {/* Desktop contact image */}
                 <source 
-                  srcSet="public\SotS-35.jpg.jpeg" 
+                  srcSet="/SotS-35.jpg.jpeg" 
                   type="image/jpeg" 
                 />
                 
                 {/* Fallback */}
                 <img 
-                  src="public\SotS-35.jpg.jpeg" 
+                  src="/SotS-35.jpg.jpeg" 
                   alt="Musical Heritage and Cultural Expression" 
                   className="contact-img"
                   loading="lazy"

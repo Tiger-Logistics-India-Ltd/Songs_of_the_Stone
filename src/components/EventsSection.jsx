@@ -128,8 +128,8 @@ const EventsSection = () => {
             >
               <img
                 className="event-video"
-                src="public\Chapter2\Event section\hero_1.jpeg"
-                alt="The Mehtab Ali Niazi Experience - Event Poster"
+                src="/Chapter2/Event section/hero_1.jpeg"
+                alt="The Rakesh Chaurasia - Event Poster"
                 loading="lazy"
               />
             </motion.div>
