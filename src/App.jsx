@@ -10,6 +10,8 @@ import Footer from './components/Footer';
 // Import pages
 import Home from './pages/Home';
 import About from './pages/About';
+import FirstChapter from './pages/FirstChapter';
+import SecondChapter from './pages/SecondChapter';
 import PrivacyPolicy from './components/Privacypolicy';
 
 /**
@@ -26,6 +28,7 @@ import PrivacyPolicy from './components/Privacypolicy';
  * Routes:
  * - / : Home page (Hero, Featured, Events, Contact)
  * - /about : About page (Inkpot & Songs of the Stone)
+ * - /first-chapter : The First Chapter event page
  */
 function App() {
   return (
@@ -35,7 +38,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/first-chapter" element={<FirstChapter />} />
+          <Route path="/second-chapter" element={<SecondChapter />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          
         </Routes>
         <Footer />
       </div>

@@ -17,17 +17,17 @@ const FeaturedSections = () => {
     {
       id: 'music',
       title: 'Cross-Over Classical',
-      image: '/2.png'
+      image: '/SotS-518 (1).jpg.jpeg'
     },
     {
       id: 'performance',
       title: 'Intimate Audience',
-      image: '/3.png'
+      image: '/feature2.jpeg'
     },
     {
       id: 'heritage',
       title: 'After Dark Experience',
-      image: '/4.png'
+      image: '/feature_4.jpeg'
     }
   ];
 

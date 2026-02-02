@@ -20,7 +20,8 @@ const PartnersSection = () => {
     { id: 6, name: 'Jaipur Rugs', desktop: '/partner/jaipurrugs.svg', mobile: '/partner/jaipurrugs.webp' },
     { id: 7, name: 'Aava', desktop: '/partner/aava.svg', mobile: '/partner/aava.webp' },
     { id: 8, name: 'Aanyna', desktop: '/partner/aanyna.svg', mobile: '/partner/aanyna.webp' },
-    { id: 9, name: 'Olaf', desktop: '/partner/olaf_svg.svg', mobile: '/partner/olaf_svg.svg' }
+    { id: 9, name: 'Olaf', desktop: '/partner/olaf_svg.svg', mobile: '/partner/olaf_svg.svg' },
+    { id: 10, name: 'Alegro', desktop: '/partner/alegro.svg', mobile: '/partner/alegro.svg' }
   ];
 
   const scrollLeft = () => {

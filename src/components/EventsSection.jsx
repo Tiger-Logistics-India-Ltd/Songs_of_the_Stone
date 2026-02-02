@@ -1,10 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { Link } from 'react-router-dom';
+
 
 /**
  * Events Section Component
- * 
  * Features:
  * - Event showcase with image and details
  * - Interactive elements and hover effects
@@ -34,6 +35,7 @@ const EventsSection = () => {
       });
     }
   };
+
 
   /**
    * Animation variants for the events content
@@ -88,11 +90,11 @@ const EventsSection = () => {
           <div className="events-grid">
             {/* Event Details Section */}
             <div className="event-details">
-              <div className="event-category">The First Chapter</div>
+              <div className="event-category">The Second Chapter</div>
               
-              <h2 className="event-title">The Mehtab Ali Niazi Experience</h2>
+              <h2 className="event-title">Live the Legacy</h2>
               
-              <h3 className="event-subtitle">A Classical Rhapsody</h3>
+              <h3 className="event-subtitle">Rakesh Chaurasia & Friends</h3>
               
               
                
@@ -101,7 +103,7 @@ const EventsSection = () => {
               <div className="event-date-time">
                 
                 <span className="event-date">
-                                13<sup>th</sup> December 2025<br />
+                                8<sup>th</sup> March 2026<br />
                               </span>
                 <span className="event-time" style={{marginTop: '-4px', display: 'inline-block'}}>
                   <span className="time-icon" aria-hidden="true"></span> 7pm Onwards
@@ -126,7 +128,7 @@ const EventsSection = () => {
             >
               <img
                 className="event-video"
-                src="/ultra_new_event_image.png"
+                src="public\Chapter2\Event section\hero_1.jpeg"
                 alt="The Mehtab Ali Niazi Experience - Event Poster"
                 loading="lazy"
               />
@@ -140,7 +142,7 @@ const EventsSection = () => {
                   onClick={handleEventRegistration}
                   aria-label="Reserve your spot for The Mehtab Ali Niazi Experience"
                 >
-                  Reserve Your Experience
+                  Book Your Tickets Now
                 </button>
               </div>
             </div>

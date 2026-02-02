@@ -99,7 +99,7 @@ const HeroSection = () => {
     <section id="home" className="hero-featured">
       <video
         ref={videoRef}
-        src="/new_hero_video.mp4"
+        src="public\chapter_one\Hero_first_chapter.mp4"
         className="hero-featured-img"
         style={{
           transform: `translateY(${scrollY * 0.5}px)`,
@@ -117,8 +117,8 @@ const HeroSection = () => {
         x-webkit-airplay="true"
       />
       <div className="hero-text-overlay">
-        <h1 className="hero-chapter-text">THE FIRST CHAPTER</h1>
-        <p className="hero-date-text">13-12-2025</p>
+        <h1 className="hero-chapter-text">THE SECOND CHAPTER</h1>
+        <p className="hero-date-text">07-03-2026</p>
         <a 
           href="https://www.district.in/events/songs-of-the-stone-after-dark-musical-experience-qutub-minar-mehtab-ali-niazi-dec13-2025-buy-tickets" 
           target="_blank" 

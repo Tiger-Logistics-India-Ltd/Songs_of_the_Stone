@@ -24,8 +24,8 @@ const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   
-  // Check if current page is landing page (home)
-  const isLandingPage = location.pathname === '/';
+  // Check if current page should have transparent navbar (home or first-chapter or second-chapter)
+  const isTransparentPage = location.pathname === '/' || location.pathname === '/first-chapter' || location.pathname === '/second-chapter';
   
   /**
    * Effect to handle scroll position changes using custom hook
@@ -74,7 +74,7 @@ const Navigation = () => {
   };
 
   return (
-    <nav className={`navbar ${scrolled || !isLandingPage ? 'scrolled' : ''} ${!isLandingPage ? 'static-nav' : ''}`}>
+    <nav className={`navbar ${scrolled || !isTransparentPage ? 'scrolled' : ''} ${!isTransparentPage ? 'static-nav' : ''}`}>
       <div className="nav-container">
         {/* Logo Section */}
         <div className="nav-logo">
@@ -87,7 +87,28 @@ const Navigation = () => {
         <div className="nav-menu">
           <Link to="/" className="nav-link">Home</Link>
           <Link to="/about" className="nav-link">About</Link>
-          <Link to="/#events" className="nav-link" onClick={(e) => { if (location.pathname === '/') scrollToSection('events', e); }}>Events</Link>
+          
+          {/* Experiences Dropdown */}
+          <div className="nav-dropdown">
+            <span className="nav-link nav-dropdown-trigger">
+              Experiences 
+              <svg className="dropdown-arrow-svg" width="10" height="6" viewBox="0 0 10 6" fill="none">
+                <path d="M1 1L5 5L9 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
+            <ul className="nav-dropdown-menu">
+              <li>
+                <span>
+                  <Link to="/second-chapter" className="dropdown-item">Second Chapter</Link>
+                </span>
+              </li>
+              <li>
+                <Link to="/first-chapter" className="dropdown-item">First Chapter</Link>
+              </li>
+            
+            </ul>
+          </div>
+          
           <Link to="/#contact" className="nav-link" onClick={(e) => { if (location.pathname === '/') scrollToSection('contact', e); }}>Contact</Link>
         </div>
 
@@ -115,7 +136,9 @@ const Navigation = () => {
         <div className="mobile-menu-inner">
           <Link to="/" onClick={closeMobile}>Home</Link>
           <Link to="/about" onClick={closeMobile}>About</Link>
-          <Link to="/#events" onClick={(e) => { if (location.pathname === '/') handleNavClick('events', e); else closeMobile(); }}>Events</Link>
+          <span className="mobile-menu-label">Experiences</span>
+          <Link to="/second-chapter" onClick={closeMobile} className="mobile-submenu-item">Second Chapter</Link>
+          <Link to="/first-chapter" onClick={closeMobile} className="mobile-submenu-item">First Chapter</Link>
           <Link to="/#contact" onClick={(e) => { if (location.pathname === '/') handleNavClick('contact', e); else closeMobile(); }}>Contact</Link>
         </div>
       </div>
