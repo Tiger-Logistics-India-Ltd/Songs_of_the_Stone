@@ -276,7 +276,7 @@ const SecondChapter = () => {
         />
         <div className="hero-text-overlay">
           <h1 className="hero-chapter-text">THE SECOND CHAPTER</h1>
-          <p className="hero-date-text">07-03-2026</p>
+          <p className="hero-date-text">08-03-2026</p>
           <a 
             href="https://www.district.in/events/songs-of-the-stone-after-dark-musical-experience-qutub-minar-mehtab-ali-niazi-dec13-2025-buy-tickets" 
             target="_blank" 
@@ -342,9 +342,9 @@ const SecondChapter = () => {
           transition={{ duration: 1 }}
         >
           <img
-            src="/Chapter2/chapter 2 page/stage.jpeg"
+            src="/Chapter2/chapter 2 page/SOTS_Website (1).png"
             alt="Event Landscape"
-            className="sc-landscape-image"
+            className="sc-landscape-image sc-no-crop"
             loading="lazy"
           />
         </motion.div>

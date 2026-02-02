@@ -4947,6 +4947,12 @@ body:not(.landing-page) .about {
   object-position: center;
 }
 
+/* No-crop variant - shows full image without cropping */
+.sc-landscape-image.sc-no-crop {
+  height: auto;
+  object-fit: contain;
+}
+
 /* Responsive adjustments for landscape banner */
 @media (max-width: 768px) {
   .sc-landscape-section {
@@ -4957,11 +4963,20 @@ body:not(.landing-page) .about {
     height: 200px;
     object-fit: cover;
   }
+  
+  .sc-landscape-image.sc-no-crop {
+    height: auto;
+    object-fit: contain;
+  }
 }
 
 @media (max-width: 480px) {
   .sc-landscape-image {
     height: 150px;
+  }
+  
+  .sc-landscape-image.sc-no-crop {
+    height: auto;
   }
 }
 
