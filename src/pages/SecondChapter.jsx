@@ -440,147 +440,120 @@ const SecondChapter = () => {
       </section>
 
       {/* ========== 5. RESERVE YOUR EXPERIENCE (CONTACT SECTION) ========== */}
-      <section id="sc-contact" className="contact" ref={contactRef}>
-        <div className="container">
-        <motion.div 
-          className="contact-content"
-          initial="hidden"
-          animate={contactInView ? "visible" : "hidden"}
-          variants={contentVariants}
-        >
-          <div className="contact-grid">
-            {/* Contact Text and Form Section */}
-            <div className="contact-text-section">
-              <div className="contact-header">
-                <div className="contact-tagline">Connect With Heritage</div>
-                
-                <h2 className="contact-title">Contact Us
-                </h2>
-                
-                <p className="contact-description">
-                  We're so glad you found us. Songs of The Stone is an experience for those seeking meaning, connection, and beauty -- in art, in stories, and in each other.
+      <section id="sc-contact" className="sc-contact-section" ref={contactRef}>
+        <div className="sc-contact-wrapper">
+          {/* Left Side - Text and Form */}
+          <motion.div 
+            className="sc-contact-left"
+            initial="hidden"
+            animate={contactInView ? "visible" : "hidden"}
+            variants={contentVariants}
+          >
+            <h2 className="sc-contact-title">CONTACT US</h2>
+            
+            <p className="sc-contact-description">
+              We're so glad you found us. Songs of The Stone is an experience for those seeking meaning, connection, and beauty — in art, in stories, and in each other.
+            </p>
+            <p className="sc-contact-description">
+              Please fill out the form below to reserve your seat. Our team will connect with you to guide you through the next steps.
+            </p>
 
-                  Please fill out the form below to reserve your seat for our First Chapter - The Mehtab Ali Niazi Experience at Qutub Minar. Our team will connect with you to guide you through the next steps.
+            {/* Contact Form */}
+            <form className="sc-contact-form" onSubmit={handleSubmit}>
+              <div className="sc-form-field">
+                <input 
+                  type="text" 
+                  name="name"
+                  placeholder="Name" 
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  className={formErrors.name ? 'error' : ''}
+                  disabled={formStatus === 'submitting'}
+                />
+                {formErrors.name && <span className="sc-error-message">{formErrors.name}</span>}
+              </div>
 
-                </p>
+              <div className="sc-form-field">
+                <input 
+                  type="email" 
+                  name="email"
+                  placeholder="Email" 
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className={formErrors.email ? 'error' : ''}
+                  disabled={formStatus === 'submitting'}
+                />
+                {formErrors.email && <span className="sc-error-message">{formErrors.email}</span>}
+              </div>
+
+              <div className="sc-form-field">
+                <input 
+                  type="tel" 
+                  name="phone"
+                  placeholder="Phone Number" 
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                  className={formErrors.phone ? 'error' : ''}
+                  disabled={formStatus === 'submitting'}
+                />
+                {formErrors.phone && <span className="sc-error-message">{formErrors.phone}</span>}
               </div>
               
-              {/* Contact Form */}
-              <div className="contact-form-wrapper">
-                <form className="contact-form" onSubmit={handleSubmit}>
-                  {/* Name Field */}
-                  <div className="form-field">
-                    <input 
-                      type="text" 
-                      name="name"
-                      placeholder="Name" 
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      className={formErrors.name ? 'error' : ''}
-                      disabled={formStatus === 'submitting'}
-                    />
-                    {formErrors.name && <span className="error-message">{formErrors.name}</span>}
-                  </div>
-
-                  {/* Email Field (single full width) */}
-                  <div className="form-field full-width-input">
-                    <input 
-                      type="email" 
-                      name="email"
-                      placeholder="Email" 
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      className={formErrors.email ? 'error' : ''}
-                      disabled={formStatus === 'submitting'}
-                    />
-                    {formErrors.email && <span className="error-message">{formErrors.email}</span>}
-                  </div>
-
-                  {/* Phone Field now full width and with clearer placeholder */}
-                  <div className="form-field full-width-input">
-                    <input 
-                      type="tel" 
-                      name="phone"
-                      placeholder="Phone Number" 
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      className={formErrors.phone ? 'error' : ''}
-                      disabled={formStatus === 'submitting'}
-                    />
-                    {formErrors.phone && <span className="error-message">{formErrors.phone}</span>}
-                  </div>
-                  
-                  {/* Message Field */}
-                  <div className="form-field">
-                    <textarea 
-                      name="message"
-                      placeholder="We'd love to get to know you. What draws you to this world of culture and what do you do in your own life or work?"
-                      rows="4"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      className={formErrors.message ? 'error' : ''}
-                      disabled={formStatus === 'submitting'}
-                    ></textarea>
-                    {formErrors.message && <span className="error-message">{formErrors.message}</span>}
-                  </div>
-                  
-                  {/* Submit Button */}
-                  <button 
-                    type="submit" 
-                    className={`submit-btn ${formStatus}`}
-                    disabled={formStatus === 'submitting'}
-                  >
-                    {formStatus === 'submitting' && 'Connecting...'}
-                    {formStatus === 'success' && 'Message Sent!'}
-                    {formStatus === 'error' && 'Try Again'}
-                    {formStatus === 'idle' && 'Submit'}
-                  </button>
-                  
-                  {/* Status Messages */}
-                  {formStatus === 'success' && (
-                    <div className="form-success">
-                      Thank you for your interest! We'll be in touch soon.
-                    </div>
-                  )}
-                  
-                  {formStatus === 'error' && (
-                    <div className="form-error">
-                      Something went wrong. Please try again later.
-                    </div>
-                  )}
-                </form>
+              <div className="sc-form-field">
+                <textarea 
+                  name="message"
+                  placeholder="Tell us about yourself..."
+                  rows="4"
+                  value={formData.message}
+                  onChange={handleInputChange}
+                  className={formErrors.message ? 'error' : ''}
+                  disabled={formStatus === 'submitting'}
+                ></textarea>
+                {formErrors.message && <span className="sc-error-message">{formErrors.message}</span>}
               </div>
-            </div>
+              
+              <button 
+                type="submit" 
+                className={`sc-submit-btn ${formStatus}`}
+                disabled={formStatus === 'submitting'}
+              >
+                {formStatus === 'submitting' && 'Sending...'}
+                {formStatus === 'success' && 'Sent!'}
+                {formStatus === 'error' && 'Try Again'}
+                {formStatus === 'idle' && 'SUBMIT'}
+              </button>
+              
+              {formStatus === 'success' && (
+                <div className="sc-form-success">
+                  Thank you! We'll be in touch soon.
+                </div>
+              )}
+              
+              {formStatus === 'error' && (
+                <div className="sc-form-error">
+                  Something went wrong. Please try again.
+                </div>
+              )}
+            </form>
+          </motion.div>
 
-            {/* Contact Image Section - Clean slate approach matching About section exactly */}
-            <div className="contact-image">
-              <picture>
-                {/* Mobile contact image - edge to edge */}
-                <source 
-                  media="(max-width: 767px)" 
-                  srcSet="/SotS-35.jpg.jpeg" 
-                  type="image/jpeg" 
-                />
-                
-                {/* Desktop contact image */}
-                <source 
-                  srcSet="/SotS-35.jpg.jpeg" 
-                  type="image/jpeg" 
-                />
-                
-                {/* Fallback */}
-                <img 
-                  src="/SotS-35.jpg.jpeg" 
-                  alt="Musical Heritage and Cultural Expression" 
-                  className="contact-img"
-                  loading="lazy"
-                />
-              </picture>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    </section>
+          {/* Right Side - Image with colored background */}
+          <motion.div 
+            className="sc-contact-right"
+            initial={{ opacity: 0, x: 50 }}
+            animate={contactInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <div className="sc-contact-image-bg"></div>
+            <img 
+              src="/SotS-35.jpg.jpeg" 
+              alt="Musical Heritage and Cultural Expression" 
+              className="sc-contact-image"
+              loading="lazy"
+            />
+          </motion.div>
+        </div>
+      </section>
 
       {/* Success Popup */}
       <AnimatePresence mode="wait">
