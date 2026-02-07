@@ -11,7 +11,6 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import FirstChapter from './pages/FirstChapter';
-import SecondChapter from './pages/SecondChapter';
 import PrivacyPolicy from './components/Privacypolicy';
 
 /**
@@ -39,7 +38,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/first-chapter" element={<FirstChapter />} />
-          <Route path="/second-chapter" element={<SecondChapter />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           
         </Routes>
