@@ -332,30 +332,16 @@ const ContactSection = () => {
               </div>
             </div>
 
-            {/* Contact Image Section - Clean slate approach matching About section exactly */}
+            {/* Contact Image Section - Optimized loading */}
             <div className="contact-image">
-              <picture>
-                {/* Mobile contact image - edge to edge */}
-                <source 
-                  media="(max-width: 767px)" 
-                  srcSet="/SotS-35.jpg.jpeg" 
-                  type="image/jpeg" 
-                />
-                
-                {/* Desktop contact image */}
-                <source 
-                  srcSet="/SotS-35.jpg.jpeg" 
-                  type="image/jpeg" 
-                />
-                
-                {/* Fallback */}
-                <img 
-                  src="/SotS-35.jpg.jpeg" 
-                  alt="Musical Heritage and Cultural Expression" 
-                  className="contact-img"
-                  loading="lazy"
-                />
-              </picture>
+              <img 
+                src="/Contactus.webp" 
+                alt="Musical Heritage and Cultural Expression" 
+                className="contact-img"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+              />
             </div>
           </div>
         </motion.div>

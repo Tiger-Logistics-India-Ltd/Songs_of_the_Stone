@@ -118,16 +118,19 @@ const HeroSection = () => {
       />
       <div className="hero-text-overlay">
         <h1 className="hero-chapter-text">THE SECOND CHAPTER</h1>
-        <p className="hero-date-text">07-03-2026</p>
-        <a 
-          href="https://www.district.in/events/songs-of-the-stone-after-dark-musical-experience-qutub-minar-mehtab-ali-niazi-dec13-2025-buy-tickets" 
-          target="_blank" 
-          rel="noopener noreferrer"
+        <p className="hero-date-text">08-03-2025</p>
+        <button 
+          onClick={() => {
+            const contactSection = document.getElementById('contact');
+            if (contactSection) {
+              contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }}
           className="hero-ticket-button"
         >
-          <span className="button-text">Book Your Ticket</span>
+          <span className="button-text">Reserve Your Experience</span>
           <span className="button-arrow">→</span>
-        </a>
+        </button>
       </div>
     </section>
   );

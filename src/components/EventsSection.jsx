@@ -94,30 +94,26 @@ const EventsSection = () => {
               
               <h2 className="event-title">Live the Legacy</h2>
               
-              <h3 className="event-subtitle">Rakesh Chaurasia & Friends</h3>
-              
-              
-               
-                
+              <h3 className="event-subtitle">Rakesh Chaurasia & Friends (RAF) | The Legend Ensemble</h3>
               
               <div className="event-date-time">
-                
                 <span className="event-date">
-                                8<sup>th</sup> March 2026<br />
-                              </span>
+                  8<sup>th</sup> March 2025<br />
+                </span>
                 <span className="event-time" style={{marginTop: '-4px', display: 'inline-block'}}>
                   <span className="time-icon" aria-hidden="true"></span> 7pm Onwards
                 </span>
-              <div className="event-location"><span className="event-location-text">Qutub Minar, Delhi</span></div>
-                
-                  
+                <div className="event-location"><span className="event-location-text">Qutub Minar, Delhi</span></div>
               </div>
               
               <p className="event-description">
-                Join us for a spellbinding musical evening with Mehtab Ali Niazi and his ensemble, where the classical meets the contemporary, and tradition finds new rhythm.
+                Songs of the Stone by Inkpot India and HSBC 'Live the Legacy' presents an immersive musical experience at the Qutub Minar. The evening features two-time Grammy Award–winning flautist Rakesh Chaurasia, accompanied by Gino Banks, Satyajit Talwalkar, Sheldon D'Silva, Sanjoy Das and Sangeet Haldipur — a collective of some of India's finest contemporary classical musicians.
               </p>
               <p className="event-description">
-                His semi-classical fusion — weaving raga with elements of jazz and modern soundscapes — creates an experience both timeless and alive, set against the breathtaking backdrop of the Qutub Minar, a UNESCO World Heritage Site.
+                Curated for a discerning community of art and heritage connoisseurs, the experience invites guests to witness India's legacy in a rare light. As dusk yields to night, the monument's illuminated silhouette becomes both stage and muse, while the serenity of the bansuri and the ensemble's virtuosity create a confluence of sound, history and architectural splendour.
+              </p>
+              <p className="event-description">
+                Songs of the Stone evokes a deeper, more intimate engagement with heritage — a quiet, contemplative and unforgettable night where music breathes life into stone, and the Qutub Minar reveals itself anew.
               </p>
             </div>
 
@@ -128,7 +124,7 @@ const EventsSection = () => {
             >
               <img
                 className="event-video"
-                src="/Chapter2/Event section/hero_1.jpeg"
+                src="/Chapter2/Event section/hero banner.png"
                 alt="The Rakesh Chaurasia - Event Poster"
                 loading="lazy"
               />
@@ -140,9 +136,9 @@ const EventsSection = () => {
                 <button
                   className="event-btn"
                   onClick={handleEventRegistration}
-                  aria-label="Reserve your spot for The Mehtab Ali Niazi Experience"
+                  aria-label="Reserve your spot for The Rakesh Chaurasia Experience"
                 >
-                  Book Your Tickets Now
+                  Reserve Your Experience
                 </button>
               </div>
             </div>
