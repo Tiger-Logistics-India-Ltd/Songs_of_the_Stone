@@ -97,7 +97,12 @@ const Navigation = () => {
               </svg>
             </span>
             <ul className="nav-dropdown-menu">
-            
+              <li>
+                <span className="dropdown-item" style={{cursor: 'default', opacity: 0.85}}>Second Chapter</span>
+              </li>
+              <li>
+                <span className="dropdown-item" style={{cursor: 'default', opacity: 0.85}}>First Chapter</span>
+              </li>
             </ul>
           </div>
           
@@ -129,6 +134,8 @@ const Navigation = () => {
           <Link to="/" onClick={closeMobile}>Home</Link>
           <Link to="/about" onClick={closeMobile}>About</Link>
           <span className="mobile-menu-label">Experiences</span>
+          <span onClick={closeMobile} className="mobile-submenu-item" style={{cursor: 'default', opacity: 0.85}}>Second Chapter</span>
+          <span onClick={closeMobile} className="mobile-submenu-item" style={{cursor: 'default', opacity: 0.85}}>First Chapter</span>
           <Link to="/#contact" onClick={(e) => { if (location.pathname === '/') handleNavClick('contact', e); else closeMobile(); }}>Contact</Link>
         </div>
       </div>
