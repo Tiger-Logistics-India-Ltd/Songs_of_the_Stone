@@ -17,7 +17,7 @@ const FeaturedSections = () => {
     {
       id: 'music',
       title: 'Cross-Over Classical',
-      image: '/SotS-518 (1).jpg.jpeg'
+      image: '/feature_2.webp'
     },
     {
       id: 'performance',
