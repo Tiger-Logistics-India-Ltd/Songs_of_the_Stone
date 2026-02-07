@@ -97,9 +97,6 @@ const Navigation = () => {
               </svg>
             </span>
             <ul className="nav-dropdown-menu">
-              <li>
-                <Link to="/first-chapter" className="dropdown-item">First Chapter</Link>
-              </li>
             
             </ul>
           </div>
@@ -132,7 +129,6 @@ const Navigation = () => {
           <Link to="/" onClick={closeMobile}>Home</Link>
           <Link to="/about" onClick={closeMobile}>About</Link>
           <span className="mobile-menu-label">Experiences</span>
-          <Link to="/first-chapter" onClick={closeMobile} className="mobile-submenu-item">First Chapter</Link>
           <Link to="/#contact" onClick={(e) => { if (location.pathname === '/') handleNavClick('contact', e); else closeMobile(); }}>Contact</Link>
         </div>
       </div>

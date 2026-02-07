@@ -10,7 +10,6 @@ import Footer from './components/Footer';
 // Import pages
 import Home from './pages/Home';
 import About from './pages/About';
-import FirstChapter from './pages/FirstChapter';
 import PrivacyPolicy from './components/Privacypolicy';
 
 /**
@@ -37,7 +36,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/first-chapter" element={<FirstChapter />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           
         </Routes>
