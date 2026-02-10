@@ -112,8 +112,30 @@ const ContactSection = () => {
   };
 
   /**
+   * Save form data to Google Sheets
+   * Replace YOUR_GOOGLE_SCRIPT_URL with your deployed Apps Script URL
+   */
+  const saveToGoogleSheets = async (data) => {
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwN0R_oSrA2kZH1ZFgEid5S7j7nHmGRSYdi7MeVLLDoJ4I1pJHyiPW2NRnYSC5-uhzF/exec'; 
+    
+    try {
+      await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+    } catch (error) {
+      console.error('Google Sheets Error:', error);
+      // Don't fail the form submission if Google Sheets fails
+    }
+  };
+
+  /**
    * Handle form submission
-   * Validates data and sends email using EmailJS
+   * Validates data and sends email using EmailJS + saves to Google Sheets
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -140,8 +162,11 @@ const ContactSection = () => {
         to_name: 'Songs of the Stone Team'
       };
       
-      // Send email using EmailJS
-      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+      // Send email using EmailJS and save to Google Sheets in parallel
+      await Promise.all([
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY),
+        saveToGoogleSheets(formData)
+      ]);
       
       setFormStatus('success');
       setFormData({ name: '', email: '', phone: '', message: '' });
