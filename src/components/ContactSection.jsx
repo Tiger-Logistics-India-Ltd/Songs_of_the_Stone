@@ -113,19 +113,22 @@ const ContactSection = () => {
 
   /**
    * Save form data to Google Sheets
-   * Replace YOUR_GOOGLE_SCRIPT_URL with your deployed Apps Script URL
+   * Uses form data approach for better CORS compatibility
    */
   const saveToGoogleSheets = async (data) => {
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwN0R_oSrA2kZH1ZFgEid5S7j7nHmGRSYdi7MeVLLDoJ4I1pJHyiPW2NRnYSC5-uhzF/exec'; 
     
     try {
+      // Use FormData for better CORS compatibility with Google Apps Script
+      const formData = new FormData();
+      formData.append('name', data.name);
+      formData.append('email', data.email);
+      formData.append('phone', data.phone);
+      formData.append('message', data.message);
+      
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+        body: formData,
       });
     } catch (error) {
       console.error('Google Sheets Error:', error);
