@@ -116,7 +116,7 @@ const ContactSection = () => {
    * Uses form data approach for better CORS compatibility
    */
   const saveToGoogleSheets = async (data) => {
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwN0R_oSrA2kZH1ZFgEid5S7j7nHmGRSYdi7MeVLLDoJ4I1pJHyiPW2NRnYSC5-uhzF/exec'; 
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzwGA3AYlRmdXU7q0iiGuDUQoaCem3XSAMyJyiGwJmahbBwHmOb_5wGaESs7dPfPCwGRw/exec'; 
     
     try {
       // Use FormData for better CORS compatibility with Google Apps Script
