@@ -98,10 +98,10 @@ const Navigation = () => {
             </span>
             <ul className="nav-dropdown-menu">
               <li>
-                <span className="dropdown-item" style={{ cursor: 'default', opacity: 0.6 }}>Second Chapter</span>
+                <Link className="dropdown-item" style={{ cursor: 'default', opacity: 1 }}>Second Chapter</Link>
               </li>
               <li>
-                <span className="dropdown-item" style={{ cursor: 'default', opacity: 0.6 }}>First Chapter</span>
+                <Link className="dropdown-item" style={{ cursor: 'default', opacity: 1 }}>First Chapter</Link>
               </li>
             </ul>
           </div>
