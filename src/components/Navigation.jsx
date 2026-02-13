@@ -88,8 +88,8 @@ const Navigation = () => {
           <Link to="/" className="nav-link">Home</Link>
           <Link to="/about" className="nav-link">About</Link>
           
-          {/* Experiences Dropdown - temporarily hidden */}
-          {/* <div className="nav-dropdown">
+          {/* Experiences Dropdown - visible but not clickable */}
+          <div className="nav-dropdown">
             <span className="nav-link nav-dropdown-trigger">
               Experiences 
               <svg className="dropdown-arrow-svg" width="10" height="6" viewBox="0 0 10 6" fill="none">
@@ -98,13 +98,13 @@ const Navigation = () => {
             </span>
             <ul className="nav-dropdown-menu">
               <li>
-                <Link to="/second-chapter" className="dropdown-item">Second Chapter</Link>
+                <span className="dropdown-item" style={{ cursor: 'default', opacity: 0.6 }}>Second Chapter</span>
               </li>
               <li>
-                <Link to="/first-chapter" className="dropdown-item">First Chapter</Link>
+                <span className="dropdown-item" style={{ cursor: 'default', opacity: 0.6 }}>First Chapter</span>
               </li>
             </ul>
-          </div> */}
+          </div>
           
           <Link to="/#contact" className="nav-link" onClick={(e) => { if (location.pathname === '/') scrollToSection('contact', e); }}>Contact</Link>
         </div>
@@ -133,9 +133,9 @@ const Navigation = () => {
         <div className="mobile-menu-inner">
           <Link to="/" onClick={closeMobile}>Home</Link>
           <Link to="/about" onClick={closeMobile}>About</Link>
-          {/* <span className="mobile-menu-label">Experiences</span>
-          <Link to="/second-chapter" onClick={closeMobile} className="mobile-submenu-item">Second Chapter</Link>
-          <Link to="/first-chapter" onClick={closeMobile} className="mobile-submenu-item">First Chapter</Link> */}
+          <span className="mobile-menu-label">Experiences</span>
+          <span className="mobile-submenu-item" style={{ cursor: 'default', opacity: 0.6 }}>Second Chapter</span>
+          <span className="mobile-submenu-item" style={{ cursor: 'default', opacity: 0.6 }}>First Chapter</span>
           <Link to="/#contact" onClick={(e) => { if (location.pathname === '/') handleNavClick('contact', e); else closeMobile(); }}>Contact</Link>
         </div>
       </div>
