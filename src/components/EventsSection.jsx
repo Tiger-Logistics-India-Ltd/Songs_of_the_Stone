@@ -110,11 +110,9 @@ const EventsSection = () => {
                 Songs of the Stone by Inkpot India and HSBC 'Live the Legacy' presents an immersive musical experience at the Qutub Minar. The evening features two-time Grammy Award–winning flautist Rakesh Chaurasia, accompanied by Gino Banks, Satyajit Talwalkar, Sheldon D'Silva, Sanjoy Das and Sangeet Haldipur — a collective of some of India's finest contemporary classical musicians.
               </p>
               <p className="event-description">
-                Curated for a discerning community of art and heritage connoisseurs, the experience invites guests to witness India's legacy in a rare light. As dusk yields to night, the monument's illuminated silhouette becomes both stage and muse, while the serenity of the bansuri and the ensemble's virtuosity create a confluence of sound, history and architectural splendour.
+                 As dusk yields to night, the monument's illuminated silhouette becomes both stage and muse, while the serenity of the bansuri and the ensemble's virtuosity create a confluence of sound, history and architectural splendour.
               </p>
-              <p className="event-description">
-                Songs of the Stone evokes a deeper, more intimate engagement with heritage — a quiet, contemplative and unforgettable night where music breathes life into stone, and the Qutub Minar reveals itself anew.
-              </p>
+              
             </div>
 
             {/* Event Image Section - Portrait mode image */}
