@@ -364,7 +364,7 @@ const ContactSection = () => {
             {/* Contact Image Section - Optimized loading */}
             <div className="contact-image">
               <img 
-                src="/Contactus.webp" 
+                src="/contact_real.webp" 
                 alt="Musical Heritage and Cultural Expression" 
                 className="contact-img"
                 loading="eager"

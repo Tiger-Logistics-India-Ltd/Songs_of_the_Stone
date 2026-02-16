@@ -23,6 +23,7 @@ const Navigation = () => {
   // State to track if the user has scrolled past a certain point
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileExpOpen, setMobileExpOpen] = useState(false);
   
   // Check if current page should have transparent navbar (home or first-chapter or second-chapter)
   const isTransparentPage = location.pathname === '/' || location.pathname === '/first-chapter' || location.pathname === '/second-chapter';
@@ -98,10 +99,12 @@ const Navigation = () => {
             </span>
             <ul className="nav-dropdown-menu">
               <li>
-                <Link className="dropdown-item" style={{ cursor: 'default', opacity: 1 }}>Second Chapter</Link>
+                {/* Second Chapter - Coming Soon */}
+                <span className="dropdown-item disabled">Second Chapter <span className="coming-soon-badge">Coming Soon</span></span>
               </li>
               <li>
-                <Link className="dropdown-item" style={{ cursor: 'default', opacity: 1 }}>First Chapter</Link>
+                {/* First Chapter - Coming Soon */}
+                <span className="dropdown-item disabled">First Chapter <span className="coming-soon-badge">Coming Soon</span></span>
               </li>
             </ul>
           </div>
@@ -133,9 +136,30 @@ const Navigation = () => {
         <div className="mobile-menu-inner">
           <Link to="/" onClick={closeMobile}>Home</Link>
           <Link to="/about" onClick={closeMobile}>About</Link>
-          <span className="mobile-menu-label">Experiences</span>
-          <span className="mobile-submenu-item" style={{ cursor: 'default', opacity: 0.6 }}>Second Chapter</span>
-          <span className="mobile-submenu-item" style={{ cursor: 'default', opacity: 0.6 }}>First Chapter</span>
+          
+          {/* Mobile Experiences Dropdown */}
+          <div className="mobile-dropdown">
+            <button 
+              className={`mobile-dropdown-trigger ${mobileExpOpen ? 'open' : ''}`} 
+              onClick={() => setMobileExpOpen(o => !o)}
+            >
+              Experiences
+              <svg className="mobile-dropdown-arrow" width="12" height="7" viewBox="0 0 12 7" fill="none">
+                <path d="M1 1L6 6L11 1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+            <div className={`mobile-dropdown-items ${mobileExpOpen ? 'open' : ''}`}>
+              {/* Second Chapter - Coming Soon */}
+              <span className="mobile-submenu-item disabled">
+                Second Chapter <span className="coming-soon-badge-mobile">Coming Soon</span>
+              </span>
+              {/* First Chapter - Coming Soon */}
+              <span className="mobile-submenu-item disabled">
+                First Chapter <span className="coming-soon-badge-mobile">Coming Soon</span>
+              </span>
+            </div>
+          </div>
+
           <Link to="/#contact" onClick={(e) => { if (location.pathname === '/') handleNavClick('contact', e); else closeMobile(); }}>Contact</Link>
         </div>
       </div>

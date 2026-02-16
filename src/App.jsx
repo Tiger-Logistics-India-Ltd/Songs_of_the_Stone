@@ -38,8 +38,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/first-chapter" element={<FirstChapter />} />
-          <Route path="/second-chapter" element={<SecondChapter />} />
+          {/* Chapter pages - temporarily disabled, will re-enable when ready */}
+          {/* <Route path="/first-chapter" element={<FirstChapter />} /> */}
+          {/* <Route path="/second-chapter" element={<SecondChapter />} /> */}
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           
         </Routes>

@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import emailjs from '@emailjs/browser';
 import { EMAILJS_CONFIG } from '../config/emailjs';
+import PartnersSection from '../components/PartnersSection';
 
 /**
  * First Chapter Event Page
@@ -505,14 +506,8 @@ const FirstChapter = () => {
         </motion.div>
       </section>
 
-      {/* Opening Text — featured-heading style (same as Home page) */}
-      <section className="featured-category-section">
-        <div className="featured-heading">
-          <h3 className="featured-subtitle">IN DIALOGUE WITH TIME</h3>
-          <h2 className="featured-title">Art. Architecture. Performance.</h2>
-          <p className="featured-description">Songs of the Stone is Inkpot's journey into art, heritage, and the spaces between.</p>
-        </div>
-      </section>
+      {/* Partners Section */}
+      <PartnersSection />
 
       {/* ========== CONTACT SECTION (exact copy from SecondChapter) ========== */}
       <section id="sc-contact" className="sc-contact-section" ref={contactRef}>
