@@ -100,11 +100,11 @@ const Navigation = () => {
             <ul className="nav-dropdown-menu">
               <li>
                 {/* Second Chapter - Coming Soon */}
-                <span className="dropdown-item disabled">Second Chapter <span className="coming-soon-badge">Coming Soon</span></span>
+                <span className="dropdown-item">Second Chapter </span>
               </li>
               <li>
                 {/* First Chapter - Coming Soon */}
-                <span className="dropdown-item disabled">First Chapter <span className="coming-soon-badge">Coming Soon</span></span>
+                <span className="dropdown-item">First Chapter </span>
               </li>
             </ul>
           </div>
@@ -151,11 +151,11 @@ const Navigation = () => {
             <div className={`mobile-dropdown-items ${mobileExpOpen ? 'open' : ''}`}>
               {/* Second Chapter - Coming Soon */}
               <span className="mobile-submenu-item disabled">
-                Second Chapter <span className="coming-soon-badge-mobile">Coming Soon</span>
+                Second Chapter 
               </span>
               {/* First Chapter - Coming Soon */}
               <span className="mobile-submenu-item disabled">
-                First Chapter <span className="coming-soon-badge-mobile">Coming Soon</span>
+                First Chapter 
               </span>
             </div>
           </div>
