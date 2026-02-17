@@ -131,13 +131,15 @@ const EventsSection = () => {
             {/* Call to Action Buttons - Separate section for flexible positioning */}
             <div className="event-cta-section">
               <div className="event-cta">
-                <button
+                <a
+                  href="https://www.district.in/events/songs-of-the-stone-rakesh-chaurasia-at-qutub-minar-mar8-2026-buy-tickets"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="event-btn"
-                  onClick={handleEventRegistration}
                   aria-label="Reserve your spot for The Rakesh Chaurasia Experience"
                 >
                   Reserve Your Experience
-                </button>
+                </a>
               </div>
             </div>
           </div>

@@ -17,7 +17,7 @@ const FeaturedSections = () => {
     {
       id: 'music',
       title: 'Cross-Over Classical',
-      image: '/feature_2.webp'
+      image: '/Rakesh_chusrisia.png'
     },
     {
       id: 'performance',
@@ -27,7 +27,7 @@ const FeaturedSections = () => {
     {
       id: 'heritage',
       title: 'After Dark Experience',
-      image: '/feature_4.jpeg'
+      image: '/feature5.png'
     }
   ];
 

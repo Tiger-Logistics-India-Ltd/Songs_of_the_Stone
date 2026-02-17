@@ -546,7 +546,7 @@ const SecondChapter = () => {
           >
             <div className="sc-contact-image-bg"></div>
             <img 
-              src="/SotS-35.jpg.jpeg" 
+              src="/contact_real.webp" 
               alt="Musical Heritage and Cultural Expression" 
               className="sc-contact-image"
               loading="lazy"

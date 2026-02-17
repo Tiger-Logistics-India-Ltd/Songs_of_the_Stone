@@ -3659,6 +3659,12 @@ body:not(.landing-page) .about {
     gap: 2rem;
   }
 
+  .partners-grid-centered {
+    justify-content: flex-start;
+    gap: 2rem;
+    flex-wrap: nowrap;
+  }
+
   .partner-logo {
     height: 80px;
     max-width: 140px;
@@ -3682,6 +3688,11 @@ body:not(.landing-page) .about {
   }
 
   .partners-grid {
+    gap: 1.5rem;
+  }
+
+  .partners-grid-centered {
+    justify-content: flex-start;
     gap: 1.5rem;
   }
 
@@ -4620,6 +4631,8 @@ body:not(.landing-page) .about {
 /* Events Dropdown Navigation Styles */
 .nav-dropdown {
   position: relative;
+  padding-bottom: 10px;
+  margin-bottom: -10px;
 }
 
 .nav-dropdown-trigger {
@@ -4640,26 +4653,40 @@ body:not(.landing-page) .about {
 
 .nav-dropdown-menu {
   position: absolute;
-  top: calc(100% + 10px);
+  top: 100%;
   left: 50%;
-  transform: translateX(-50%) translateY(10px);
+  transform: translateX(-50%) translateY(5px);
   min-width: 220px;
   background: var(--primary-white);
   border-radius: 8px;
   padding: 0.5rem 0;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: 0.05s;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   z-index: 1001;
   list-style: none;
   margin: 0;
+  pointer-events: none;
+}
+
+/* Invisible bridge to prevent gap hover loss */
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 0;
+  right: 0;
+  height: 12px;
 }
 
 .nav-dropdown:hover .nav-dropdown-menu {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+  transition-delay: 0s;
 }
 
 .nav-dropdown-menu li {

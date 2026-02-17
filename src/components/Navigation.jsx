@@ -99,12 +99,10 @@ const Navigation = () => {
             </span>
             <ul className="nav-dropdown-menu">
               <li>
-                {/* Second Chapter - Coming Soon */}
-                <span className="dropdown-item">Second Chapter </span>
+                <Link to="#" className="dropdown-item" onClick={(e) => e.preventDefault()}>Second Chapter</Link>
               </li>
               <li>
-                {/* First Chapter - Coming Soon */}
-                <span className="dropdown-item">First Chapter </span>
+                <Link to="#" className="dropdown-item" onClick={(e) => e.preventDefault()}>First Chapter</Link>
               </li>
             </ul>
           </div>
@@ -149,13 +147,11 @@ const Navigation = () => {
               </svg>
             </button>
             <div className={`mobile-dropdown-items ${mobileExpOpen ? 'open' : ''}`}>
-              {/* Second Chapter - Coming Soon */}
-              <span className="mobile-submenu-item disabled">
-                Second Chapter 
+              <span className="mobile-submenu-item" onClick={(e) => e.preventDefault()}>
+                Second Chapter
               </span>
-              {/* First Chapter - Coming Soon */}
-              <span className="mobile-submenu-item disabled">
-                First Chapter 
+              <span className="mobile-submenu-item" onClick={(e) => e.preventDefault()}>
+                First Chapter
               </span>
             </div>
           </div>
