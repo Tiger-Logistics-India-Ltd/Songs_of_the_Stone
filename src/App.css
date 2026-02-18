@@ -4720,16 +4720,19 @@ body:not(.landing-page) .about {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border: 1.5px solid rgba(0, 0, 0, 0.15);
-  background: transparent;
-  color: var(--primary-black);
+  border: none;
+  background: var(--primary-brown, #482D18);
+  color: #fff;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.gvs-page-arrow svg {
+  stroke: #fff;
+}
+
 .gvs-page-arrow:hover:not(:disabled) {
-  background: rgba(0, 0, 0, 0.06);
-  border-color: rgba(0, 0, 0, 0.25);
+  background: var(--primary-brown);
   transform: scale(1.1);
 }
 
@@ -4738,7 +4741,7 @@ body:not(.landing-page) .about {
 }
 
 .gvs-page-arrow:disabled {
-  opacity: 0.3;
+  opacity: 0.35;
   cursor: default;
 }
 
@@ -4764,7 +4767,7 @@ body:not(.landing-page) .about {
 }
 
 .gvs-dot-active {
-  background: var(--primary-black);
+  background: var(--primary-brown, #482D18);
   width: 24px;
   border-radius: 4px;
 }
@@ -4872,8 +4875,13 @@ body:not(.landing-page) .about {
   }
 
   .gvs-page-arrow {
-    width: 42px;
-    height: 42px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .gvs-page-arrow svg {
+    width: 28px;
+    height: 28px;
   }
 }
 
