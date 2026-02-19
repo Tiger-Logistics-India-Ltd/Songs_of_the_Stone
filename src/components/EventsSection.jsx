@@ -122,7 +122,7 @@ const EventsSection = () => {
             >
               <img
                 className="event-video"
-                src="/Chapter2/Event section/hero banner.png"
+                src="/chapter_one/finalhero.jpg"
                 alt="The Rakesh Chaurasia - Event Poster"
                 loading="lazy"
               />
