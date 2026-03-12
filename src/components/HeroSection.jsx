@@ -120,12 +120,11 @@ const HeroSection = () => {
         <h1 className="hero-chapter-text">THE SECOND CHAPTER</h1>
         <p className="hero-date-text">08-03-2025</p>
         <a 
-          href="https://www.district.in/events/songs-of-the-stone-rakesh-chaurasia-at-qutub-minar-mar8-2026-buy-tickets"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#after-film"
           className="hero-ticket-button"
+          onClick={e => { e.preventDefault(); document.getElementById('after-film')?.scrollIntoView({ behavior: 'smooth' }); }}
         >
-          <span className="button-text">Book Your Tickets</span>
+          <span className="button-text">Watch After Movie</span>
           <span className="button-arrow">→</span>
         </a>
       </div>

@@ -203,7 +203,7 @@ const GalleryVideoSection = () => {
   return (
     <>
       {/* ═══ VIDEO SECTION ═══ */}
-      <section className="gvs-video-section" ref={videoSectionRef}>
+      <section id="after-film" className="gvs-video-section" ref={videoSectionRef}>
         <div className="gvs-container">
           <div className="gvs-section-header">
             <span className="gvs-label">After Film</span>

@@ -43,7 +43,7 @@ const PartnersSection = ({ partners = defaultPartners, centered = false }) => {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
       >
-        <h3 className="partners-heading">In Partnership With</h3>
+        <h3 className="partners-heading">Partners - Second Chapter</h3>
         
         <div className="partners-scroll-container">
           <button 
