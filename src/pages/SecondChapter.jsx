@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import emailjs from '@emailjs/browser';
 import { EMAILJS_CONFIG } from '../config/emailjs';
+import PartnersSection from '../components/PartnersSection';
 
 /**
  * Second Chapter Event Page
@@ -15,6 +16,23 @@ import { EMAILJS_CONFIG } from '../config/emailjs';
  * 5. Reserve Your Experience (Contact Form)
  */
 
+
+
+const sc2Partners = [
+  { id: 1,  name: 'ARC',          desktop: '/partner/arc.svg',             mobile: '/partner/arc.svg' },
+  { id: 2,  name: 'Delhi Tourism', desktop: '/partner/delhi.svg',           mobile: '/partner/delhi.webp' },
+  { id: 3,  name: 'HSBC',          desktop: '/Chapter2/Partner/HSBC.png',   mobile: '/Chapter2/Partner/HSBC.png' },
+  { id: 4,  name: 'Cohoma',        desktop: '/Chapter2/Partner/Cohoma.png', mobile: '/Chapter2/Partner/Cohoma.png' },
+  { id: 5,  name: 'Partner 6',     desktop: 'partner/7.png',   mobile: 'partner/7.png' },
+  { id: 6,  name: 'Partner 7',     desktop: 'partner/8.png',   mobile: 'partner/8.png' },
+  { id: 7,  name: 'Partner 8',     desktop: 'partner/9.png',   mobile: 'partner/9.png' },
+  { id: 8,  name: 'Partner 9',     desktop: 'partner/10.png',  mobile: 'partner/10.png' },
+  { id: 9,  name: 'Partner 10',    desktop: 'partner/11.png',  mobile: 'partner/11.png' },
+  { id: 10, name: 'Partner 11',    desktop: 'partner/12.png',  mobile: 'partner/12.png' },
+  { id: 11, name: 'Partner 12',    desktop: 'partner/13.png',  mobile: 'partner/13.png' },
+  { id: 12, name: 'Partner 13',    desktop: 'partner/14.png',  mobile: 'partner/14.png' },
+];
+
 const SecondChapter = () => {
   // Scroll to top on component mount
   useEffect(() => {
@@ -24,6 +42,13 @@ const SecondChapter = () => {
   // ========== HERO SECTION ==========
   const videoRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
+
+  /* ── YouTube player (After Film) ─────────────────────────── */
+  const sc2PlayerRef       = useRef(null);
+  const sc2VideoSectionRef = useRef(null);
+  const [isPlaying,         setIsPlaying]         = useState(true);
+  const [isMuted,           setIsMuted]           = useState(false);
+  const [showUnmuteOverlay, setShowUnmuteOverlay] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -119,6 +144,8 @@ const SecondChapter = () => {
     }
   ];
 
+
+
   // ========== EVENTS SECTION ==========
   const { ref: eventsRef, inView: eventsInView } = useInView({
     threshold: 0.1,
@@ -202,6 +229,20 @@ const SecondChapter = () => {
     return errors;
   };
 
+  const saveToGoogleSheets = async (data) => {
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzwGA3AYlRmdXU7q0iiGuDUQoaCem3XSAMyJyiGwJmahbBwHmOb_5wGaESs7dPfPCwGRw/exec';
+    try {
+      const fd = new FormData();
+      fd.append('name',    data.name);
+      fd.append('email',   data.email);
+      fd.append('phone',   data.phone);
+      fd.append('message', data.message);
+      await fetch(GOOGLE_SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: fd });
+    } catch (error) {
+      console.error('Google Sheets Error:', error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -224,7 +265,10 @@ const SecondChapter = () => {
         to_name: 'Songs of the Stone Team'
       };
       
-      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+      await Promise.all([
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY),
+        saveToGoogleSheets(formData),
+      ]);
       
       setFormStatus('success');
       setFormData({ name: '', email: '', phone: '', message: '' });
@@ -251,13 +295,92 @@ const SecondChapter = () => {
     }
   };
 
+  /* ── YouTube IFrame API ───────────────────────────────────── */
+  useEffect(() => {
+    if (window.YT && window.YT.Player) { initPlayer(); return; }
+
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const first = document.getElementsByTagName('script')[0];
+    first.parentNode.insertBefore(tag, first);
+    window.onYouTubeIframeAPIReady = () => initPlayer();
+
+    function initPlayer() {
+      sc2PlayerRef.current = new window.YT.Player('sc2-youtube-player', {
+        videoId: 'PuX7U9ogybc',
+        playerVars: {
+          autoplay: 1, mute: 0, loop: 1,
+          playlist: 'PuX7U9ogybc',
+          controls: 1, modestbranding: 1,
+          rel: 0, playsinline: 1,
+        },
+        events: {
+          onReady: (e) => {
+            e.target.playVideo();
+            setTimeout(() => {
+              if (e.target.getPlayerState?.() !== window.YT.PlayerState.PLAYING) {
+                e.target.mute();
+                setIsMuted(true);
+                setShowUnmuteOverlay(true);
+                e.target.playVideo();
+              }
+            }, 1500);
+          },
+          onStateChange: (e) => setIsPlaying(e.data === window.YT.PlayerState.PLAYING),
+        },
+      });
+    }
+    return () => { window.onYouTubeIframeAPIReady = null; };
+  }, []);
+
+  /* ── Video section reveal ────────────────────────────────── */
+  useEffect(() => {
+    const el = sc2VideoSectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { el.classList.add('gvs-video-revealed'); obs.unobserve(el); } },
+      { threshold: 0.1 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  /* ── Video controls ──────────────────────────────────────── */
+  const skipForward  = () => {
+    if (sc2PlayerRef.current?.getCurrentTime)
+      sc2PlayerRef.current.seekTo(sc2PlayerRef.current.getCurrentTime() + 10, true);
+  };
+  const skipBackward = () => {
+    if (sc2PlayerRef.current?.getCurrentTime)
+      sc2PlayerRef.current.seekTo(Math.max(0, sc2PlayerRef.current.getCurrentTime() - 10), true);
+  };
+  const handleUnmute = () => {
+    if (!sc2PlayerRef.current) return;
+    sc2PlayerRef.current.unMute();
+    sc2PlayerRef.current.setVolume(100);
+    setIsMuted(false);
+    setShowUnmuteOverlay(false);
+  };
+  const toggleMute = () => {
+    if (!sc2PlayerRef.current) return;
+    if (sc2PlayerRef.current.isMuted()) {
+      sc2PlayerRef.current.unMute(); setIsMuted(false); setShowUnmuteOverlay(false);
+    } else {
+      sc2PlayerRef.current.mute(); setIsMuted(true);
+    }
+  };
+  const togglePlayPause = () => {
+    if (!sc2PlayerRef.current) return;
+    isPlaying ? sc2PlayerRef.current.pauseVideo() : sc2PlayerRef.current.playVideo();
+  };
+
   return (
     <div className="second-chapter-page">
       {/* ========== 1. HERO VIDEO SECTION ========== */}
       <section id="sc-home" className="hero-featured">
         <video
           ref={videoRef}
-          src="/chapter_one/Hero_first_chapter.mp4"
+          src="/Hero_Banner_Video/homapage.mp4"
           className="hero-featured-img"
           style={{
             transform: `translateY(${scrollY * 0.5}px)`,
@@ -277,19 +400,11 @@ const SecondChapter = () => {
         <div className="hero-text-overlay">
           <h1 className="hero-chapter-text">THE SECOND CHAPTER</h1>
           <p className="hero-date-text">08-03-2026</p>
-          <a 
-            href="https://www.district.in/events/songs-of-the-stone-after-dark-musical-experience-qutub-minar-mehtab-ali-niazi-dec13-2025-buy-tickets" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="hero-ticket-button"
-          >
-            <span className="button-text">Book Your Ticket</span>
-            <span className="button-arrow">→</span>
-          </a>
         </div>
       </section>
 
-      {/* ========== 2. FEATURED 4-PICTURE GRID ========== */}
+      {/* ========== 2. FEATURED 4-PICTURE GRID (commented out) ========== */}
+      {false && (
       <section className="featured-category-section" ref={featuredRef}>
         <motion.div 
           className="featured-heading"
@@ -331,6 +446,16 @@ const SecondChapter = () => {
           </motion.div>
         </div>
       </section>
+      )}
+
+      {/* ========== OPENING TEXT ========== */}
+      <section className="featured-category-section">
+        <div className="featured-heading">
+          <h3 className="featured-subtitle">IN DIALOGUE WITH TIME</h3>
+          <h2 className="featured-title">Art. Architecture. Performance.</h2>
+          <p className="featured-description">Songs of the Stone is Inkpot's journey into art, heritage, and the spaces between.</p>
+        </div>
+      </section>
 
       {/* ========== 3. EDGE-TO-EDGE LANDSCAPE IMAGE ========== */}
       <section className="sc-landscape-section">
@@ -368,7 +493,7 @@ const SecondChapter = () => {
                 
                 <h2 className="event-title">Live the Legacy</h2>
                 
-                <h3 className="event-subtitle">Rakesh Chaurasia & Friends</h3>
+                <h3 className="event-subtitle">Rakesh Chaurasia & Friends (RAF) | The Legend Ensemble</h3>
                 
                 <div className="event-date-time">
                   <span className="event-date">
@@ -383,10 +508,10 @@ const SecondChapter = () => {
                 </div>
                 
                 <p className="event-description">
-                  Join us for a spellbinding musical evening with Mehtab Ali Niazi and his ensemble, where the classical meets the contemporary, and tradition finds new rhythm.
+                  Songs of the Stone by Inkpot India and HSBC 'Live the Legacy' presents an immersive musical experience at the Qutub Minar. The evening features two-time Grammy Award–winning flautist Rakesh Chaurasia, accompanied by Gino Banks, Satyajit Talwalkar, Sheldon D'Silva, Sanjoy Das and Sangeet Haldipur — a collective of some of India's finest contemporary classical musicians.
                 </p>
                 <p className="event-description">
-                  His semi-classical fusion — weaving raga with elements of jazz and modern soundscapes — creates an experience both timeless and alive, set against the breathtaking backdrop of the Qutub Minar, a UNESCO World Heritage Site.
+                  As dusk yields to night, the monument's illuminated silhouette becomes both stage and muse, while the serenity of the bansuri and the ensemble's virtuosity create a confluence of sound, history and architectural splendour.
                 </p>
               </div>
 
@@ -396,166 +521,95 @@ const SecondChapter = () => {
               >
                 <img
                   className="event-video"
-                  src="/Chapter2/Event section/hero_1.jpeg"
-                  alt="The Mehtab Ali Niazi Experience - Event Poster"
+                  src="/chapter_one/finalhero.jpg"
+                  alt="The Rakesh Chaurasia - Event Poster"
                   loading="lazy"
                 />
               </motion.div>
               
-              <div className="event-cta-section">
-                <div className="event-cta">
-                  <button
-                    className="event-btn"
-                    onClick={handleEventRegistration}
-                    aria-label="Reserve your spot for The Mehtab Ali Niazi Experience"
-                  >
-                    Book Your Tickets Now
-                  </button>
-                </div>
-              </div>
+
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ========== CHAPTER ONE BANNER ========== */}
-      <section className="chapter-link-banner">
-        <motion.div 
-          className="chapter-link-content"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+      {/* ========== VIDEO BANNER ========== */}
+      <section className="fc-banner-section">
+        <video
+          className="fc-banner-img"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
         >
-          <span className="chapter-link-label">Explore Our Journey</span>
-          <h2 className="chapter-link-title">The First Chapter</h2>
-          <p className="chapter-link-subtitle">The Mehtab Ali Niazi Experience</p>
-          <a href="/first-chapter" className="chapter-link-btn">
-            <span>View Chapter One</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </a>
-        </motion.div>
+          <source src="/chapter_one/videos/video_first_chapter.mp4" type="video/mp4" />
+        </video>
       </section>
 
-      {/* ========== 5. RESERVE YOUR EXPERIENCE (CONTACT SECTION) ========== */}
-      <section id="sc-contact" className="sc-contact-section" ref={contactRef}>
-        <div className="sc-contact-wrapper">
-          {/* Left Side - Text and Form */}
-          <motion.div 
-            className="sc-contact-left"
-            initial="hidden"
-            animate={contactInView ? "visible" : "hidden"}
-            variants={contentVariants}
-          >
-            <h2 className="sc-contact-title">CONTACT US</h2>
-            
-            <p className="sc-contact-description">
-              We're so glad you found us. Songs of The Stone is an experience for those seeking meaning, connection, and beauty — in art, in stories, and in each other.
-            </p>
-            <p className="sc-contact-description">
-              Please fill out the form below to reserve your seat. Our team will connect with you to guide you through the next steps.
-            </p>
 
-            {/* Contact Form */}
-            <form className="sc-contact-form" onSubmit={handleSubmit}>
-              <div className="sc-form-field">
-                <input 
-                  type="text" 
-                  name="name"
-                  placeholder="Name" 
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className={formErrors.name ? 'error' : ''}
-                  disabled={formStatus === 'submitting'}
-                />
-                {formErrors.name && <span className="sc-error-message">{formErrors.name}</span>}
-              </div>
 
-              <div className="sc-form-field">
-                <input 
-                  type="email" 
-                  name="email"
-                  placeholder="Email" 
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className={formErrors.email ? 'error' : ''}
-                  disabled={formStatus === 'submitting'}
-                />
-                {formErrors.email && <span className="sc-error-message">{formErrors.email}</span>}
-              </div>
+      {/* ========== AFTER FILM ========== */}
+      <section id="after-film" className="gvs-video-section" ref={sc2VideoSectionRef}>
+        <div className="gvs-container">
+          <div className="gvs-section-header">
+            <span className="gvs-label">After Film</span>
+            <h2 className="gvs-title">The Second Chapter</h2>
+          </div>
 
-              <div className="sc-form-field">
-                <input 
-                  type="tel" 
-                  name="phone"
-                  placeholder="Phone Number" 
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  className={formErrors.phone ? 'error' : ''}
-                  disabled={formStatus === 'submitting'}
-                />
-                {formErrors.phone && <span className="sc-error-message">{formErrors.phone}</span>}
-              </div>
-              
-              <div className="sc-form-field">
-                <textarea 
-                  name="message"
-                  placeholder="Tell us about yourself..."
-                  rows="4"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  className={formErrors.message ? 'error' : ''}
-                  disabled={formStatus === 'submitting'}
-                ></textarea>
-                {formErrors.message && <span className="sc-error-message">{formErrors.message}</span>}
-              </div>
-              
-              <button 
-                type="submit" 
-                className={`sc-submit-btn ${formStatus}`}
-                disabled={formStatus === 'submitting'}
-              >
-                {formStatus === 'submitting' && 'Sending...'}
-                {formStatus === 'success' && 'Sent!'}
-                {formStatus === 'error' && 'Try Again'}
-                {formStatus === 'idle' && 'SUBMIT'}
-              </button>
-              
-              {formStatus === 'success' && (
-                <div className="sc-form-success">
-                  Thank you! We'll be in touch soon.
-                </div>
+          <div className="gvs-video-frame">
+            <div className="gvs-video-embed">
+              <div id="sc2-youtube-player"></div>
+            </div>
+          </div>
+
+          <div className="gvs-controls">
+            <button className="gvs-ctrl-btn" onClick={skipBackward} aria-label="Rewind 10 seconds" type="button">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" fill="currentColor"/>
+                <text x="9" y="14.5" fontSize="6" fill="currentColor" fontWeight="bold">10</text>
+              </svg>
+            </button>
+
+            <button className="gvs-ctrl-btn gvs-ctrl-play" onClick={togglePlayPause} aria-label={isPlaying ? 'Pause' : 'Play'} type="button">
+              {isPlaying ? (
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+                  <rect x="6" y="4" width="4" height="16" rx="1" fill="currentColor"/>
+                  <rect x="14" y="4" width="4" height="16" rx="1" fill="currentColor"/>
+                </svg>
+              ) : (
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 5v14l11-7L8 5z" fill="currentColor"/>
+                </svg>
               )}
-              
-              {formStatus === 'error' && (
-                <div className="sc-form-error">
-                  Something went wrong. Please try again.
-                </div>
-              )}
-            </form>
-          </motion.div>
+            </button>
 
-          {/* Right Side - Image with colored background */}
-          <motion.div 
-            className="sc-contact-right"
-            initial={{ opacity: 0, x: 50 }}
-            animate={contactInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
-            <div className="sc-contact-image-bg"></div>
-            <img 
-              src="/contact_real.webp" 
-              alt="Musical Heritage and Cultural Expression" 
-              className="sc-contact-image"
-              loading="lazy"
-            />
-          </motion.div>
+            <button className="gvs-ctrl-btn" onClick={toggleMute} aria-label={isMuted ? 'Unmute' : 'Mute'} type="button">
+              {isMuted ? (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                  <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" fill="currentColor"/>
+                </svg>
+              ) : (
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                  <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" fill="currentColor"/>
+                </svg>
+              )}
+            </button>
+
+            <button className="gvs-ctrl-btn" onClick={skipForward} aria-label="Forward 10 seconds" type="button">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                <path d="M12 5V1l5 5-5 5V7c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6h2c0 4.42-3.58 8-8 8s-8-3.58-8-8 3.58-8 8-8z" fill="currentColor"/>
+                <text x="9" y="14.5" fontSize="6" fill="currentColor" fontWeight="bold">10</text>
+              </svg>
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* Success Popup */}
+      {/* ========== PARTNERS SECTION ========== */}
+      <PartnersSection partners={sc2Partners} centered />
+
+      {/* ========== CONTACT ========== */}
       <AnimatePresence mode="wait">
         {showSuccessPopup && (
           <motion.div
@@ -572,28 +626,76 @@ const SecondChapter = () => {
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
               onClick={(e) => e.stopPropagation()}
             >
               <div className="popup-icon">
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
+                  <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
               <h3 className="popup-title">Thank You!</h3>
-              <p className="popup-message">
-                Thank you for reaching out. Will get back to you soon!
-              </p>
+              <p className="popup-message">Thank you for reaching out. Will get back to you soon!</p>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      <section id="sc-contact" className="contact" ref={contactRef}>
+        <div className="container">
+          <motion.div
+            className="contact-content"
+            initial={{ opacity: 0, y: 50 }}
+            animate={contactInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
+          >
+            <div className="contact-grid">
+              <div className="contact-text-section">
+                <div className="contact-header">
+                  <div className="contact-tagline">Connect With Heritage</div>
+                  <h2 className="contact-title">Contact Us</h2>
+                  <p className="contact-description">
+                    We're so glad you found us. Songs of The Stone is an experience for those seeking meaning, connection, and beauty -- in art, in stories, and in each other.
+
+                    Please fill out the form below and Our team will connect with you to guide you through the next steps.
+                  </p>
+                </div>
+                <div className="contact-form-wrapper">
+                  <form className="contact-form" onSubmit={handleSubmit}>
+                    <div className="form-field">
+                      <input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleInputChange} className={formErrors.name ? 'error' : ''} disabled={formStatus === 'submitting'} />
+                      {formErrors.name && <span className="error-message">{formErrors.name}</span>}
+                    </div>
+                    <div className="form-field full-width-input">
+                      <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleInputChange} className={formErrors.email ? 'error' : ''} disabled={formStatus === 'submitting'} />
+                      {formErrors.email && <span className="error-message">{formErrors.email}</span>}
+                    </div>
+                    <div className="form-field full-width-input">
+                      <input type="tel" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleInputChange} className={formErrors.phone ? 'error' : ''} disabled={formStatus === 'submitting'} />
+                      {formErrors.phone && <span className="error-message">{formErrors.phone}</span>}
+                    </div>
+                    <div className="form-field">
+                      <textarea name="message" placeholder="We'd love to get to know you. What draws you to this world of culture and what do you do in your own life or work?" rows="4" value={formData.message} onChange={handleInputChange} className={formErrors.message ? 'error' : ''} disabled={formStatus === 'submitting'} />
+                      {formErrors.message && <span className="error-message">{formErrors.message}</span>}
+                    </div>
+                    <button type="submit" className={`submit-btn ${formStatus}`} disabled={formStatus === 'submitting'}>
+                      {formStatus === 'submitting' && 'Connecting...'}
+                      {formStatus === 'success' && 'Message Sent!'}
+                      {formStatus === 'error' && 'Try Again'}
+                      {formStatus === 'idle' && 'Submit'}
+                    </button>
+                    {formStatus === 'success' && <div className="form-success">Thank you for your interest! We'll be in touch soon.</div>}
+                    {formStatus === 'error' && <div className="form-error">Something went wrong. Please try again later.</div>}
+                  </form>
+                </div>
+              </div>
+              <div className="contact-image">
+                <img src="/Contact_us_form/contact_us_form.jpeg" alt="Songs of the Stone — Contact Us" className="contact-img" loading="eager" fetchPriority="high" decoding="async" />
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </div>
   );
 };

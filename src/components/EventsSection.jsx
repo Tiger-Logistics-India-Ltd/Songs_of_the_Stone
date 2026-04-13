@@ -138,7 +138,7 @@ const EventsSection = () => {
                   className="event-btn"
                   aria-label="Reserve your spot for The Rakesh Chaurasia Experience"
                 >
-                  Reserve Your Experience
+                  Learn More
                 </a>
               </div>
             </div>

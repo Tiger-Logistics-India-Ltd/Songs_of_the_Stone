@@ -13,6 +13,7 @@ import About from './pages/About';
 import FirstChapter from './pages/FirstChapter';
 import SecondChapter from './pages/SecondChapter';
 import PrivacyPolicy from './components/Privacypolicy';
+import Press from './pages/Press';
 
 /**
  * Main App Component
@@ -44,6 +45,7 @@ function App() {
           <Route path="/first-chapter" element={<FirstChapter />} />
           <Route path="/second-chapter" element={<SecondChapter />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/press" element={<Press />} />
           
         </Routes>
         <Footer />

@@ -17,7 +17,7 @@ const FeaturedSections = () => {
     {
       id: 'music',
       title: 'Cross-Over Classical',
-      image: '/Rakesh_chusrisia.png'
+      image: '/Homepage/feature_image/SOTS-481.jpg.jpeg'
     },
     {
       id: 'performance',
@@ -42,7 +42,7 @@ const FeaturedSections = () => {
       >
         <h3 className="featured-subtitle">IN DIALOGUE WITH TIME</h3>
         <h2 className="featured-title">Art. Architecture. Performance. </h2>
-        <p className="featured-description">A Musical Evening at the Qutub Minar</p>
+        <p className="featured-description">A Musical Evening at Heritage Sites</p>
       </motion.div>
 
       {/* Category Grid */}

@@ -65,4 +65,19 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+  /* Preserve custom button styles — must come after the generic rule */
+  button.artist-arrow {
+    background-color: transparent !important;
+    background: transparent !important;
+    border-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+  }
+  button.artist-dot {
+    background-color: rgba(0,0,0,0.18) !important;
+  }
+  button.artist-dot.artist-dot--active {
+    background-color: var(--primary-brown) !important;
+  }
 }

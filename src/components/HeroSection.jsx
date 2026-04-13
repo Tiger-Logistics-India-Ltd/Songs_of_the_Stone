@@ -99,7 +99,7 @@ const HeroSection = () => {
     <section id="home" className="hero-featured">
       <video
         ref={videoRef}
-        src="/chapter_one/Hero_first_chapter.mp4"
+        src="/Hero_Banner_Video/homapage.mp4"
         className="hero-featured-img"
         style={{
           transform: `translateY(${scrollY * 0.5}px)`,
@@ -117,16 +117,16 @@ const HeroSection = () => {
         x-webkit-airplay="true"
       />
       <div className="hero-text-overlay">
-        <h1 className="hero-chapter-text">THE SECOND CHAPTER</h1>
-        <p className="hero-date-text">08-03-2025</p>
-        <a 
+        <h1 className="hero-chapter-text">A TIMELESS LEGACY</h1>
+        {/* <p className="hero-date-text">08-03-2025</p> */}
+        {/* <a 
           href="#after-film"
           className="hero-ticket-button"
           onClick={e => { e.preventDefault(); document.getElementById('after-film')?.scrollIntoView({ behavior: 'smooth' }); }}
         >
           <span className="button-text">Watch After Movie</span>
           <span className="button-arrow">→</span>
-        </a>
+        </a> */}
       </div>
     </section>
   );
