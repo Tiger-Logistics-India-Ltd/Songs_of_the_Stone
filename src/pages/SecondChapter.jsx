@@ -111,7 +111,6 @@ const SecondChapter = () => {
 
   // ========== HERO SECTION ==========
   const videoRef = useRef(null);
-  const [scrollY, setScrollY] = useState(0);
 
   /* ── YouTube player (After Film) ─────────────────────────── */
   const sc2PlayerRef       = useRef(null);
@@ -169,7 +168,9 @@ const SecondChapter = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      if (videoRef.current) {
+        videoRef.current.style.transform = `translateY(${window.scrollY * 0.5}px)`;
+      }
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -299,15 +300,15 @@ const SecondChapter = () => {
 
   /* ── YouTube IFrame API ───────────────────────────────────── */
   useEffect(() => {
-    if (window.YT && window.YT.Player) { initPlayer(); return; }
+    const sectionEl = sc2VideoSectionRef.current;
+    if (!sectionEl) return;
 
-    const tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    const first = document.getElementsByTagName('script')[0];
-    first.parentNode.insertBefore(tag, first);
-    window.onYouTubeIframeAPIReady = () => initPlayer();
+    let playerCreated = false;
 
     function initPlayer() {
+      if (playerCreated) return;
+      playerCreated = true;
+
       sc2PlayerRef.current = new window.YT.Player('sc2-youtube-player', {
         videoId: 'PuX7U9ogybc',
         playerVars: {
@@ -332,7 +333,31 @@ const SecondChapter = () => {
         },
       });
     }
-    return () => { window.onYouTubeIframeAPIReady = null; };
+
+    function loadAndInit() {
+      if (window.YT && window.YT.Player) { initPlayer(); return; }
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const first = document.getElementsByTagName('script')[0];
+      first.parentNode.insertBefore(tag, first);
+      window.onYouTubeIframeAPIReady = () => initPlayer();
+    }
+
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          loadAndInit();
+          obs.unobserve(sectionEl);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    obs.observe(sectionEl);
+
+    return () => {
+      obs.disconnect();
+      window.onYouTubeIframeAPIReady = null;
+    };
   }, []);
 
   /* ── Video section reveal ────────────────────────────────── */
@@ -384,15 +409,11 @@ const SecondChapter = () => {
           ref={videoRef}
           src="/Hero_Banner_Video/homapage.mp4"
           className="hero-featured-img"
-          style={{
-            transform: `translateY(${scrollY * 0.5}px)`,
-            transition: 'transform 0.1s ease-out'
-          }}
           autoPlay
           muted
           playsInline
           loop
-          preload="auto"
+          preload="metadata"
           webkit-playsinline="true"
           x5-playsinline="true"
           x5-video-player-type="h5"
@@ -543,7 +564,7 @@ const SecondChapter = () => {
           loop
           muted
           playsInline
-          preload="auto"
+          preload="metadata"
         >
           <source src="/chapter_one/videos/video_first_chapter.mp4" type="video/mp4" />
         </video>

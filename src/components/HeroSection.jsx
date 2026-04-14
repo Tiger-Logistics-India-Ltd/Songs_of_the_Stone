@@ -1,13 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const HeroSection = () => {
   const videoRef = useRef(null);
-  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    // Parallax scroll effect
     const handleScroll = () => {
-      setScrollY(window.scrollY);
+      if (videoRef.current) {
+        videoRef.current.style.transform = `translateY(${window.scrollY * 0.5}px)`;
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -101,15 +101,11 @@ const HeroSection = () => {
         ref={videoRef}
         src="/Hero_Banner_Video/homapage.mp4"
         className="hero-featured-img"
-        style={{
-          transform: `translateY(${scrollY * 0.5}px)`,
-          transition: 'transform 0.1s ease-out'
-        }}
         autoPlay
         muted
         playsInline
         loop
-        preload="auto"
+        preload="metadata"
         webkit-playsinline="true"
         x5-playsinline="true"
         x5-video-player-type="h5"

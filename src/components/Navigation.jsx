@@ -195,7 +195,7 @@ const Navigation = () => {
                     onClick={() => setDesktopExpOpen(false)}
                   >
                     <div className="chapter-dropdown-image-wrap">
-                      <img src={chapter.image} alt={chapter.title} className="chapter-dropdown-image" />
+                      <img src={chapter.image} alt={chapter.title} className="chapter-dropdown-image" loading="lazy" />
                     </div>
                     <div className="chapter-dropdown-content">
                       <h4 className="chapter-dropdown-title">{chapter.title}</h4>
@@ -241,7 +241,7 @@ const Navigation = () => {
                     onClick={() => setDesktopPressOpen(false)}
                   >
                     <div className="chapter-dropdown-image-wrap">
-                      <img src={item.image} alt={item.title} className="chapter-dropdown-image" />
+                      <img src={item.image} alt={item.title} className="chapter-dropdown-image" loading="lazy" />
                     </div>
                     <div className="chapter-dropdown-content">
                       <h4 className="chapter-dropdown-title">{item.title}</h4>

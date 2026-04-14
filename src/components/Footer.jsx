@@ -15,6 +15,7 @@ const Footer = () => {
               src="/Images/desktop/new_footer.svg"
               alt="Songs of the Stone"
               className="footer-logo-img"
+              loading="lazy"
             />
           </Link>
           {/* <p className="footer-tagline">

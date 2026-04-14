@@ -77,7 +77,7 @@ const PressCard = ({ item, index }) => {
       ref={ref}
       href={item.url}
       target="_blank"
-      rel="noopener noreferrer"
+      rel="noopener noreferrer nofollow"
       className="press-page-card"
       initial={{ opacity: 0, y: 28 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
