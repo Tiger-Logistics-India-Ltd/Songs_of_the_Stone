@@ -250,7 +250,7 @@ a {
 
 /* Navigation */
 .navbar {
-  position: fixed;
+  position: absolute;
   top: 0;
   width: 100%;
   background: rgba(144, 26, 28, 0.98);
