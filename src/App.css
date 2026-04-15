@@ -250,19 +250,14 @@ a {
 
 /* Navigation */
 .navbar {
-  position: absolute;
+  position: fixed;
   top: 0;
   width: 100%;
-  background: transparent;
-  backdrop-filter: none;
+  background: rgba(144, 26, 28, 0.98);
+  backdrop-filter: blur(20px);
   z-index: 1000;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   padding: 0.75rem 0;
-}
-
-.navbar:hover {
-  background: rgba(144, 26, 28, 0.85);
-  backdrop-filter: blur(20px);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
@@ -3773,7 +3768,6 @@ html {
 
 /* Static navbar styling for non-landing pages */
 .navbar.static-nav {
-  position: absolute;
   background-color: var(--primary-red);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 0.75rem 0;

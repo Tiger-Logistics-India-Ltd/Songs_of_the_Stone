@@ -236,7 +236,7 @@ const Navigation = () => {
                     key={item.id}
                     href={item.url}
                     target="_blank"
-                    rel="noopener noreferrer"
+                    rel="noopener noreferrer nofollow"
                     className="chapter-dropdown-card"
                     onClick={() => setDesktopPressOpen(false)}
                   >
@@ -327,7 +327,7 @@ const Navigation = () => {
                   key={item.id}
                   href={item.url}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener noreferrer nofollow"
                   className="mobile-submenu-item"
                   onClick={closeMobile}
                 >
