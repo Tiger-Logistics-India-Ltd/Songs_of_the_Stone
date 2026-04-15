@@ -14,7 +14,7 @@ const artists = [
 
 const getBatch = () => {
   if (typeof window === 'undefined') return 5;
-  if (window.innerWidth <= 768) return 1;
+  if (window.innerWidth <= 900) return 1;
   if (window.innerWidth <= 1024) return 3;
   return 5;
 };

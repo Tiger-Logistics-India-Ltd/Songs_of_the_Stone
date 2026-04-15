@@ -403,7 +403,7 @@ a {
   height: 100vh;
   min-height: 600px;
   overflow: hidden;
-  background: var(--primary-white);
+  background: #000;
 }
 
 .hero-featured-img {
