@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -8,7 +8,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-inner">
 
-        {/* ── Top row: logo + tagline ── */}
+        {/* â”€â”€ Top row: logo + tagline â”€â”€ */}
         <div className="footer-brand">
           <Link to="/" className="footer-logo-link">
             <img
@@ -24,23 +24,23 @@ const Footer = () => {
           </p> */}
         </div>
 
-        {/* ── Middle row: nav columns + social ── */}
+        {/* â”€â”€ Middle row: nav columns + social â”€â”€ */}
         <div className="footer-grid">
 
-          {/* Column 1 – Experiences */}
+          {/* Column 1 â€“ Experiences */}
           <div className="footer-col">
-            <h4 className="footer-col-heading">Experiences</h4>
+            <h2 className="footer-col-heading">Experiences</h2>
             <nav aria-label="Experiences navigation">
               <ul className="footer-nav-list">
-                <li><Link to="/first-chapter" className="footer-nav-link">Chapter One — Mehtab Ali Niazi</Link></li>
-                <li><Link to="/second-chapter" className="footer-nav-link">Chapter Two — Live the Legacy</Link></li>
+                <li><Link to="/first-chapter" className="footer-nav-link">Chapter One â€” Mehtab Ali Niazi</Link></li>
+                <li><Link to="/second-chapter" className="footer-nav-link">Chapter Two â€” Live the Legacy</Link></li>
               </ul>
             </nav>
           </div>
 
-          {/* Column 2 – Explore */}
+          {/* Column 2 â€“ Explore */}
           <div className="footer-col">
-            <h4 className="footer-col-heading">Explore</h4>
+            <h2 className="footer-col-heading">Explore</h2>
             <nav aria-label="Explore navigation">
               <ul className="footer-nav-list">
                 <li><Link to="/" className="footer-nav-link">Home</Link></li>
@@ -50,9 +50,9 @@ const Footer = () => {
             </nav>
           </div>
 
-          {/* Column 3 – Connect */}
+          {/* Column 3 â€“ Connect */}
           <div className="footer-col">
-            <h4 className="footer-col-heading">Connect</h4>
+            <h2 className="footer-col-heading">Connect</h2>
             <ul className="footer-nav-list">
               <li>
                 <a
@@ -101,10 +101,10 @@ const Footer = () => {
 
         </div>
 
-        {/* ── Bottom row: copyright + legal ── */}
+        {/* â”€â”€ Bottom row: copyright + legal â”€â”€ */}
         <div className="footer-bottom">
           <p className="footer-copyright">
-            © {currentYear} Songs of the Stone · Inkpot India. All rights reserved.
+            Â© {currentYear} Songs of the Stone Â· Inkpot India. All rights reserved.
           </p>
           <div className="footer-legal-links">
             <Link to="/privacy-policy" className="footer-legal-link">Privacy Policy</Link>

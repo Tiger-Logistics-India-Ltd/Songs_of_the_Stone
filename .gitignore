@@ -36,3 +36,7 @@ __pycache__/
 .env
 .env.local
 .env.production
+
+# Compression backups
+_backup_originals/
+scripts/

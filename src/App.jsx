@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import './App.css';
@@ -7,13 +7,13 @@ import './App.css';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
 
-// Import pages
-import Home from './pages/Home';
-import About from './pages/About';
-import FirstChapter from './pages/FirstChapter';
-import SecondChapter from './pages/SecondChapter';
-import PrivacyPolicy from './components/Privacypolicy';
-import Press from './pages/Press';
+// Lazy-loaded pages (code splitting)
+const Home = lazy(() => import('./pages/Home'));
+const About = lazy(() => import('./pages/About'));
+const FirstChapter = lazy(() => import('./pages/FirstChapter'));
+const SecondChapter = lazy(() => import('./pages/SecondChapter'));
+const PrivacyPolicy = lazy(() => import('./components/Privacypolicy'));
+const Press = lazy(() => import('./pages/Press'));
 
 /**
  * Main App Component
@@ -36,6 +36,8 @@ function App() {
     <>
       <div className="App">
         <Navigation />
+        <main>
+        <Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -48,6 +50,8 @@ function App() {
           <Route path="/press" element={<Press />} />
           
         </Routes>
+        </Suspense>
+        </main>
         <Footer />
       </div>
       <SpeedInsights />

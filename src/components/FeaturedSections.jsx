@@ -40,7 +40,7 @@ const FeaturedSections = () => {
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
       >
-        <h3 className="featured-subtitle">IN DIALOGUE WITH TIME</h3>
+        <p className="featured-subtitle">IN DIALOGUE WITH TIME</p>
         <h2 className="featured-title">Art. Architecture. Performance. </h2>
         <p className="featured-description">A Musical Evening at Heritage Sites</p>
       </motion.div>
@@ -69,7 +69,7 @@ const FeaturedSections = () => {
                   loading="lazy"
                 />
               </div>
-              <h4 className="featured-card-title">{category.title}</h4>
+              <h3 className="featured-card-title">{category.title}</h3>
             </motion.div>
           ))}
         </motion.div>

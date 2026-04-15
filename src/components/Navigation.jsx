@@ -227,7 +227,8 @@ const Navigation = () => {
 
             <div
               className={`nav-expanded-panel nav-press-panel ${desktopPressOpen ? 'open' : ''}`}
-              role="menu"
+              role="navigation"
+              aria-label="Press articles"
             >
               <div className="nav-expanded-inner nav-press-inner">
                 {pressDropdownItems.map((item) => (
@@ -237,7 +238,6 @@ const Navigation = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="chapter-dropdown-card"
-                    role="menuitem"
                     onClick={() => setDesktopPressOpen(false)}
                   >
                     <div className="chapter-dropdown-image-wrap">
