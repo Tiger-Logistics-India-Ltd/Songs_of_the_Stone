@@ -105,7 +105,7 @@ const HeroSection = () => {
         muted
         playsInline
         loop
-        preload="metadata"
+        preload="auto"
         webkit-playsinline="true"
         x5-playsinline="true"
         x5-video-player-type="h5"

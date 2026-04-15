@@ -8,7 +8,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-inner">
 
-        {/* â”€â”€ Top row: logo + tagline â”€â”€ */}
+        {/* ---- Top row: logo + tagline ---- */}
         <div className="footer-brand">
           <Link to="/" className="footer-logo-link">
             <img
@@ -24,21 +24,21 @@ const Footer = () => {
           </p> */}
         </div>
 
-        {/* â”€â”€ Middle row: nav columns + social â”€â”€ */}
+        {/* ---- Middle row: nav columns + social ---- */}
         <div className="footer-grid">
 
-          {/* Column 1 â€“ Experiences */}
+          {/* Column 1 — Experiences */}
           <div className="footer-col">
             <h2 className="footer-col-heading">Experiences</h2>
             <nav aria-label="Experiences navigation">
               <ul className="footer-nav-list">
-                <li><Link to="/first-chapter" className="footer-nav-link">Chapter One â€” Mehtab Ali Niazi</Link></li>
-                <li><Link to="/second-chapter" className="footer-nav-link">Chapter Two â€” Live the Legacy</Link></li>
+                <li><Link to="/first-chapter" className="footer-nav-link">Chapter One — Mehtab Ali Niazi</Link></li>
+                <li><Link to="/second-chapter" className="footer-nav-link">Chapter Two — Live the Legacy</Link></li>
               </ul>
             </nav>
           </div>
 
-          {/* Column 2 â€“ Explore */}
+          {/* Column 2 -- Explore */}
           <div className="footer-col">
             <h2 className="footer-col-heading">Explore</h2>
             <nav aria-label="Explore navigation">
@@ -50,7 +50,7 @@ const Footer = () => {
             </nav>
           </div>
 
-          {/* Column 3 â€“ Connect */}
+          {/* Column 3 -- Connect */}
           <div className="footer-col">
             <h2 className="footer-col-heading">Connect</h2>
             <ul className="footer-nav-list">
@@ -101,10 +101,10 @@ const Footer = () => {
 
         </div>
 
-        {/* â”€â”€ Bottom row: copyright + legal â”€â”€ */}
+        {/* ---- Bottom row: copyright + legal ---- */}
         <div className="footer-bottom">
           <p className="footer-copyright">
-            Â© {currentYear} Songs of the Stone Â· Inkpot India. All rights reserved.
+            © {currentYear} Songs of the Stone · Inkpot India. All rights reserved.
           </p>
           <div className="footer-legal-links">
             <Link to="/privacy-policy" className="footer-legal-link">Privacy Policy</Link>
