@@ -12,7 +12,9 @@ const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const FirstChapter = lazy(() => import('./pages/FirstChapter'));
 const SecondChapter = lazy(() => import('./pages/SecondChapter'));
+const ThirdChapter = lazy(() => import('./pages/ThirdChapter'));
 const PrivacyPolicy = lazy(() => import('./components/Privacypolicy'));
+const TermsAndConditions = lazy(() => import('./components/TermsAndConditions'));
 const Press = lazy(() => import('./pages/Press'));
 
 /**
@@ -46,7 +48,9 @@ function App() {
           {/* Chapter pages - temporarily disabled on production, enabled locally for testing */}
           <Route path="/first-chapter" element={<FirstChapter />} />
           <Route path="/second-chapter" element={<SecondChapter />} />
+          <Route path="/third-chapter" element={<ThirdChapter />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route path="/press" element={<Press />} />
           
         </Routes>

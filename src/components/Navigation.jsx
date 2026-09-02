@@ -54,6 +54,14 @@ const Navigation = () => {
 
   const chapterDropdownItems = [
     {
+      id: 'third-chapter',
+      title: 'Third Chapter',
+      path: '/third-chapter',
+      image: '/chapter_3/SOTS_District%20banner%20potrait.png',
+      date: '10–11 Oct 2026',
+      description: 'Amrita Kaur, from dusk to dawn — two concerts at sunset and sunrise.'
+    },
+    {
       id: 'first-chapter',
       title: 'First Chapter',
       path: '/first-chapter',
@@ -72,7 +80,7 @@ const Navigation = () => {
   ];
   
   // Check if current page should have transparent navbar (home or first-chapter or second-chapter)
-  const isTransparentPage = location.pathname === '/' || location.pathname === '/first-chapter' || location.pathname === '/second-chapter';
+  const isTransparentPage = location.pathname === '/' || location.pathname === '/first-chapter' || location.pathname === '/second-chapter' || location.pathname === '/third-chapter';
   
   /**
    * Effect to handle scroll position changes using custom hook
@@ -301,6 +309,9 @@ const Navigation = () => {
               </svg>
             </button>
             <div className={`mobile-dropdown-items ${mobileExpOpen ? 'open' : ''}`}>
+              <Link to="/third-chapter" className="mobile-submenu-item" onClick={closeMobile}>
+                Third Chapter
+              </Link>
               <Link to="/second-chapter" className="mobile-submenu-item" onClick={closeMobile}>
                 Second Chapter
               </Link>

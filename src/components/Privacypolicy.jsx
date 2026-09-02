@@ -336,7 +336,7 @@ const PrivacyPolicy = () => (
         </div>
         
         <p className="mb-6">
-          <strong>Note:</strong> You may opt out of promotional communications at any time by using the "unsubscribe" link in our emails or by contacting us at privacy@songsofthestone.com. Opting out will not affect essential service-related communications (e.g., ticket confirmations or event updates).
+          <strong>Note:</strong> You may opt out of promotional communications at any time by using the "unsubscribe" link in our emails or by contacting us at info@inkpotindia.com. Opting out will not affect essential service-related communications (e.g., ticket confirmations or event updates).
         </p>
 
         <h3 className="text-xl font-semibold text-gray-900 mb-3">2.4. Legal and Regulatory Compliance</h3>
@@ -454,7 +454,7 @@ const PrivacyPolicy = () => (
           <li>Legitimate interests justify such use under the law.</li>
         </ul>
         <p className="mb-6">
-          If you wish to withdraw your consent for data use (except where legally mandated), you may write to our Grievance Officer at privacy@songsofthestone.com. Upon receipt, the Company will cease processing your data for such purposes, except where retention is required for statutory, legal, or dispute resolution reasons.
+          If you wish to withdraw your consent for data use (except where legally mandated), you may write to our Grievance Officer at info@inkpotindia.com. Upon receipt, the Company will cease processing your data for such purposes, except where retention is required for statutory, legal, or dispute resolution reasons.
         </p>
 
         <h3 className="text-xl font-semibold text-gray-900 mb-3">2.9. Limitation of Use</h3>
@@ -664,7 +664,7 @@ const PrivacyPolicy = () => (
         <div className="bg-gray-50 p-6 rounded-lg mb-6">
           <p className="font-semibold text-gray-900 mb-2">Grievance Officer</p>
           <p className="mb-2">Songs of the Stone</p>
-          <p className="mb-2">Email: info@songsofthestone.com</p>
+          <p className="mb-2">Email: info@inkpotindia.com</p>
           
          
         </div>

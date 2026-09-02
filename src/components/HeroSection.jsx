@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { CHAPTER_THREE } from '../config/event';
 
 const HeroSection = () => {
   const videoRef = useRef(null);
@@ -114,15 +115,19 @@ const HeroSection = () => {
       />
       <div className="hero-text-overlay">
         <h1 className="hero-chapter-text">A TIMELESS LEGACY</h1>
-        {/* <p className="hero-date-text">08-03-2025</p> */}
-        {/* <a 
-          href="#after-film"
+        <p className="hero-event-line">
+          {CHAPTER_THREE.artist} · {CHAPTER_THREE.dateShort}
+        </p>
+        <a
+          href={CHAPTER_THREE.ticketUrl}
           className="hero-ticket-button"
-          onClick={e => { e.preventDefault(); document.getElementById('after-film')?.scrollIntoView({ behavior: 'smooth' }); }}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Book tickets for ${CHAPTER_THREE.title}, ${CHAPTER_THREE.dateLong}`}
         >
-          <span className="button-text">Watch After Movie</span>
+          <span className="button-text">Book Tickets on District</span>
           <span className="button-arrow">→</span>
-        </a> */}
+        </a>
       </div>
     </section>
   );

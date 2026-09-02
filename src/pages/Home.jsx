@@ -1,6 +1,7 @@
 import React from 'react';
 import HeroSection from '../components/HeroSection';
 import FeaturedSections from '../components/FeaturedSections';
+import UpcomingEvent from '../components/UpcomingEvent';
 import ChapterShowcase from '../components/ChapterShowcase';
 import PartnersSection from '../components/PartnersSection';
 import ArtistSection from '../components/ArtistSection';
@@ -35,6 +36,7 @@ const Home = () => {
     <>
       <HeroSection />
       <FeaturedSections />
+      <UpcomingEvent />
       <ChapterShowcase />
       <PressSection />
       <ArtistSection />

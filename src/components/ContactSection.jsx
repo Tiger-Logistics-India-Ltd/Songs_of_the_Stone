@@ -13,7 +13,37 @@ import { EMAILJS_CONFIG } from '../config/emailjs';
  * - Mobile-responsive grid layout
  * - Form state management and submission handling
  */
-const ContactSection = () => {
+const ContactSection = ({
+  tag = null,
+  heading = null,
+  description = null,
+  submitLabel = 'Submit',
+  eventName = null,
+} = {}) => {
+  /*
+   * Desktop and mobile shipped with different default copy, so each keeps its
+   * own fallback. Passing a prop overrides both.
+   */
+  const desktopTag     = tag     ?? 'CONNECT WITH HERITAGE';
+  const mobileTag      = tag     ?? 'Connect With Heritage';
+  const desktopHeading = heading ?? 'Contact Us';
+  const mobileHeading  = heading ?? 'Reserve your Experience';
+
+  const desktopDescription = description ?? (
+    <>
+      We're so glad you found us. Songs of The Stone is an experience for those seeking meaning, connection, and beauty in art, in stories, and in each other.
+      <br /><br />
+      Please fill out the form below and our team will connect with you to guide you through the next steps.
+    </>
+  );
+  const mobileDescription = description ?? (
+    <>
+      We are so glad you found us. Songs of The Stone is an experience for those seeking meaning, connection, and beauty in art, in stories, and in each other.
+      <br /><br />
+      Please fill out the form below and Our team will connect with you to guide you through the next steps.
+    </>
+  );
+
   /**
    * Form state management
    */
@@ -125,6 +155,7 @@ const ContactSection = () => {
       formData.append('email', data.email);
       formData.append('phone', data.phone);
       formData.append('message', data.message);
+      formData.append('event', eventName || 'General enquiry');
       
       await fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
@@ -163,6 +194,7 @@ const ContactSection = () => {
         from_email: formData.email,
         phone: formData.phone,
         message: formData.message,
+        event: eventName || 'General enquiry',
         to_name: 'Songs of the Stone Team'
       };
       
@@ -259,13 +291,9 @@ const ContactSection = () => {
           transition={{ duration: 0.9, ease: 'easeOut' }}
         >
           <div className="contact-glass-header">
-            <span className="contact-glass-tag">CONNECT WITH HERITAGE</span>
-            <h2 className="contact-glass-heading">Contact Us</h2>
-            <p className="contact-glass-desc">
-              We're so glad you found us. Songs of The Stone is an experience for those seeking meaning, connection, and beauty in art, in stories, and in each other.
-              <br /><br />
-              Please fill out the form below and our team will connect with you to guide you through the next steps.
-            </p>
+            <span className="contact-glass-tag">{desktopTag}</span>
+            <h2 className="contact-glass-heading">{desktopHeading}</h2>
+            <p className="contact-glass-desc">{desktopDescription}</p>
           </div>
 
           <form className="contact-glass-form" onSubmit={handleSubmit}>
@@ -313,7 +341,7 @@ const ContactSection = () => {
             >
               {formStatus === 'submitting' ? 'Connecting...' :
                formStatus === 'success'    ? 'Message Sent!' :
-               formStatus === 'error'      ? 'Try Again'     : 'Submit'}
+               formStatus === 'error'      ? 'Try Again'     : submitLabel}
             </button>
             {formStatus === 'error' && (
               <p className="cg-form-error">Something went wrong. Please try again.</p>
@@ -330,13 +358,9 @@ const ContactSection = () => {
             <div className="contact-grid">
               <div className="contact-text-section">
                 <div className="contact-header">
-                  <div className="contact-tagline">Connect With Heritage</div>
-                  <h2 className="contact-title">Reserve your Experience</h2>
-                  <p className="contact-description">
-                    We are so glad you found us. Songs of The Stone is an experience for those seeking meaning, connection, and beauty in art, in stories, and in each other.
-
-                    Please fill out the form below and Our team will connect with you to guide you through the next steps.
-                  </p>
+                  <div className="contact-tagline">{mobileTag}</div>
+                  <h2 className="contact-title">{mobileHeading}</h2>
+                  <p className="contact-description">{mobileDescription}</p>
                 </div>
 
                 <div className="contact-form-wrapper">
@@ -386,7 +410,7 @@ const ContactSection = () => {
                       {formStatus === 'submitting' && 'Connecting...'}
                       {formStatus === 'success' && 'Message Sent!'}
                       {formStatus === 'error' && 'Try Again'}
-                      {formStatus === 'idle' && 'Submit'}
+                      {formStatus === 'idle' && submitLabel}
                     </button>
                     {formStatus === 'success' && (
                       <div className="form-success">
