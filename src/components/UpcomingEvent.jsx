@@ -39,10 +39,10 @@ const UpcomingEvent = () => {
           <picture>
             <source
               media="(max-width: 700px)"
-              srcSet="/chapter_3/SOTS_District%20banner%20potrait.png"
+              srcSet="/chapter_3/new_hero_poster_chapter_3.jpg"
             />
             <img
-              src="/chapter_3/SOTS_District%20banner.png"
+              src="/chapter_3/new_hero_poster_chap_3_landscape.jpeg"
               alt="Amrita Kaur — From Dusk to Dawn, Songs of the Stone by Inkpot India"
               className="ue-banner-img"
               width="1600"

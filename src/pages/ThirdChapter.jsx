@@ -176,7 +176,7 @@ const ThirdChapter = () => {
               <motion.div className="event-video-container" variants={imageVariants}>
                 <img
                   className="event-video"
-                  src="/chapter_3/SOTS_District%20banner%20potrait.png"
+                  src="/chapter_3/new_hero_poster_chapter_3.jpg"
                   alt="Amrita Kaur — From Dusk to Dawn, a two-part live concert experience"
                   loading="lazy"
                 />
