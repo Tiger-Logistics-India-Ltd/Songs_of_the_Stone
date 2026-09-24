@@ -3,7 +3,14 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import ContactSection from '../components/ContactSection';
 import DuskToDawn from '../components/DuskToDawn';
+import PartnersSection from '../components/PartnersSection';
 import { CHAPTER_THREE } from '../config/event';
+
+const tcPartners = [
+  { id: 1, name: 'HSBC', desktop: '/Chapter2/Partner/HSBC.png', mobile: '/Chapter2/Partner/HSBC.png' },
+  { id: 2, name: 'Delhi Tourism', desktop: '/partner/delhi.svg', mobile: '/partner/delhi.webp' },
+  { id: 3, name: 'Archaeological Survey of India', desktop: '/partner/arc.svg', mobile: '/partner/arc.webp' },
+];
 
 /**
  * Third Chapter Event Page — Amrita Kaur, Dusk to Dawn
@@ -13,7 +20,8 @@ import { CHAPTER_THREE } from '../config/event';
  * 2. Event — details left, portrait key art right (matches the other chapter pages)
  * 3. Dusk to Dawn — the two moments (Sunset / Sunrise)
  * 4. Terms and Conditions (event-specific)
- * 5. Reserve an Experience form
+ * 5. Partners — HSBC, Delhi Tourism, ASI
+ * 6. Reserve an Experience form
  */
 
 /* Event-specific terms — distinct from the site-wide Terms & Conditions page */
@@ -151,9 +159,9 @@ const ThirdChapter = () => {
               <div className="event-details">
                 <div className="event-category">{CHAPTER_THREE.chapter}</div>
 
-                <h2 className="event-title">Amrita Kaur - Dusk to Dawn</h2>
+                <h2 className="event-title">Live The Legacy</h2>
 
-                <h3 className="event-subtitle">A Two-part Live Concert Experience</h3>
+                <h3 className="event-subtitle">Amrita Kaur - From Dusk to Dawn</h3>
 
                 <p className="event-description">
                   Internationally acclaimed music sensation, Amrita Kaur, is coming to Delhi for
@@ -236,7 +244,10 @@ const ThirdChapter = () => {
         </div>
       </section>
 
-      {/* ========== 5. RESERVE AN EXPERIENCE ========== */}
+      {/* ========== 5. PARTNERS ========== */}
+      <PartnersSection partners={tcPartners} centered />
+
+      {/* ========== 6. RESERVE AN EXPERIENCE ========== */}
       <ContactSection
         tag="Reserve Your Place"
         heading="Register Your Interest"
