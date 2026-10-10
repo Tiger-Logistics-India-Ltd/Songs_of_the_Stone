@@ -7,6 +7,7 @@ import PartnersSection from '../components/PartnersSection';
 import ArtistSection from '../components/ArtistSection';
 import PressSection from '../components/PressSection';
 import ContactSection from '../components/ContactSection';
+import RescheduleNoticeModal from '../components/RescheduleNoticeModal';
 
 const allPartners = [
   { id: 1,  name: 'ARC',          desktop: '/partner/arc.svg',             mobile: '/partner/arc.svg' },
@@ -34,6 +35,7 @@ const allPartners = [
 const Home = () => {
   return (
     <>
+      <RescheduleNoticeModal />
       <HeroSection />
       <FeaturedSections />
       <UpcomingEvent />

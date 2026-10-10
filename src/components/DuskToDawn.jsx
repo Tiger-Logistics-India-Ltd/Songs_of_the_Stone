@@ -114,7 +114,7 @@ const moments = [
     id: 'dusk',
     label: 'Moment One',
     title: 'Dusk',
-    day: 'Saturday, 10 October 2026',
+    day: 'Sunday, 11 October 2026',
     time: '7 PM – 10 PM',
     description:
       'An atmospheric evening performance, as the light leaves the stone and the sky turns. Its own setlist, its own mood, its own rhythm.',

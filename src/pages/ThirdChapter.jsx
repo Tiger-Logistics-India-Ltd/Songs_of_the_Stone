@@ -129,7 +129,7 @@ const ThirdChapter = () => {
         />
         <div className="hero-text-overlay">
           <h1 className="hero-chapter-text">THE THIRD CHAPTER</h1>
-          <p className="hero-date-text">10&ndash;11 OCT 2026</p>
+          <p className="hero-date-text">11 OCT 2026</p>
           <a
             href={CHAPTER_THREE.ticketUrl}
             className="hero-ticket-button"
@@ -255,7 +255,7 @@ const ThirdChapter = () => {
         eventName={CHAPTER_THREE.title}
         description={
           <>
-            Two concerts, one experience &mdash; at dusk on 10 October and at dawn on 11 October.
+            Two concerts, one day &mdash; dusk and dawn, both on 11 October.
             Seating is limited and intimate by design.
             <br /><br />
             Share your details below and our team will get in touch to guide you through the next steps.
