@@ -4108,7 +4108,6 @@ body:not(.landing-page) .about {
 
 .partner-card:hover .partner-logo {
   filter: brightness(1.05);
-  transform: scale(1.03);
 }
 
 /* Responsive Design */
