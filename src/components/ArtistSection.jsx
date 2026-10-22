@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 const artists = [
+  { name: 'Amrita Kaur',       role: 'Vocalist',           image: '/chapter_3/gallery/potrait/66.png' },
   { name: 'Rakesh Chaurasia',  role: 'Flautist',           image: '/Artist/Rakesh Chaurasia.png' },
   { name: 'Sanjoy Das',        role: 'Guitarist',          image: '/Artist/Sanjoy Das.png' },
   { name: 'Gino Banks',        role: 'Drummer',            image: '/Artist/Gino Banks.png' },

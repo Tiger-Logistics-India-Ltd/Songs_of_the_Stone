@@ -8499,6 +8499,12 @@ body:not(.landing-page) .about {
 .third-chapter-page {
   width: 100%;
   overflow-x: hidden;
+  background: var(--bg-linen);
+}
+
+.third-chapter-page .events,
+.third-chapter-page .partners-section {
+  background: transparent;
 }
 
 /* Hero — upcoming event line above the ticket CTA */

@@ -1,40 +1,126 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import ContactSection from '../components/ContactSection';
-import DuskToDawn from '../components/DuskToDawn';
 import PartnersSection from '../components/PartnersSection';
 import { CHAPTER_THREE } from '../config/event';
+
+/**
+ * Third Chapter Event Page — Amrita Kaur, Dusk to Dawn
+ *
+ * The event has concluded, so this page follows the same "after" structure
+ * as the Second Chapter page:
+ *
+ * Sections:
+ * 1. Hero video (shared with the home page)
+ * 2. Opening text
+ * 3. Edge-to-edge landscape image — dusk stage shot
+ * 4. Event section (text left, key art right)
+ * 4b. Edge-to-edge landscape image — dawn stage shot (bookends the event section)
+ * 5. Gallery
+ * 6. Partners — HSBC, Delhi Tourism, ASI
+ * 7. Contact
+ *
+ * No After Film yet (no recap video available) — add a gvs-video-section
+ * once one exists, matching SecondChapter.jsx's "AFTER FILM" block.
+ */
+
+/* ── Gallery data — Third Chapter ──
+   Desktop: 4 landscape + 1 portrait per page (portrait in the tall middle slot),
+   same layout as Second Chapter. Mobile: landscape only (portraits don't suit
+   the fixed-height mobile grid). */
+const tcGalleryImages = [
+  // Page 1
+  { src: '/chapter_3/gallery/37.png', title: 'In Full Voice' },
+  { src: '/chapter_3/gallery/potrait/66.png', title: 'Dawn Recital' },
+  { src: '/chapter_3/gallery/38.png', title: 'The Performance' },
+  { src: '/chapter_3/gallery/39.png', title: 'An Evening Unfolds' },
+  { src: '/chapter_3/gallery/40.png', title: 'Among the Ruins' },
+  // Page 2
+  { src: '/chapter_3/gallery/41.png', title: 'A Shared Evening' },
+  { src: '/chapter_3/gallery/potrait/67.png', title: 'A Word Before the Song' },
+  { src: '/chapter_3/gallery/42.png', title: 'Golden Hour' },
+  { src: '/chapter_3/gallery/43.png', title: 'The Ensemble' },
+  { src: '/chapter_3/gallery/44.png', title: 'Quiet Moments' },
+  // Page 3
+  { src: '/chapter_3/gallery/45.png', title: 'Lanterns at Dusk' },
+  { src: '/chapter_3/gallery/potrait/68.png', title: 'Into the Evening' },
+  { src: '/chapter_3/gallery/46.png', title: 'Echoes of Stone' },
+  { src: '/chapter_3/gallery/47.png', title: 'Setting the Scene' },
+  { src: '/chapter_3/gallery/48.png', title: 'Gathered Together' },
+  // Page 4
+  { src: '/chapter_3/gallery/49.png', title: 'At Purana Qila' },
+  { src: '/chapter_3/gallery/potrait/69.png', title: 'Welcome to the Stage' },
+  { src: '/chapter_3/gallery/50.png', title: 'Under the Canopy' },
+  { src: '/chapter_3/gallery/51.png', title: 'As Night Falls' },
+  { src: '/chapter_3/gallery/52.png', title: 'The Audience' },
+];
+
+const tcMobileGalleryImages = [
+  { src: '/chapter_3/gallery/37.png', title: 'In Full Voice' },
+  { src: '/chapter_3/gallery/38.png', title: 'The Performance' },
+  { src: '/chapter_3/gallery/39.png', title: 'An Evening Unfolds' },
+  { src: '/chapter_3/gallery/40.png', title: 'Among the Ruins' },
+  { src: '/chapter_3/gallery/41.png', title: 'A Shared Evening' },
+  { src: '/chapter_3/gallery/42.png', title: 'Golden Hour' },
+  { src: '/chapter_3/gallery/43.png', title: 'The Ensemble' },
+  { src: '/chapter_3/gallery/44.png', title: 'Quiet Moments' },
+  { src: '/chapter_3/gallery/45.png', title: 'Lanterns at Dusk' },
+  { src: '/chapter_3/gallery/46.png', title: 'Echoes of Stone' },
+  { src: '/chapter_3/gallery/47.png', title: 'Setting the Scene' },
+  { src: '/chapter_3/gallery/48.png', title: 'Gathered Together' },
+  { src: '/chapter_3/gallery/49.png', title: 'At Purana Qila' },
+  { src: '/chapter_3/gallery/50.png', title: 'Under the Canopy' },
+  { src: '/chapter_3/gallery/51.png', title: 'As Night Falls' },
+  { src: '/chapter_3/gallery/52.png', title: 'The Audience' },
+];
+
+const TC_PER_PAGE_DESKTOP = 5;
+const TC_PER_PAGE_MOBILE  = 3;
+
+/* 4 landscape (full-width slots) + 1 portrait (tall middle slot) per page */
+const tcDesktopPattern = [
+  { gridColumn: '1 / 5',  gridRow: '1 / 2' },
+  { gridColumn: '5 / 9',  gridRow: '1 / 3' },
+  { gridColumn: '9 / 13', gridRow: '1 / 2' },
+  { gridColumn: '1 / 5',  gridRow: '2 / 3' },
+  { gridColumn: '9 / 13', gridRow: '2 / 3' },
+];
+
+const tcMobilePattern = [
+  { gridColumn: 'auto' }, { gridColumn: 'auto' }, { gridColumn: 'auto' },
+];
 
 const tcPartners = [
   { id: 1, name: 'HSBC', desktop: '/Chapter2/Partner/HSBC.png', mobile: '/Chapter2/Partner/HSBC.png' },
   { id: 2, name: 'Delhi Tourism', desktop: '/partner/delhi.svg', mobile: '/partner/delhi.webp' },
   { id: 3, name: 'Archaeological Survey of India', desktop: '/partner/arc.svg', mobile: '/partner/arc.webp' },
+  { id: 4, name: 'Nabha Phulkari', desktop: '/chapter_3/partner/TLT_LOGO%20WHITE/11.png', mobile: '/chapter_3/partner/TLT_LOGO%20WHITE/11.png' },
+  { id: 5, name: 'Pio', desktop: '/chapter_3/partner/TLT_LOGO%20WHITE/12.png', mobile: '/chapter_3/partner/TLT_LOGO%20WHITE/12.png' },
+  { id: 6, name: 'Aava Natural Mineral Water', desktop: '/chapter_3/partner/TLT_LOGO%20WHITE/13.png', mobile: '/chapter_3/partner/TLT_LOGO%20WHITE/13.png' },
+  { id: 7, name: 'House of Spade', desktop: '/chapter_3/partner/TLT_LOGO%20WHITE/14.png', mobile: '/chapter_3/partner/TLT_LOGO%20WHITE/14.png' },
+  { id: 8, name: 'Mahesh Sharma', desktop: '/chapter_3/partner/TLT_LOGO%20WHITE/15.png', mobile: '/chapter_3/partner/TLT_LOGO%20WHITE/15.png' },
+  { id: 9, name: 'YogShri Sound Healing Training & Research Institute', desktop: '/chapter_3/partner/TLT_LOGO%20WHITE/16.png', mobile: '/chapter_3/partner/TLT_LOGO%20WHITE/16.png' },
+  { id: 10, name: 'House of Aurae', desktop: '/chapter_3/partner/TLT_LOGO%20WHITE/17.png', mobile: '/chapter_3/partner/TLT_LOGO%20WHITE/17.png' },
+  { id: 11, name: 'Evolve - The Wellness Club', desktop: '/chapter_3/partner/TLT_LOGO%20WHITE/18.png', mobile: '/chapter_3/partner/TLT_LOGO%20WHITE/18.png' },
+  { id: 12, name: 'Dialogues by Nirmals', desktop: '/chapter_3/partner/TLT_LOGO%20WHITE/19.png', mobile: '/chapter_3/partner/TLT_LOGO%20WHITE/19.png' },
+  { id: 13, name: 'Parinaya Sutra Wedding Planners', desktop: '/chapter_3/partner/TLT_LOGO%20WHITE/20.png', mobile: '/chapter_3/partner/TLT_LOGO%20WHITE/20.png' },
+  { id: 14, name: 'Le Meridien New Delhi', desktop: '/chapter_3/partner/TLT_LOGO%20WHITE/21.png', mobile: '/chapter_3/partner/TLT_LOGO%20WHITE/21.png' },
 ];
 
-/**
- * Third Chapter Event Page — Amrita Kaur, Dusk to Dawn
- *
- * Sections:
- * 1. Hero video (shared with the home page)
- * 2. Event — details left, portrait key art right (matches the other chapter pages)
- * 3. Dusk to Dawn — the two moments (Sunset / Sunrise)
- * 4. Terms and Conditions (event-specific)
- * 5. Partners — HSBC, Delhi Tourism, ASI
- * 6. Reserve an Experience form
- */
-
-/* Event-specific terms — distinct from the site-wide Terms & Conditions page */
-const eventTerms = [
-  'Please carry a valid ID proof along with you.',
-  'All ticket purchases are final and non-refundable. If an event is cancelled, you will receive a full refund. If an event is rescheduled, you may choose to retain your ticket for the rescheduled date or opt for a refund.',
-  'Security procedures, including frisking, remain the right of the management.',
-  'No dangerous or potentially hazardous objects including but not limited to weapons, knives, guns, fireworks, helmets, lazer devices, bottles and musical instruments will be allowed in the venue, and may be ejected with or without the owner from the venue.',
-  'The sponsors / performers / organizers are not responsible for any injury or damage occurring due to the event. Any claims regarding the same would be settled in courts in Mumbai.',
-  'People in an inebriated state may not be allowed entry.',
-  'Organizers hold the right to deny late entry to the event.',
-  'Venue rules apply.',
-];
+/* ── useIsMobile hook ── */
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== 'undefined' ? window.innerWidth <= breakpoint : false
+  );
+  useEffect(() => {
+    const mql = window.matchMedia(`(max-width: ${breakpoint}px)`);
+    const handler = (e) => setIsMobile(e.matches);
+    mql.addEventListener('change', handler);
+    return () => mql.removeEventListener('change', handler);
+  }, [breakpoint]);
+  return isMobile;
+}
 
 const ThirdChapter = () => {
   useEffect(() => {
@@ -101,12 +187,52 @@ const ThirdChapter = () => {
 
   const { ref: aboutRef, inView: aboutInView } = useInView({ threshold: 0.1, triggerOnce: true });
 
-  const [termsOpen, setTermsOpen] = useState(false);
+  // ========== GALLERY ==========
+  const galleryGridRef = useRef(null);
+  const tileRefs       = useRef([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [gridVisible, setGridVisible] = useState(true);
 
-  const scrollToContact = (e) => {
-    e.preventDefault();
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
+  const isMobile = useIsMobile();
+  const galleryData = isMobile ? tcMobileGalleryImages : tcGalleryImages;
+  const perPage      = isMobile ? TC_PER_PAGE_MOBILE : TC_PER_PAGE_DESKTOP;
+  const pattern       = isMobile ? tcMobilePattern : tcDesktopPattern;
+
+  const totalPages    = Math.ceil(galleryData.length / perPage);
+  const currentImages = useMemo(
+    () => galleryData.slice(currentPage * perPage, (currentPage + 1) * perPage),
+    [currentPage, perPage, galleryData]
+  );
+
+  useEffect(() => {
+    if (currentPage >= totalPages) setCurrentPage(0);
+  }, [totalPages, currentPage]);
+
+  const goToPage = useCallback((page) => {
+    if (page < 0 || page >= totalPages || page === currentPage) return;
+    setGridVisible(false);
+    setTimeout(() => { setCurrentPage(page); setGridVisible(true); }, 500);
+  }, [currentPage, totalPages]);
+
+  /* IntersectionObserver — tile scroll reveal */
+  useEffect(() => {
+    const tiles = tileRefs.current.filter(Boolean);
+    if (!tiles.length) return;
+    tiles.forEach(t => t.classList.remove('gvs-tile-visible'));
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const idx = tiles.indexOf(entry.target);
+          setTimeout(() => entry.target.classList.add('gvs-tile-visible'), Math.max(0, idx) * 120);
+          obs.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.1 }
+    );
+    tiles.forEach(t => obs.observe(t));
+    return () => obs.disconnect();
+  }, [currentPage, gridVisible]);
 
   return (
     <div className="third-chapter-page">
@@ -130,20 +256,37 @@ const ThirdChapter = () => {
         <div className="hero-text-overlay">
           <h1 className="hero-chapter-text">THE THIRD CHAPTER</h1>
           <p className="hero-date-text">11 OCT 2026</p>
-          <a
-            href={CHAPTER_THREE.ticketUrl}
-            className="hero-ticket-button"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Book tickets for ${CHAPTER_THREE.title}, ${CHAPTER_THREE.dateLong}`}
-          >
-            <span className="button-text">Book Tickets on District</span>
-            <span className="button-arrow">→</span>
-          </a>
         </div>
       </section>
 
-      {/* ========== 2. EVENT — details left, key art right ========== */}
+      {/* ========== 2. OPENING TEXT ========== */}
+      <section className="featured-category-section">
+        <div className="featured-heading">
+          <h3 className="featured-subtitle">IN DIALOGUE WITH TIME</h3>
+          <h2 className="featured-title">Art. Architecture. Performance.</h2>
+          <p className="featured-description">Songs of the Stone is Inkpot's journey into art, heritage, and the spaces between.</p>
+        </div>
+      </section>
+
+      {/* ========== 3. EDGE-TO-EDGE LANDSCAPE IMAGE — Dusk ========== */}
+      <section className="sc-landscape-section">
+        <motion.div
+          className="sc-landscape-container"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <img
+            src="/chapter_3/banner/8.png"
+            alt="Amrita Kaur performing at dusk, Songs of the Stone Chapter 3"
+            className="sc-landscape-image sc-no-crop"
+            loading="lazy"
+          />
+        </motion.div>
+      </section>
+
+      {/* ========== 4. EVENT — details left, key art right ========== */}
       <section id="tc-events" className="events" ref={aboutRef}>
         <div className="container">
           <motion.div
@@ -164,20 +307,20 @@ const ThirdChapter = () => {
                 <h3 className="event-subtitle">Amrita Kaur - From Dusk to Dawn</h3>
 
                 <p className="event-description">
-                  Internationally acclaimed music sensation, Amrita Kaur, is coming to Delhi for
+                  Internationally acclaimed music sensation, Amrita Kaur, came to Delhi for
                   Chapter 3 of Songs of the Stone by Inkpot India&mdash;a rare, sensory and
                   contemplative musical experience set within one of the city&rsquo;s most evocative
                   heritage spaces.
                 </p>
                 <p className="event-description">
                   Unfolding across two extraordinary moments at sunset and sunrise, the experience
-                  will bring together two distinct concerts, inviting audiences to immerse themselves
+                  brought together two distinct concerts, inviting audiences to immerse themselves
                   in music, stillness and the changing moods of the sky.
                 </p>
                 <p className="event-description">
                   With two distinct moments&mdash;an atmospheric evening performance and a
-                  contemplative morning experience, each with its own setlist, mood and rhythm, come
-                  to reimagine how Delhi experiences music, heritage and place.
+                  contemplative morning experience, each with its own setlist, mood and rhythm,
+                  the evening reimagined how Delhi experiences music, heritage and place.
                 </p>
               </div>
 
@@ -189,79 +332,112 @@ const ThirdChapter = () => {
                   loading="lazy"
                 />
               </motion.div>
-
-              <div className="event-cta-section">
-                <div className="event-cta">
-                  <a
-                    href={CHAPTER_THREE.ticketUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="event-btn"
-                    aria-label={`Book tickets for ${CHAPTER_THREE.title}`}
-                  >
-                    Book Tickets on District
-                  </a>
-                  <a href="#contact" className="event-btn event-btn-ghost" onClick={scrollToContact}>
-                    Register Your Interest
-                  </a>
-                </div>
-              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ========== 3. DUSK TO DAWN ========== */}
-      <DuskToDawn />
+      {/* ========== 4b. EDGE-TO-EDGE LANDSCAPE IMAGE — Dawn ========== */}
+      <section className="sc-landscape-section">
+        <motion.div
+          className="sc-landscape-container"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <img
+            src="/chapter_3/banner/9.png"
+            alt="Amrita Kaur performing at dawn, Songs of the Stone Chapter 3"
+            className="sc-landscape-image sc-no-crop"
+            loading="lazy"
+          />
+        </motion.div>
+      </section>
 
-      {/* ========== 4. TERMS AND CONDITIONS ========== */}
-      <section className="tc-terms">
-        <div className="tc-terms-inner">
-          <button
-            type="button"
-            className={`tc-terms-toggle${termsOpen ? ' tc-terms-open' : ''}`}
-            onClick={() => setTermsOpen((open) => !open)}
-            aria-expanded={termsOpen}
-            aria-controls="tc-terms-panel"
-          >
-            <span className="tc-terms-heading">Terms and Conditions</span>
-            <svg className="tc-terms-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M3 6l5 5 5-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
+      {/* ========== 5. GALLERY ========== */}
+      <section className="gvs-gallery-section">
+        <div className="gvs-container">
+          <div className="gvs-section-header">
+            <span className="gvs-label">Explore</span>
+            <h2 className="gvs-title">Gallery</h2>
+            <p className="gvs-subtitle">Two concerts, one night's turn from dusk to dawn&mdash;held here in the moments between.</p>
+          </div>
 
           <div
-            id="tc-terms-panel"
-            className="tc-terms-panel"
-            hidden={!termsOpen}
+            className={`gvs-grid ${gridVisible ? 'gvs-grid-enter' : 'gvs-grid-exit'}`}
+            ref={galleryGridRef}
           >
-            <ul className="tc-terms-list">
-              {eventTerms.map((term, i) => (
-                <li key={i}>{term}</li>
-              ))}
-            </ul>
+            {currentImages.map((img, index) => {
+              const placement = pattern[index];
+              if (!placement) return null;
+              return (
+                <div
+                  key={`p${currentPage}-t${index}`}
+                  className="gvs-tile"
+                  style={{ gridColumn: placement.gridColumn, gridRow: placement.gridRow }}
+                  ref={el => { tileRefs.current[index] = el; }}
+                >
+                  <img
+                    src={img.src}
+                    alt={img.title}
+                    className="gvs-tile-img"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              );
+            })}
           </div>
+
+          {totalPages > 1 && (
+            <nav className="gvs-pagination" aria-label="Gallery pagination">
+              <button
+                className="gvs-page-arrow"
+                onClick={() => goToPage(currentPage - 1)}
+                disabled={currentPage === 0}
+                aria-label="Previous page"
+                type="button"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <polyline points="15,6 9,12 15,18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                </svg>
+              </button>
+
+              <div className="gvs-page-indicators">
+                {Array.from({ length: totalPages }).map((_, i) => (
+                  <button
+                    key={i}
+                    className={`gvs-dot${i === currentPage ? ' gvs-dot-active' : ''}`}
+                    onClick={() => goToPage(i)}
+                    aria-label={`Page ${i + 1}`}
+                    aria-current={i === currentPage ? 'page' : undefined}
+                    type="button"
+                  />
+                ))}
+              </div>
+
+              <button
+                className="gvs-page-arrow"
+                onClick={() => goToPage(currentPage + 1)}
+                disabled={currentPage === totalPages - 1}
+                aria-label="Next page"
+                type="button"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <polyline points="9,6 15,12 9,18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                </svg>
+              </button>
+            </nav>
+          )}
         </div>
       </section>
 
-      {/* ========== 5. PARTNERS ========== */}
+      {/* ========== 6. PARTNERS ========== */}
       <PartnersSection partners={tcPartners} centered />
 
-      {/* ========== 6. RESERVE AN EXPERIENCE ========== */}
-      <ContactSection
-        tag="Reserve Your Place"
-        heading="Register Your Interest"
-        submitLabel="Submit"
-        eventName={CHAPTER_THREE.title}
-        description={
-          <>
-            Two concerts, one day &mdash; dusk and dawn, both on 11 October.
-            Seating is limited and intimate by design.
-            <br /><br />
-            Share your details below and our team will get in touch to guide you through the next steps.
-          </>
-        }
-      />
+      {/* ========== 7. CONTACT ========== */}
+      <ContactSection />
     </div>
   );
 };

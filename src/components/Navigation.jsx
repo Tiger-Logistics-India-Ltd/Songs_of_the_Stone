@@ -57,7 +57,7 @@ const Navigation = () => {
       id: 'third-chapter',
       title: 'Third Chapter',
       path: '/third-chapter',
-      image: '/chapter_3/new_hero_poster_chapter_3.jpg',
+      image: '/chapter_3/gallery/potrait/66.png',
       date: '11 Oct 2026',
       description: 'Amrita Kaur, from dusk to dawn — two concerts at sunset and sunrise, both on 11 October.'
     },
