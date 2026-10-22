@@ -31,7 +31,7 @@ import { CHAPTER_THREE } from '../config/event';
    the fixed-height mobile grid). */
 const tcGalleryImages = [
   // Page 1
-  { src: '/chapter_3/gallery/37.png', title: 'In Full Voice' },
+  { src: '/chapter_3/gallery/42.png', title: 'Golden Hour' },
   { src: '/chapter_3/gallery/potrait/66.png', title: 'Dawn Recital' },
   { src: '/chapter_3/gallery/38.png', title: 'The Performance' },
   { src: '/chapter_3/gallery/39.png', title: 'An Evening Unfolds' },
@@ -39,7 +39,7 @@ const tcGalleryImages = [
   // Page 2
   { src: '/chapter_3/gallery/41.png', title: 'A Shared Evening' },
   { src: '/chapter_3/gallery/potrait/67.png', title: 'A Word Before the Song' },
-  { src: '/chapter_3/gallery/42.png', title: 'Golden Hour' },
+  { src: '/chapter_3/gallery/37.png', title: 'In Full Voice' },
   { src: '/chapter_3/gallery/43.png', title: 'The Ensemble' },
   { src: '/chapter_3/gallery/44.png', title: 'Quiet Moments' },
   // Page 3
@@ -57,12 +57,12 @@ const tcGalleryImages = [
 ];
 
 const tcMobileGalleryImages = [
-  { src: '/chapter_3/gallery/37.png', title: 'In Full Voice' },
+  { src: '/chapter_3/gallery/42.png', title: 'Golden Hour' },
   { src: '/chapter_3/gallery/38.png', title: 'The Performance' },
   { src: '/chapter_3/gallery/39.png', title: 'An Evening Unfolds' },
   { src: '/chapter_3/gallery/40.png', title: 'Among the Ruins' },
   { src: '/chapter_3/gallery/41.png', title: 'A Shared Evening' },
-  { src: '/chapter_3/gallery/42.png', title: 'Golden Hour' },
+  { src: '/chapter_3/gallery/37.png', title: 'In Full Voice' },
   { src: '/chapter_3/gallery/43.png', title: 'The Ensemble' },
   { src: '/chapter_3/gallery/44.png', title: 'Quiet Moments' },
   { src: '/chapter_3/gallery/45.png', title: 'Lanterns at Dusk' },

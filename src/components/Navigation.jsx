@@ -54,14 +54,6 @@ const Navigation = () => {
 
   const chapterDropdownItems = [
     {
-      id: 'third-chapter',
-      title: 'Third Chapter',
-      path: '/third-chapter',
-      image: '/chapter_3/gallery/potrait/66.png',
-      date: '11 Oct 2026',
-      description: 'Amrita Kaur, from dusk to dawn — two concerts at sunset and sunrise, both on 11 October.'
-    },
-    {
       id: 'first-chapter',
       title: 'First Chapter',
       path: '/first-chapter',
@@ -76,6 +68,14 @@ const Navigation = () => {
       image: '/navbar_photos/SOTS-329.jpg',
       date: '8 Mar 2026',
       description: 'Live the legacy through a curated journey of performance, rhythm, and cultural expression.'
+    },
+    {
+      id: 'third-chapter',
+      title: 'Third Chapter',
+      path: '/third-chapter',
+      image: '/chapter_3/gallery/potrait/66.png',
+      date: '11 Oct 2026',
+      description: 'Amrita Kaur, from dusk to dawn — two concerts at sunset and sunrise, both on 11 October.'
     }
   ];
   
