@@ -437,7 +437,7 @@ const ThirdChapter = () => {
       <PartnersSection partners={tcPartners} centered />
 
       {/* ========== 7. CONTACT ========== */}
-      <ContactSection />
+      <ContactSection image="/chapter_3/contact.png" />
     </div>
   );
 };

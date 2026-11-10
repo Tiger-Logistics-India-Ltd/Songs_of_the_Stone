@@ -19,7 +19,9 @@ const ContactSection = ({
   description = null,
   submitLabel = 'Submit',
   eventName = null,
+  image = null,
 } = {}) => {
+  const contactImage = image ?? '/contact_real.webp';
   /*
    * Desktop and mobile shipped with different default copy, so each keeps its
    * own fallback. Passing a prop overrides both.
@@ -428,7 +430,7 @@ const ContactSection = ({
 
               <div className="contact-image">
                 <img
-                  src="/contact_real.webp"
+                  src={contactImage}
                   alt="Musical Heritage and Cultural Expression"
                   className="contact-img"
                   loading="eager"
