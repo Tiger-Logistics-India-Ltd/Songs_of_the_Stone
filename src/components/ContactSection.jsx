@@ -21,11 +21,12 @@ const ContactSection = ({
   eventName = null,
   image = null,
 } = {}) => {
-  const contactImage = image ?? '/contact_real.webp';
   /*
-   * Desktop and mobile shipped with different default copy, so each keeps its
-   * own fallback. Passing a prop overrides both.
+   * Desktop and mobile shipped with different default copy and default
+   * images, so each keeps its own fallback. Passing a prop overrides both.
    */
+  const mobileImage  = image ?? '/contact_real.webp';
+  const desktopImage = image ?? '/Contact_us_form/contact_us_form.jpeg';
   const desktopTag     = tag     ?? 'CONNECT WITH HERITAGE';
   const mobileTag      = tag     ?? 'Connect With Heritage';
   const desktopHeading = heading ?? 'Contact Us';
@@ -285,7 +286,12 @@ const ContactSection = ({
       </AnimatePresence>
 
       {/* ── DESKTOP: Glassmorphism design ── */}
-      <section id="contact" className="contact-glass-section contact-desktop-only" ref={ref}>
+      <section
+        id="contact"
+        className="contact-glass-section contact-desktop-only"
+        style={{ '--contact-bg-image': `url('${desktopImage}')` }}
+        ref={ref}
+      >
         <motion.div
           className="contact-glass-panel"
           initial={{ opacity: 0, x: -30 }}
@@ -430,7 +436,7 @@ const ContactSection = ({
 
               <div className="contact-image">
                 <img
-                  src={contactImage}
+                  src={mobileImage}
                   alt="Musical Heritage and Cultural Expression"
                   className="contact-img"
                   loading="eager"

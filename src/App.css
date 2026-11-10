@@ -2122,7 +2122,7 @@ span.italic-text {
   min-height: 100vh;
   display: flex;
   overflow: hidden;
-  background: url('/Contact_us_form/contact_us_form.jpeg') center/cover no-repeat;
+  background: var(--contact-bg-image, url('/Contact_us_form/contact_us_form.jpeg')) center/cover no-repeat;
 }
 
 /* Left panel: text + form */
