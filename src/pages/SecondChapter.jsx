@@ -514,9 +514,9 @@ const SecondChapter = () => {
               <div className="event-details">
                 <div className="event-category">The Second Chapter</div>
                 
-                <h2 className="event-title">Live the Legacy</h2>
-                
-                <h3 className="event-subtitle">Rakesh Chaurasia & Friends (RAF) | The Legend Ensemble</h3>
+                <h2 className="event-title">Rakesh Chaurasia & Friends</h2>
+
+                <h3 className="event-subtitle">Live the Legacy</h3>
                 
                 <div className="event-date-time">
                   <span className="event-date">
