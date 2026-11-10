@@ -302,12 +302,12 @@ const ThirdChapter = () => {
               <div className="event-details">
                 <div className="event-category">{CHAPTER_THREE.chapter}</div>
 
-                <h2 className="event-title">Live The Legacy</h2>
+                <h2 className="event-title">Amrita Kaur - From Dusk to Dawn</h2>
 
-                <h3 className="event-subtitle">Amrita Kaur - From Dusk to Dawn</h3>
+                <h3 className="event-subtitle">Live The Legacy</h3>
 
                 <p className="event-description">
-                  Internationally acclaimed music sensation, Amrita Kaur, came to Delhi for
+                  Internationally acclaimed vocalist, Amrita Kaur, came to Delhi for
                   Chapter 3 of Songs of the Stone by Inkpot India&mdash;a rare, sensory and
                   contemplative musical experience set within one of the city&rsquo;s most evocative
                   heritage spaces.
@@ -361,7 +361,7 @@ const ThirdChapter = () => {
           <div className="gvs-section-header">
             <span className="gvs-label">Explore</span>
             <h2 className="gvs-title">Gallery</h2>
-            <p className="gvs-subtitle">Two concerts, one night's turn from dusk to dawn&mdash;held here in the moments between.</p>
+            <p className="gvs-subtitle">A glimpse from the event.</p>
           </div>
 
           <div

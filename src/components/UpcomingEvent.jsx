@@ -96,15 +96,7 @@ const UpcomingEvent = () => {
           setlist, mood and rhythm.
         </p>
         <div className="ue-actions">
-          <a
-            href={CHAPTER_THREE.ticketUrl}
-            className="ue-cta"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Book Tickets on District <span className="ue-cta-arrow" aria-hidden="true">&rarr;</span>
-          </a>
-          <Link to={CHAPTER_THREE.path} className="ue-cta ue-cta-ghost">
+          <Link to={CHAPTER_THREE.path} className="ue-cta">
             Learn More About the Event <span className="ue-cta-arrow" aria-hidden="true">&rarr;</span>
           </Link>
         </div>
