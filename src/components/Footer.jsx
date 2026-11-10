@@ -33,7 +33,8 @@ const Footer = () => {
             <nav aria-label="Experiences navigation">
               <ul className="footer-nav-list">
                 <li><Link to="/first-chapter" className="footer-nav-link">Chapter One — Mehtab Ali Niazi</Link></li>
-                <li><Link to="/second-chapter" className="footer-nav-link">Chapter Two — Live the Legacy</Link></li>
+                <li><Link to="/second-chapter" className="footer-nav-link">Chapter Two — Rakesh Chaurasia</Link></li>
+                <li><Link to="/third-chapter" className="footer-nav-link">Chapter Three — Amrita Kaur</Link></li>
               </ul>
             </nav>
           </div>
